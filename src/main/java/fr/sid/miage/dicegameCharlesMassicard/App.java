@@ -26,9 +26,9 @@ public class App  extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Projet - DiceGame ");
 		primaryStage.getIcons().add(new Image("images/dice-game.png"));
-		//scene.getStylesheets().add(getClass().getResource("/app.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/app.css").toExternalForm());
 		//not allow to modify the window 
-		//primaryStage.setResizable(false);
+		primaryStage.setResizable(false);
 		//To change the visibility to false
 		primaryStage.hide();
 		//for the responsive window's
