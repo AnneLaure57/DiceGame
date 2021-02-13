@@ -39,11 +39,15 @@ Sous la licence MIT.
 
 ### HTTPS
 
+```
 git clone https://github.com/AnneLaure57/DiceGame.git
+```
 
 ### SSH
 
+```
 git clone git@github.com:AnneLaure57/DiceGame.git
+```
 
 ## Démarrer le projet
 
