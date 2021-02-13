@@ -1,6 +1,11 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+### Visual Paradisgm ###
+
+*.vpp.lck*
+*.vpp.bak*
+
 ### STS ###
 .apt_generated
 .classpath
