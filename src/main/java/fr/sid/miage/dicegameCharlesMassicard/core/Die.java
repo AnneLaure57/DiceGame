@@ -13,21 +13,37 @@ public class Die {
 
 	/* ========================================= Global ================================================ */ /*=========================================*/
 
+	/**
+	 * Logger for this class : Die.
+	 */
 	private static final Logger LOG = Logger.getLogger(Die.class.getName());
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
+	/**
+	 * The face value of the die.
+	 */
 	private int faceValue = 1;
 
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 	
+	/**
+	 * No Args Constructor.
+	 * When die is created, the face value is initialized at value 1.
+	 */
 	public Die() {
 		LOG.info("An Die has just been created.");
-		this.setFaceValue(new Random().nextInt(7));
+//		this.setFaceValue(new Random().nextInt(7));
+		this.setFaceValue(1);
 	}
 
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 
+	/**
+	 * Method roll : to roll the dice and change the face value randomly.
+	 * 
+	 * @return The new value of die face value.
+	 */
 	public boolean roll() {
 		try {
 			this.setFaceValue(new Random().nextInt(7));
