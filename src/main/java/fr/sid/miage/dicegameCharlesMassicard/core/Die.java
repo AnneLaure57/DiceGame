@@ -28,6 +28,17 @@ public class Die {
 
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 
+	public boolean roll() {
+		try {
+			this.setFaceValue(new Random().nextInt(7));
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method roll from Die class :");
+			LOG.severe(e.toString());
+			return false;
+		}
+	}
+	
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 	
 	/**
