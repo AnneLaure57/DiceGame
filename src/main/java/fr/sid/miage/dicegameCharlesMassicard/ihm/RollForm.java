@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 /**
+ * @author Anne-Laure CHARLES
  * @author Louis MASSICARD (user name : louis)
  * @version 
  * @since %G% - %U% (%I%)
