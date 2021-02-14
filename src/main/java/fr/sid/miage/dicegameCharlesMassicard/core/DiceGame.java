@@ -12,17 +12,34 @@ import java.util.logging.Logger;
 public class DiceGame {
 	/* ========================================= Global ================================================ */ /*=========================================*/
 
+	/**
+	 * Logger for this class : DiceGame.
+	 */
 	private static final Logger LOG = Logger.getLogger(DiceGame.class.getName());
 	
+	/**
+	 * The instance of the singleton DiceGame. 
+	 */
 	private static DiceGame INSTANCE = null;
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
+	/**
+	 * Fist die of the DiceGame.
+	 */
 	private Die die1;
+	
+	/**
+	 * Second die of the DiceGame.
+	 */
 	private Die die2;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
+	/**
+	 * No Args Constructor.
+	 * When DiceGame is created, two dice are initialized to play.
+	 */
 	private DiceGame() {
 		LOG.info("An DiceGame has just been created with twoo dice are initialized.");
 		this.setDie1(new Die());
@@ -31,10 +48,18 @@ public class DiceGame {
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 
+	/**
+	 * Method to start a game.
+	 */
 	public void start() {
 		
 	}
 	
+	/**
+	 * Method getInstance : to get the DiceGame's instance.
+	 * 
+	 * @return The DiceGame's instance.
+	 */
 	public static synchronized DiceGame getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new DiceGame();

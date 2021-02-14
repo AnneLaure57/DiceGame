@@ -29,7 +29,7 @@ public class Die {
 	
 	/**
 	 * No Args Constructor.
-	 * When die is created, the face value is initialized at value 1.
+	 * When Die is created, the face value is initialized at value 1.
 	 */
 	public Die() {
 		LOG.info("An Die has just been created.");
