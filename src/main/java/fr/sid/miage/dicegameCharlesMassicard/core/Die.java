@@ -1,6 +1,7 @@
 package fr.sid.miage.dicegameCharlesMassicard.core;
 
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * @author Louis MASSICARD (user name : louis)
@@ -12,6 +13,8 @@ public class Die {
 
 	/* ========================================= Global ================================================ */ /*=========================================*/
 
+	private static final Logger LOG = Logger.getLogger(Die.class.getName());
+	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	private int faceValue = 1;
@@ -19,6 +22,7 @@ public class Die {
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 	
 	public Die() {
+		LOG.info("An Die has just been created.");
 		this.setFaceValue(new Random().nextInt(7));
 	}
 

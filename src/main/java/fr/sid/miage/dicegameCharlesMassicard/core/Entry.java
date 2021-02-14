@@ -1,5 +1,7 @@
 package fr.sid.miage.dicegameCharlesMassicard.core;
 
+import java.util.logging.Logger;
+
 /**
  * @author Louis MASSICARD (user name : louis)
  * @version 
@@ -10,15 +12,22 @@ public class Entry {
 
 	/* ========================================= Global ================================================ */ /*=========================================*/
 
+	private static final Logger LOG = Logger.getLogger(Entry.class.getName());
+	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	private String name;
 
 	private int score;
 
-
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
+		public Entry(String name, int score) {
+		LOG.info("An Entry has just been created with name and score : " + name + " - " + score);
+		this.name = name;
+		this.score = score;
+	}
+	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
