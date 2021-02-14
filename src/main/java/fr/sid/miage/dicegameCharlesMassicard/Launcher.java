@@ -1,12 +1,12 @@
 package fr.sid.miage.dicegameCharlesMassicard;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+//import java.util.Arrays;
+//import java.util.Date;
+//import java.util.List;
+//import java.util.Objects;
+//
+//import javax.persistence.EntityManager;
+//import javax.persistence.EntityTransaction;
 
 import javafx.application.Application;
 
