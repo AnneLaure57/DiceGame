@@ -12,6 +12,7 @@ import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
  * @since %G% - %U% (%I%)
  * 
  * Singleton
+ * Concrete Product
  */
 public class HighScoreXML implements HighScore {
 	/* ========================================= Global ================================================ */ /*=========================================*/

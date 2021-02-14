@@ -12,6 +12,7 @@ import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
  * @since %G% - %U% (%I%)
  * 
  * Singleton
+ * Concrete Product
  */
 public class HighScoreMongo implements HighScore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
