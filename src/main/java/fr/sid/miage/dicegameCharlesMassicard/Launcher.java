@@ -10,6 +10,13 @@ import javax.persistence.EntityTransaction;
 
 import javafx.application.Application;
 
+/**
+ * @author Anne-Laure CHARLES
+ * @author Louis MASSICARD (user name : louis)
+ * @version 
+ * @since %G% - %U% (%I%)
+ *
+ */
 public class Launcher {
 
   public static void main(String[] args) {

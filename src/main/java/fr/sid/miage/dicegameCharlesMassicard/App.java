@@ -9,6 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * @author Anne-Laure CHARLES
+ * @author Louis MASSICARD (user name : louis)
+ * @version 
+ * @since %G% - %U% (%I%)
+ *
+ */
 public class App  extends Application {
 	
 	public void start(Stage primaryStage) {
