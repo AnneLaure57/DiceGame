@@ -47,6 +47,7 @@ public class Die {
 	public boolean roll() {
 		try {
 			this.setFaceValue(new Random().nextInt(7));
+			LOG.info("The die rolls, new face value is : " + getFaceValue());
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method roll from Die class :");
