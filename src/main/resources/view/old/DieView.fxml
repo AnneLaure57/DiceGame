@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="36.0" layoutY="46.0" text="N° du tour :" />
+      <Label fx:id="turnNumber" layoutX="113.0" layoutY="46.0" text="Label" />
+      <Label layoutX="36.0" layoutY="92.0" text="Score tour :" />
+      <Label fx:id="turnScore" layoutX="113.0" layoutY="92.0" text="Label" />
+      <Label layoutX="37.0" layoutY="137.0" text="Score final :" />
+      <Label fx:id="finalScore" layoutX="113.0" layoutY="137.0" text="Label" />
+      <AnchorPane id="boardGameAnchor" fx:id="boardGame" layoutX="304.0" layoutY="1.0" prefHeight="250.0" prefWidth="520.0">
+         <children>
+            <Label layoutX="125.0" layoutY="17.0" styleClass="bg-white-style" text="Dé 1 :" />
+            <Label layoutX="367.0" layoutY="17.0" styleClass="bg-white-style" text="Dé 2 :" />
+            <ImageView fx:id="dOne" fitHeight="121.0" fitWidth="122.0" layoutX="79.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/face_one.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dTwo" fitHeight="120.0" fitWidth="122.0" layoutX="322.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/face_one.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
