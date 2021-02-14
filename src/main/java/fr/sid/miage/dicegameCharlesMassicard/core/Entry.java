@@ -12,17 +12,33 @@ public class Entry {
 
 	/* ========================================= Global ================================================ */ /*=========================================*/
 
+	/**
+	 * Logger for this class : Entry.
+	 */
 	private static final Logger LOG = Logger.getLogger(Entry.class.getName());
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
+	/**
+	 * The player's name.
+	 */
 	private String name;
 
+	/**
+	 * The player's score.
+	 */
 	private int score;
 
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
-		public Entry(String name, int score) {
+	/**
+	 * All Args Constructor.
+	 * Allow to save player's name and score.
+	 * 
+	 * @param name The player's name.
+	 * @param score The player's score.
+	 */
+	public Entry(String name, int score) {
 		LOG.info("An Entry has just been created with name and score : " + name + " - " + score);
 		this.name = name;
 		this.score = score;
