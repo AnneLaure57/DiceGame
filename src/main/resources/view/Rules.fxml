@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="445.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.sid.miage.dicegameCharlesMassicard.ihm.RollForm">
+   <children>
+      <StackPane layoutY="-1.0" prefHeight="293.0" prefWidth="445.0">
+         <children>
+            <AnchorPane prefHeight="179.0" prefWidth="236.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="26.0" prefHeight="27.0" prefWidth="445.0" text="Règles" textAlignment="RIGHT" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="88.0" prefHeight="51.0" prefWidth="352.0" text="Les règles du jeu sont très simples ! " textAlignment="CENTER" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="147.0" prefHeight="88.0" prefWidth="352.0" text="Vous avez 10 lancés lors d'une partie. Si vous réalisez un 7 avec les deux dés, vous marquez 10 points. Gagnez un maximum de points pour être dans le top classement ! À vous de jouez !" textAlignment="CENTER" wrapText="true" />
+                  <Button fx:id="quitRules" layoutX="181.0" layoutY="250.0" mnemonicParsing="false" onAction="#closeView" text="J'ai compris !" />
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

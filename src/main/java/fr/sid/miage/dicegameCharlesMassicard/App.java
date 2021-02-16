@@ -15,7 +15,7 @@ public class App  extends Application {
 		Parent root =  null;
 		try {
 			//If files in resources
-			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Main.fxml"));
+			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/RollForm.fxml"));
 			//If in packages in src/main/java
 			//root = FXMLLoader.load(getClass().getResource("views/Main.fxml"));
 		} catch (IOException | NullPointerException e) {
@@ -24,10 +24,11 @@ public class App  extends Application {
             System.exit(0);
 		}
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("Projet -Bibliothèque ");
-		//scene.getStylesheets().add(getClass().getResource("/app.css").toExternalForm());
+		primaryStage.setTitle("Projet - DiceGame ");
+		primaryStage.getIcons().add(new Image("images/dice-game.png"));
+		scene.getStylesheets().add(getClass().getResource("/app.css").toExternalForm());
 		//not allow to modify the window 
-		//primaryStage.setResizable(false);
+		primaryStage.setResizable(false);
 		//To change the visibility to false
 		primaryStage.hide();
 		//for the responsive window's
