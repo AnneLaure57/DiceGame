@@ -1,6 +1,7 @@
 package fr.sid.miage.dicegameCharlesMassicard.core;
 
 /**
+ * @author Anne-Laure CHARLES
  * @author Louis MASSICARD (user name : louis)
  * @version 
  * @since %G% - %U% (%I%)

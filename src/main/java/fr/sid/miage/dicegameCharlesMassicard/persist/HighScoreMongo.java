@@ -7,6 +7,7 @@ import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
 
 /**
+ * @author Anne-Laure CHARLES
  * @author Louis MASSICARD (user name : louis)
  * @version 
  * @since %G% - %U% (%I%)
