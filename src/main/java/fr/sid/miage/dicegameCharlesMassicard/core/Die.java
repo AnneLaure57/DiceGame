@@ -1,7 +1,8 @@
 package fr.sid.miage.dicegameCharlesMassicard.core;
 
-import java.util.Random;
 import java.util.logging.Logger;
+
+import fr.sid.miage.dicegameCharlesMassicard.utils.Randomizer;
 
 /**
  * @author Anne-Laure CHARLES
@@ -47,7 +48,7 @@ public class Die {
 	 */
 	public boolean roll() {
 		try {
-			this.setFaceValue(new Random().nextInt(7));
+			this.setFaceValue(Randomizer.getInstance().getValue(6));
 			LOG.info("The die rolls, new face value is : " + getFaceValue());
 			return true;
 		} catch (Exception e) {
