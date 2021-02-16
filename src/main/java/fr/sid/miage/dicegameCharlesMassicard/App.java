@@ -9,29 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/**
- * @author Anne-Laure CHARLES
- * @author Louis MASSICARD (user name : louis)
- * @version 
- * @since %G% - %U% (%I%)
- *
- */
 public class App  extends Application {
 	
-	
-	/**
-	 * Method start : allow to initiate 
-	 *  - the FXML first view
-	 *  - the title of the applicaiton's window 
-	 *  - the icon of the applicaiton's window 
-	 *  - the CSS
-	 * Allow also to param the applicaiton's window (size, etc.).
-	 */
 	public void start(Stage primaryStage) {
 		Parent root =  null;
 		try {
 			//If files in resources
-			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/RollForm.fxml"));
+			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Main.fxml"));
 			//If in packages in src/main/java
 			//root = FXMLLoader.load(getClass().getResource("views/Main.fxml"));
 		} catch (IOException | NullPointerException e) {
@@ -40,11 +24,10 @@ public class App  extends Application {
             System.exit(0);
 		}
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("Projet - DiceGame ");
-		primaryStage.getIcons().add(new Image("images/dice-game.png"));
-		scene.getStylesheets().add(getClass().getResource("/app.css").toExternalForm());
+		primaryStage.setTitle("Projet -Bibliothèque ");
+		//scene.getStylesheets().add(getClass().getResource("/app.css").toExternalForm());
 		//not allow to modify the window 
-		primaryStage.setResizable(false);
+		//primaryStage.setResizable(false);
 		//To change the visibility to false
 		primaryStage.hide();
 		//for the responsive window's
@@ -55,11 +38,6 @@ public class App  extends Application {
 		
 	}
 	
-	/**
-	 * Main function.
-	 * 
-	 * @param args Arguments passed to application's Jar (here, not used).
-	 */
 	public static void main(String[] args) {
 		//Démarrer le menu
 		launch(args);
