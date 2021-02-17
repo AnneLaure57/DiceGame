@@ -18,9 +18,29 @@ public class DiceGame {
 	 * Logger for this class : DiceGame.
 	 */
 	private static final Logger LOG = Logger.getLogger(DiceGame.class.getName());
+	
+	/**
+	 * The maximum number of throw in a game.
+	 */
+	private static final int MAX_NUMBER_OF_THROWS = 10;
+	
+	/**
+	 * The sum of the dice's face value for which the player win some points.
+	 */
+	private static final int DICE_SUM_TO_WIN = 7;
+	
+	/**
+	 * Number of points to add when the sum of dice's face value allow to win.
+	 */
+	private static final int POINTS_TO_ADD_WHEN_WIN = 7;
 		
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
+	/**
+	 * Player who plays the game DiceGame.
+	 */
+	private Player player;
+	
 	/**
 	 * Fist die of the DiceGame.
 	 */
@@ -51,8 +71,9 @@ public class DiceGame {
 	 * No Args Constructor.
 	 * When DiceGame is created, two dice are initialized to play.
 	 */
-	private DiceGame() {
+	private DiceGame(String playerName) {
 		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
+		this.setPlayer(new Player(playerName));
 		this.setDie1(new Die());
 		this.setDie2(new Die());
 		this.setThrowNumber(0);
@@ -67,6 +88,7 @@ public class DiceGame {
 	public boolean newGame() {
 		try {
 			this.setThrowNumber(0);
+			this.getPlayer().setScore(0);
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'newGame' from DiceGame class :");
@@ -80,10 +102,19 @@ public class DiceGame {
 	 */
 	public boolean throwDice() {
 		try {
-			if (this.getThrowNumber() >= 10) {
+			if (this.getThrowNumber() >= MAX_NUMBER_OF_THROWS) {
 				throw new TooMuchDiceThrowException("You exceed the maximum throw number of : ");
 			}
 			this.throwNumber++;
+			
+			// TODO : Momento & Strategie
+			die1.roll();
+			die2.roll();
+			
+			if (die1.getFaceValue() + die2.getFaceValue() == DICE_SUM_TO_WIN) {
+					
+			}
+			
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'throwDice' from DiceGame class :");
@@ -155,6 +186,20 @@ public class DiceGame {
 	 */
 	public void setPlayerPoints(int playerPoints) {
 		this.playerPoints = playerPoints;
+	}
+
+	/**
+	 * @return the player
+	 */
+	public Player getPlayer() {
+		return player;
+	}
+
+	/**
+	 * @param player the player to set
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/
