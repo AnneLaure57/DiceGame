@@ -112,7 +112,7 @@ public class DiceGame {
 			die2.roll();
 			
 			if (die1.getFaceValue() + die2.getFaceValue() == DICE_SUM_TO_WIN) {
-					
+				this.getPlayer().increaseScore(POINTS_TO_ADD_WHEN_WIN);
 			}
 			
 			return true;
