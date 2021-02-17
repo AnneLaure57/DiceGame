@@ -1,6 +1,7 @@
 package fr.sid.miage.dicegameCharlesMassicard.persist;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
@@ -18,14 +19,28 @@ import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
 public class HighScoreXML implements HighScore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
 	
+	/**
+	 * 
+	 */
 	private static HighScoreXML INSTANCE = null;
+
+	/**
+	 * 
+	 */
+	private static int NUMBER_OF_SCORES_TO_SAVE = 100;
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
+	/**
+	 * 
+	 */
 	private List<Entry> scores;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
+	/**
+	 * 
+	 */
 	private HighScoreXML() {
 		this.setScores(new ArrayList<Entry>());
 	}
@@ -47,7 +62,11 @@ public class HighScoreXML implements HighScore {
 	@Override
 	public void add(String nomJoueur, int score) {
 		// TODO Auto-generated method stub
-
+		this.scores.add(new Entry(nomJoueur, score));
+//		this.scores.sort(Comparator<? extends Entry>);
+		if (this.scores.size() > NUMBER_OF_SCORES_TO_SAVE) {
+			this.scores.remove(this.scores.size() - 1);
+		}
 	}
 
 	@Override
