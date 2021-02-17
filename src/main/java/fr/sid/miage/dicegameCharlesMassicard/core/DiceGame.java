@@ -8,7 +8,6 @@ import java.util.logging.Logger;
  * @version 
  * @since %G% - %U% (%I%)
  * 
- * Singleton
  */
 public class DiceGame {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -17,12 +16,7 @@ public class DiceGame {
 	 * Logger for this class : DiceGame.
 	 */
 	private static final Logger LOG = Logger.getLogger(DiceGame.class.getName());
-	
-	/**
-	 * The instance of the singleton DiceGame. 
-	 */
-	private static DiceGame INSTANCE = null;
-	
+		
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	/**
@@ -35,6 +29,13 @@ public class DiceGame {
 	 */
 	private Die die2;
 	
+	/**
+	 * The throw number for the game.
+	 * Begin at 0.
+	 * Max value 10.
+	 */
+	private int throwNumber;
+	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	/**
@@ -42,9 +43,10 @@ public class DiceGame {
 	 * When DiceGame is created, two dice are initialized to play.
 	 */
 	private DiceGame() {
-		LOG.info("An DiceGame has just been created with twoo dice are initialized.");
+		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
 		this.setDie1(new Die());
 		this.setDie2(new Die());
+		this.setThrowNumber(0);
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -56,18 +58,6 @@ public class DiceGame {
 		
 	}
 	
-	/**
-	 * Method getInstance : to get the DiceGame's instance.
-	 * 
-	 * @return The DiceGame's instance.
-	 */
-	public static synchronized DiceGame getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new DiceGame();
-		}
-		return INSTANCE;
-	}
-
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 	
 	/**
@@ -96,6 +86,20 @@ public class DiceGame {
 	 */
 	public void setDie2(Die die2) {
 		this.die2 = die2;
+	}
+
+	/**
+	 * @return the throwNumber
+	 */
+	public int getThrowNumber() {
+		return throwNumber;
+	}
+
+	/**
+	 * @param throwNumber the throwNumber to set
+	 */
+	public void setThrowNumber(int throwNumber) {
+		this.throwNumber = throwNumber;
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/
