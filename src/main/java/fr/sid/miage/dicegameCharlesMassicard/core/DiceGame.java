@@ -52,6 +52,20 @@ public class DiceGame {
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 
 	/**
+	 * Method to start a new game.
+	 */
+	public boolean newGame() {
+		try {
+			this.setThrowNumber(0);
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'newGame' from DiceGame class :");
+			LOG.severe(e.toString());
+			return false;
+		}
+	}
+	
+	/**
 	 * Method to start a game.
 	 */
 	public void start() {
