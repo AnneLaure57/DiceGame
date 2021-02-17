@@ -152,7 +152,7 @@ public class DiceGame {
 	 * @return Return true if the game ends correctly, otherwise return false.
 	 */
 	public boolean endGame() {
-		this.save();
+		this.savePlayerScore();
 		this.newGame();
 		try {
 			return true;
