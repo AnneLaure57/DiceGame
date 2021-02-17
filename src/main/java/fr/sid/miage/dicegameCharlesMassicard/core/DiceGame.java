@@ -84,6 +84,8 @@ public class DiceGame {
 
 	/**
 	 * Method newGame : to start a new game.
+	 * 
+	 * @return Return true if the dice's throw is a success, otherwise return false.
 	 */
 	public boolean newGame() {
 		try {
@@ -98,19 +100,26 @@ public class DiceGame {
 	}
 	
 	/**
-	 * Method to start a game.
+	 * Method throwDice : to throw dice.
+	 * 
+	 * @return Return true if the dice's throw is a success, otherwise return false.
 	 */
 	public boolean throwDice() {
 		try {
+			// Increase the number of throws.
 			if (this.getThrowNumber() >= MAX_NUMBER_OF_THROWS) {
 				throw new TooMuchDiceThrowException("You exceed the maximum throw number of : ");
 			}
 			this.throwNumber++;
 			
 			// TODO : Momento & Strategie
+			
+			// Roll the dice.
 			die1.roll();
 			die2.roll();
 			
+			// If the player wins (The sum of the dice's face value for which the player win some points)
+			// then increase the player's score.
 			if (die1.getFaceValue() + die2.getFaceValue() == DICE_SUM_TO_WIN) {
 				this.getPlayer().increaseScore(POINTS_TO_ADD_WHEN_WIN);
 			}
@@ -124,10 +133,34 @@ public class DiceGame {
 	}
 	
 	/**
-	 * Method to start a game.
+	 * @return Return true if the player's score is saved, otherwise return false.
 	 */
-	public void start() {
-		
+	public boolean savePlayerScore() {
+		try {
+			// TODO
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'save' from DiceGame class :");
+			LOG.severe(e.toString());
+			return false;
+		}
+	}
+	
+	/**
+	 * Method endGame : to start a game.
+	 * 
+	 * @return Return true if the game ends correctly, otherwise return false.
+	 */
+	public boolean endGame() {
+		this.save();
+		this.newGame();
+		try {
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'save' from DiceGame class :");
+			LOG.severe(e.toString());
+			return false;
+		}
 	}
 	
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
