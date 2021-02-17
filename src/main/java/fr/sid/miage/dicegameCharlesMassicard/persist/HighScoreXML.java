@@ -27,7 +27,7 @@ public class HighScoreXML implements HighScore {
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	private HighScoreXML() {
-		this.scores = new ArrayList<Entry>();
+		this.setScores(new ArrayList<Entry>());
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -56,8 +56,23 @@ public class HighScoreXML implements HighScore {
 		// TODO Auto-generated method stub
 
 	}
+
 	
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
+	/**
+	 * @return the scores
+	 */
+	public List<Entry> getScores() {
+		return scores;
+	}
+
+	/**
+	 * @param scores the scores to set
+	 */
+	public void setScores(List<Entry> scores) {
+		this.scores = scores;
+	}
+	
 	/* ========================================= Main ================================================== */ /*=========================================*/
 }
