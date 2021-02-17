@@ -40,7 +40,7 @@ public class HighScoreMySQL implements HighScore {
 	}
 	
 	@Override
-	public void add(String nomJoueur, Integer score) {
+	public void add(String nomJoueur, int score) {
 		// TODO Auto-generated method stub
 
 	}
