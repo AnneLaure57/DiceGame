@@ -71,7 +71,7 @@ public class DiceGame {
 	 * No Args Constructor.
 	 * When DiceGame is created, two dice are initialized to play.
 	 */
-	private DiceGame(String playerName) {
+	public DiceGame(String playerName) {
 		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
 		this.setPlayer(new Player(playerName));
 		this.setDie1(new Die());

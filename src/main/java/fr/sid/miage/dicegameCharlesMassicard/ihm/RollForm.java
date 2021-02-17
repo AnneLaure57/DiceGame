@@ -75,7 +75,8 @@ public class RollForm implements Initializable {
 	
 	@FXML private Button start;
 	
-	private static DiceGame diceGame = DiceGame.getInstance();
+	// TODO : set the player name
+	private static DiceGame diceGame = new DiceGame("");
 
 	/* ========================================= Composants ================================================ */ /*=========================================*/
 
