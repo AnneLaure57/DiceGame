@@ -36,6 +36,13 @@ public class DiceGame {
 	 */
 	private int throwNumber;
 	
+	/**
+	 * Points earned by the player during the game.
+	 * Begin at 0.
+	 * Add 10 points when the sum of dices is equal to 7.
+	 */
+	private int playerPoints;
+	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	/**
@@ -47,12 +54,13 @@ public class DiceGame {
 		this.setDie1(new Die());
 		this.setDie2(new Die());
 		this.setThrowNumber(0);
+		this.setPlayerPoints(0);
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 
 	/**
-	 * Method to start a new game.
+	 * Method newGame : to start a new game.
 	 */
 	public boolean newGame() {
 		try {
@@ -60,6 +68,20 @@ public class DiceGame {
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'newGame' from DiceGame class :");
+			LOG.severe(e.toString());
+			return false;
+		}
+	}
+	
+	/**
+	 * Method to start a game.
+	 */
+	public boolean throwDice() {
+		try {
+			this.setThrowNumber(0);
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'throwDice' from DiceGame class :");
 			LOG.severe(e.toString());
 			return false;
 		}
@@ -114,6 +136,20 @@ public class DiceGame {
 	 */
 	public void setThrowNumber(int throwNumber) {
 		this.throwNumber = throwNumber;
+	}
+
+	/**
+	 * @return the playerPoints
+	 */
+	public int getPlayerPoints() {
+		return playerPoints;
+	}
+
+	/**
+	 * @param playerPoints the playerPoints to set
+	 */
+	public void setPlayerPoints(int playerPoints) {
+		this.playerPoints = playerPoints;
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/
