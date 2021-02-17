@@ -32,6 +32,11 @@ public class HighScoreXML implements HighScore {
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 	
+	/**
+	 * Method getInstance : return the instance of the current Concrete Product or create it.
+	 * 
+	 * @return the current Concrete Product or create it.
+	 */
 	public static synchronized HighScoreXML getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new HighScoreXML();
