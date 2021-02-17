@@ -1,7 +1,7 @@
 package fr.sid.miage.dicegameCharlesMassicard.persist;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
 import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
@@ -22,12 +22,12 @@ public class HighScoreXML implements HighScore {
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
-	private Map<String, Entry> scores;
+	private List<Entry> scores;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	private HighScoreXML() {
-		this.scores = new HashMap<String, Entry>();
+		this.scores = new ArrayList<Entry>();
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/

@@ -1,7 +1,9 @@
 package fr.sid.miage.dicegameCharlesMassicard.persist;
 
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
@@ -23,12 +25,14 @@ public class HighScoreMongo implements HighScore {
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 //	private Map<String, Entry> scores = new HashMap<String, Entry>();
-	private Map<String, Entry> scores;
+//	private Map<String, Entry> scores;
+	private List<Entry> scores;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	private HighScoreMongo() {
-		this.scores = new HashMap<String, Entry>();
+//		this.scores = new HashMap<String, Entry>();
+		this.scores = new ArrayList<Entry>();
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
