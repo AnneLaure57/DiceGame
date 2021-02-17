@@ -48,6 +48,25 @@ public class Player {
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 
+	/**
+	 * Method increaseScore : to add a certain value to player's score.
+	 * 
+	 * @param valueToAdd Value to add to player's score
+	 * @return Return true if the score increases, otherwise return false.
+	 */
+	public boolean increaseScore(int valueToAdd) {
+		try {
+			if (valueToAdd > 0) {
+				this.score += 7;
+			}
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'increaseScore' from Player class :");
+			LOG.severe(e.toString());
+			return false;
+		}
+	}
+	
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
 	/**
