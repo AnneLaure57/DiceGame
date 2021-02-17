@@ -2,6 +2,8 @@ package fr.sid.miage.dicegameCharlesMassicard.core;
 
 import java.util.logging.Logger;
 
+import fr.sid.miage.dicegameCharlesMassicard.utils.TooMuchDiceThrowException;
+
 /**
  * @author Anne-Laure CHARLES
  * @author Louis MASSICARD (user name : louis)
@@ -78,7 +80,10 @@ public class DiceGame {
 	 */
 	public boolean throwDice() {
 		try {
-			this.setThrowNumber(0);
+			if (this.getThrowNumber() >= 10) {
+				throw new TooMuchDiceThrowException("You exceed the maximum throw number of : ");
+			}
+			this.throwNumber++;
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'throwDice' from DiceGame class :");
