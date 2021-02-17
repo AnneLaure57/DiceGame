@@ -61,9 +61,9 @@ public class HighScoreXML implements HighScore {
 	
 	@Override
 	public void add(String nomJoueur, int score) {
-		// TODO Auto-generated method stub
 		this.scores.add(new Entry(nomJoueur, score));
 //		this.scores.sort(Comparator<? extends Entry>);
+		this.scores.sort(Comparator.comparing(Entry::getScore));
 		if (this.scores.size() > NUMBER_OF_SCORES_TO_SAVE) {
 			this.scores.remove(this.scores.size() - 1);
 		}
