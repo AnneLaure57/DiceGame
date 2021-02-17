@@ -17,11 +17,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -31,6 +37,7 @@ import javafx.stage.Stage;
  * @since %G% - %U% (%I%)
  *
  */
+
 public class RollForm implements Initializable {
 
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -45,6 +52,13 @@ public class RollForm implements Initializable {
 	@FXML
 	private AnchorPane content;
 	
+	@FXML
+	private AnchorPane formNickName;
+	
+	@FXML private SplitPane boardDiceGameAnchor;
+	
+	@FXML private TextField addNickName;
+	
 	@FXML private MenuBar mainItems;
 	
 	@FXML private Menu help;
@@ -54,6 +68,12 @@ public class RollForm implements Initializable {
 	@FXML private MenuItem quit;
 	
 	@FXML private Button quitRules;
+	
+	@FXML private Label nickName;
+	
+	@FXML private Label errorMessage;
+	
+	@FXML private Button start;
 	
 	private static DiceGame diceGame = DiceGame.getInstance();
 
@@ -72,15 +92,20 @@ public class RollForm implements Initializable {
 	/* ========================================= INITIALISATIONS ! */
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources) {	
 		if (location.equals(getClass().getClassLoader().getResource("view/RollForm.fxml"))) {
+			formNickName.setVisible(true);
+			formNickName.setManaged(true);
+			//formNickName.setViewOrder(0);
 			
 			//load rules view
 			CheckMenuItem rules = new CheckMenuItem("Règles");
 			rules.setSelected(true);
 			rules.setOnAction(e -> displayRules());
 		}
-		
+		if (location.equals(getClass().getClassLoader().getResource("view/PlayerView.fxml"))) {
+			
+		}
 	}
 	
 	@FXML
@@ -120,12 +145,60 @@ public class RollForm implements Initializable {
         }
 	} 
 	
+	/* ========================================= Start Game ============================================== */
+	
+	@FXML
+    private void startGame() {
+		try {
+			if (!validInput()) {
+	    		errorMessage.setText("Veuillez saisir un pseudo !");
+	    		errorMessage.setTextFill(Color.RED);
+	    	} else {
+	    		String nickNameFound = addNickName.getText();
+	    		FXMLLoader loader = new FXMLLoader(getClass().getResource("view/PlayerView.fxml"));
+	    		//formNickName.getChildren().clear();
+	    		formNickName.setVisible(false);
+	    		//boardDiceGameAnchor.setVisible(true);
+	    		//boardDiceGameAnchor.setManaged(true);
+	    	}
+    	} catch (Exception e) {
+    		LOG.severe("Erreur de saisie : "+ e.getMessage());
+    		//e.printStackTrace();
+    	}
+    }
+	
+	public boolean validInput(){
+		if (addNickName.getText() == null || addNickName.getText().trim().isEmpty()) {
+			return false;
+		}
+        return true;
+    }
+	
 	/* ========================================= New Game ============================================== */
 	
 	@FXML
-    private void openViewNewNickName(ActionEvent event) {
+    private void openViewNewNickName() {
 		try {
-			//content.getChildren().setAll(FXMLLoader.load());
+		  Stage stage = new Stage();
+		  root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FormNewNickName.fxml"));
+		  stage.setScene(new Scene(root));
+		  stage.getIcons().add(new Image("images/dice-game.png"));
+		  stage.setTitle("Ajouter un nouveau pseudo");
+		  stage.initModality(Modality.WINDOW_MODAL);
+		  //stage.initOwner(((Node)event.getSource()).getScene().getWindow() );
+		  stage.show();
+    	} catch (Exception e) {
+    		LOG.severe("Erreur de saisie : "+ e.getMessage());
+    		e.printStackTrace();
+    	}
+    }
+	
+	@FXML
+    private void roll() {
+		try {
+		  if (!nickName.equals("Label") || nickName != null) {
+			  
+		  }
     	} catch (Exception e) {
     		LOG.severe("Erreur de saisie : "+ e.getMessage());
     		e.printStackTrace();

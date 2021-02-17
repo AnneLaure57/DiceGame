@@ -2,15 +2,24 @@
     -fx-background-color: #2c397a;
 }
 
-.header>.title {
+/*.header>.title {
     -fx-font-size: 24pt;
     -fx-alignment: center ;
     -fx-text-fill: #f7f7f7fd;
-}
+}*/
 
-.pane>.title2 {
+/*.pane>.title2 {
     -fx-font-size: 20pt;
     -fx-text-fill: #f7f7f7fd;
+}*/
+
+.title2 {
+    -fx-font-size: 20pt;
+    -fx-text-fill: #f7f7f7fd;
+}
+
+.errorLabel {
+    -fx-font-size: 14pt;
 }
 
 .bg-black-style {
@@ -97,6 +106,12 @@
 .btn.btn-primary {
     -fx-background-color: #2c397a;
     -fx-text-fill: #FFF;
+}
+
+/********************* DICEGAME ***********************/
+#formNickNameAnchor {
+	-fx-background-image: url('images/fond-table.jpg');
+    -fx-background-size: 100% 100%;  
 }
 
 #boardGameAnchor {
