@@ -51,13 +51,13 @@ public class HighScoreMongo implements HighScore {
 	}
 
 	@Override
-	public void load() {
+	public void save() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void save() {
+	public void load() {
 		// TODO Auto-generated method stub
 
 	}

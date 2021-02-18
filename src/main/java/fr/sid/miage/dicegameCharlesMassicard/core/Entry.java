@@ -33,6 +33,15 @@ public class Entry {
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	/**
+	 * No Args Constructor.
+	 */
+	public Entry() {
+		LOG.info("An empty Entry has just been created.");
+		this.name = "";
+		this.score = 0;
+	}
+	
+	/**
 	 * All Args Constructor.
 	 * Allow to save player's name and score.
 	 * 

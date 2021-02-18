@@ -10,6 +10,6 @@ package fr.sid.miage.dicegameCharlesMassicard.core;
  */
 public interface HighScore {
 	public abstract void add(String playerName, int score);
-	public abstract void load();
 	public abstract void save();
+	public abstract void load();
 }

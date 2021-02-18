@@ -89,6 +89,21 @@ public class HighScoreXML implements HighScore {
 	}
 
 	/**
+	 * Method save : to save new best scores.
+	 */
+	@Override
+	public void save() {
+		XMLEncoder encoder = null;
+		try {
+		encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(SERIALIZED_FILE_NAME)));
+		} catch(FileNotFoundException fileNotFound) {
+			System.out.println("ERROR: While Creating or Opening the saved highScores");
+		}
+		encoder.writeObject(this.scores);
+		encoder.close();	
+	}
+
+	/**
 	 * Method load : to load previous best scores.
 	 */
 	@SuppressWarnings("unchecked")
@@ -105,22 +120,6 @@ public class HighScoreXML implements HighScore {
 			System.out.println("nom: " + entry.getName() + ", score: " + entry.getScore());
 		}
 	}
-
-	/**
-	 * Method save : to save new best scores.
-	 */
-	@Override
-	public void save() {
-		XMLEncoder encoder = null;
-		try {
-		encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(SERIALIZED_FILE_NAME)));
-		} catch(FileNotFoundException fileNotFound) {
-			System.out.println("ERROR: While Creating or Opening the saved highScores");
-		}
-		encoder.writeObject(this.scores);
-		encoder.close();	
-	}
-
 	
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
