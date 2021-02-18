@@ -46,8 +46,8 @@ public class Main {
 			System.out.println("nom: " + entry.getName() + ", score: " + entry.getScore());
 		}
 		
-//		highScore.save();
+		highScore.save();
 		
-//		highScore.load();
+		highScore.load();
 	}
 }

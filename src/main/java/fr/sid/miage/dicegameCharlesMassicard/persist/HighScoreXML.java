@@ -116,9 +116,9 @@ public class HighScoreXML implements HighScore {
 			System.out.println("ERROR: File highscores.xml not found");
 		}
 		this.scores = (List<Entry>) decoder.readObject();
-		for (Entry entry : scores) {
-			System.out.println("nom: " + entry.getName() + ", score: " + entry.getScore());
-		}
+//		for (Entry entry : scores) {
+//			System.out.println("nom: " + entry.getName() + ", score: " + entry.getScore());
+//		}
 	}
 	
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/

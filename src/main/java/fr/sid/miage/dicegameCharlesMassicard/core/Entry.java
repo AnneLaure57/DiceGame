@@ -34,9 +34,11 @@ public class Entry {
 
 	/**
 	 * No Args Constructor.
+	 * Need it for serialization.
 	 */
 	public Entry() {
-		LOG.info("An empty Entry has just been created.");
+		// Comment this line because HighScoreXML create an empty Entry by Entry to save.
+		// LOG.info("An empty Entry has just been created.");
 		this.name = "";
 		this.score = 0;
 	}
