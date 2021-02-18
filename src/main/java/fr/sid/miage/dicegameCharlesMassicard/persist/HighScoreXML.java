@@ -27,31 +27,33 @@ public class HighScoreXML implements HighScore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
 	
 	/**
-	 * 
+	 * The unique instance of this Singleton class.
 	 */
 	private static HighScoreXML INSTANCE = null;
 
 	/**
-	 * 
+	 * Maximum number of scores to save.
+	 * If there is too much to score, then smaller scores aren't saved.
 	 */
 	private static final int NUMBER_OF_SCORES_TO_SAVE = 100;
 	
 	/**
-	 * 
+	 * The path where scores are saved.
 	 */
 	private static final String SERIALIZED_FILE_NAME = "./highscores.xml";
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	/**
-	 * 
+	 * The list of best scores to saved.
 	 */
 	private List<Entry> scores;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	/**
-	 * 
+	 * No Args Constructor.
+	 * Initiate the list of best scores. 
 	 */
 	private HighScoreXML() {
 		this.setScores(new ArrayList<Entry>());
@@ -72,7 +74,8 @@ public class HighScoreXML implements HighScore {
 	}
 	
 	/**
-	 *
+	 * Method add : to add a new player score.
+	 * The player is identified by name.
 	 */
 	@Override
 	public void add(String nomJoueur, int score) {
@@ -86,7 +89,7 @@ public class HighScoreXML implements HighScore {
 	}
 
 	/**
-	 *
+	 * Method load : to load previous best scores.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -101,15 +104,10 @@ public class HighScoreXML implements HighScore {
 		for (Entry entry : scores) {
 			System.out.println("nom: " + entry.getName() + ", score: " + entry.getScore());
 		}
-//		for (Map.Entry<String, Integer> entry : this.scores.entrySet()) {
-//		    String key = entry.getKey();
-//		    Object value = entry.getValue();
-//		    System.out.println("nom: " + key + ", score: " + value);
-//		}
 	}
 
 	/**
-	 *
+	 * Method save : to save new best scores.
 	 */
 	@Override
 	public void save() {
