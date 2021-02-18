@@ -9,7 +9,7 @@ package fr.sid.miage.dicegameCharlesMassicard.core;
  * Abstract product.
  */
 public interface HighScore {
-	public abstract void add(String nomJoueur, int score);
+	public abstract void add(String playerName, int score);
 	public abstract void load();
 	public abstract void save();
 }

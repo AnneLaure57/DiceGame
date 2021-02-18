@@ -45,7 +45,7 @@ public class HighScoreMongo implements HighScore {
 	}
 	
 	@Override
-	public void add(String nomJoueur, int score) {
+	public void add(String playerName, int score) {
 		// TODO Auto-generated method stub
 
 	}

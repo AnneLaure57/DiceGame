@@ -78,8 +78,8 @@ public class HighScoreXML implements HighScore {
 	 * The player is identified by name.
 	 */
 	@Override
-	public void add(String nomJoueur, int score) {
-		this.scores.add(new Entry(nomJoueur, score));
+	public void add(String playerName, int score) {
+		this.scores.add(new Entry(playerName, score));
 //		this.scores.sort(Comparator<? extends Entry>);
 		// https://dzone.com/articles/java-8-comparator-how-to-sort-a-list
 		this.scores.sort(Comparator.comparing(Entry::getScore));
