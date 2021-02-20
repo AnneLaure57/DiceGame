@@ -1,7 +1,6 @@
 package fr.sid.miage.dicegameCharlesMassicard;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
-import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
 import fr.sid.miage.dicegameCharlesMassicard.persist.HighScoreXML;
 import fr.sid.miage.dicegameCharlesMassicard.persist.PersistKit;
 import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
