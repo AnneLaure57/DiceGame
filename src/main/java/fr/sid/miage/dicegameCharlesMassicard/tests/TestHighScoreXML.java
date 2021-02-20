@@ -5,6 +5,7 @@ import fr.sid.miage.dicegameCharlesMassicard.persist.PersistKit;
 import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
 
 /**
+ * @author Anne-Laure CHARLES
  * @author Louis MASSICARD (user name : louis)
  * @version 
  * @since %G% - %U% (%I%)
