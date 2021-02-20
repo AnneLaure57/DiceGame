@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
 import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
@@ -25,6 +26,11 @@ import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
  */
 public class HighScoreXML implements HighScore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
+	
+	/**
+	 * Logger for this class : Entry.
+	 */
+	private static final Logger LOG = Logger.getLogger(HighScoreXML.class.getName());
 	
 	/**
 	 * The unique instance of this Singleton class.
