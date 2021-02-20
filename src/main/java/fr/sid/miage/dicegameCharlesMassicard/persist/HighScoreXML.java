@@ -88,7 +88,7 @@ public class HighScoreXML implements HighScore {
 	public void add(String playerName, int score) {
 		this.scores.add(new Entry(playerName, score));
 		// Examples : https://dzone.com/articles/java-8-comparator-how-to-sort-a-list
-		this.scores.sort(Comparator.comparing(Entry::getScore));
+		this.scores.sort(Comparator.comparing(Entry::getScore).reversed());
 		if (this.scores.size() > NUMBER_OF_SCORES_TO_SAVE) {
 			this.scores.remove(this.scores.size() - 1);
 		}
