@@ -1,8 +1,8 @@
 package fr.sid.miage.dicegameCharlesMassicard.tests;
 
-import fr.sid.miage.dicegameCharlesMassicard.persist.HighScoreXML;
+import fr.sid.miage.dicegameCharlesMassicard.persist.HighScorePostGreSQL;
 import fr.sid.miage.dicegameCharlesMassicard.persist.PersistKit;
-import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
+import fr.sid.miage.dicegameCharlesMassicard.persist.PostGreSQLKit;
 
 /**
  * @author Anne-Laure CHARLES
@@ -29,11 +29,11 @@ public class TestHighScorePostGreSQL {
 		
 		// Declarations
 		PersistKit persistKit;
-		HighScoreXML highScore;
+		HighScorePostGreSQL highScore;
 
 		// Initialisations
-		persistKit = new XMLKit();
-		highScore = (HighScoreXML) persistKit.makeKit();
+		persistKit = new PostGreSQLKit();
+		highScore = (HighScorePostGreSQL) persistKit.makeKit();
 		
 		// Use it
 		highScore.add("Louis", 100);
@@ -45,9 +45,9 @@ public class TestHighScorePostGreSQL {
 		highScore.getScores().forEach(System.out::println);
 		
 		// Test save
-		highScore.save();
+//		highScore.save();
 		
 		// Test load
-		highScore.load();
+//		highScore.load();
 	}
 }
