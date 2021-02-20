@@ -1,4 +1,4 @@
-package fr.sid.miage.dicegameCharlesMassicard;
+package fr.sid.miage.dicegameCharlesMassicard.tests;
 
 import fr.sid.miage.dicegameCharlesMassicard.persist.HighScoreXML;
 import fr.sid.miage.dicegameCharlesMassicard.persist.PersistKit;
@@ -12,7 +12,7 @@ import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
  *
  * Temp class to test backend.
  */
-public class Main {
+public class TestHighScoreXML {
 	/* ========================================= Global ================================================ */ /*=========================================*/
 
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
