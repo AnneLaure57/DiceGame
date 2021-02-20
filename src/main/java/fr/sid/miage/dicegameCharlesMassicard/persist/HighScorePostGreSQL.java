@@ -2,6 +2,7 @@ package fr.sid.miage.dicegameCharlesMassicard.persist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
 import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
@@ -17,6 +18,11 @@ import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
  */
 public class HighScorePostGreSQL implements HighScore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
+	
+	/**
+	 * Logger for this class : Entry.
+	 */
+	private static final Logger LOG = Logger.getLogger(HighScorePostGreSQL.class.getName());
 	
 	/**
 	 * The unique instance of this Singleton class.
@@ -50,6 +56,7 @@ public class HighScorePostGreSQL implements HighScore {
 	public static synchronized HighScorePostGreSQL getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new HighScorePostGreSQL();
+			LOG.info("A HighScorePostGreSQL's Instance is created.");
 		}
 		return INSTANCE;
 	}
