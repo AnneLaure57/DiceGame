@@ -35,7 +35,7 @@ public class TestHighScorePostGreSQL {
 		persistKit = new PostGreSQLKit();
 		highScore = (HighScorePostGreSQL) persistKit.makeKit();
 		
-		// Use it
+		// Use it : add some entries
 		highScore.add("Louis", 100);
 		highScore.add("AL", 100);
 		highScore.add("Claire", 50);
@@ -43,6 +43,9 @@ public class TestHighScorePostGreSQL {
 		
 		// Display
 		highScore.getScores().forEach(System.out::println);
+		
+		// Connection
+		
 		
 		// Test save
 //		highScore.save();

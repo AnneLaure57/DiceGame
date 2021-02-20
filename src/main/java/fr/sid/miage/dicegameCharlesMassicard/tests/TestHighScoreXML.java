@@ -35,7 +35,7 @@ public class TestHighScoreXML {
 		persistKit = new XMLKit();
 		highScore = (HighScoreXML) persistKit.makeKit();
 		
-		// Use it
+		// Use it : add some entries
 		highScore.add("Louis", 100);
 		highScore.add("AL", 100);
 		highScore.add("Claire", 50);
