@@ -21,7 +21,7 @@ public class PostGreSQLKit implements PersistKit {
 	
 	@Override
 	public HighScore makeKit() {
-		return HighScoreMySQL.getInstance();
+		return HighScorePostGreSQL.getInstance();
 	}
 
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
