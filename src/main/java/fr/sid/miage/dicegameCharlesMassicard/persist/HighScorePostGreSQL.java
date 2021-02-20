@@ -1,9 +1,7 @@
 package fr.sid.miage.dicegameCharlesMassicard.persist;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
 import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
