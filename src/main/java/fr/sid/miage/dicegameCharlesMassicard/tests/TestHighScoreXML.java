@@ -11,7 +11,7 @@ import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
  * @since %G% - %U% (%I%)
  *
  *
- * Temp class to test backend.
+ * Temp class to test backend : HighScoreXML.
  */
 public class TestHighScoreXML {
 	/* ========================================= Global ================================================ */ /*=========================================*/
