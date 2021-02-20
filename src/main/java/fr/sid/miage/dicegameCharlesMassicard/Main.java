@@ -1,6 +1,5 @@
 package fr.sid.miage.dicegameCharlesMassicard;
 
-import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
 import fr.sid.miage.dicegameCharlesMassicard.persist.HighScoreXML;
 import fr.sid.miage.dicegameCharlesMassicard.persist.PersistKit;
 import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
@@ -27,7 +26,7 @@ public class Main {
 	/* ========================================= Main ================================================== */ /*=========================================*/
 	public static void main(String[] args) {
 		
-		// Déclarations
+		// Declarations
 		PersistKit persistKit;
 		HighScoreXML highScore;
 
@@ -35,18 +34,19 @@ public class Main {
 		persistKit = new XMLKit();
 		highScore = (HighScoreXML) persistKit.makeKit();
 		
-		// Utilisations
+		// Use it
 		highScore.add("Louis", 100);
 		highScore.add("AL", 100);
 		highScore.add("Claire", 50);
 		highScore.add("Adel", 0);
 		
-		for (Entry entry : highScore.getScores()) {
-			System.out.println("nom: " + entry.getName() + ", score: " + entry.getScore());
-		}
+		// Display
+		highScore.getScores().forEach(System.out::println);
 		
+		// Test save
 		highScore.save();
 		
+		// Test load
 		highScore.load();
 	}
 }
