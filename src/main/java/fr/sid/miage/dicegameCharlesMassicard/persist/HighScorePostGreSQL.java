@@ -1,5 +1,7 @@
 package fr.sid.miage.dicegameCharlesMassicard.persist;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -15,6 +17,19 @@ import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
  * 
  * Singleton
  * Concrete Product
+ * https://www.tutorialspoint.com/postgresql/postgresql_java.htm
+ * 
+ * If you have a running PostGreSQL server, then run this command : sudo pkill -u postgres
+ * 
+ * Use PostGreSQL Docker : 
+ *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
+ *  * otherwise : docker start postgres
+ *  
+ * If you want to manage your PostGreSQL Docker : docker run -it --rm --link postgres:postgres postgres psql -h postgres -U postgres
+ * Password : riovas
+ * To list databases : \l
+ * Request example : select * from utilisateur;
+ * To quit : \q
  */
 public class HighScorePostGreSQL implements HighScore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -95,6 +110,37 @@ public class HighScorePostGreSQL implements HighScore {
 
 	}
 
+	/* ========================================= PostGreSQL Utils ====================================== */ /*=========================================*/
+	
+	/**
+	 * Method connection : to connect the Java application DiceGame to the associated PostGreSQL database.
+	 * 
+	 * If you have a running PostGreSQL server, then run this command : sudo pkill -u postgres
+	 * 
+	 * Use PostGreSQL Docker : 
+	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
+	 *  * otherwise : docker start postgres
+	 *  
+	 * If you want to manage your PostGreSQL Docker : docker run -it --rm --link postgres:postgres postgres psql -h postgres -U postgres
+	 * Password : riovas
+	 * To list databases : \l
+	 * Request example : select * from utilisateur;
+	 * To quit : \q
+	 */
+	public void connection () {
+		@SuppressWarnings("unused")
+		Connection connection = null;
+	      try {
+	         Class.forName("org.postgresql.Driver");
+	         connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/dicegame", "postgres", "riovas");
+	      } catch (Exception error) {
+	    	  error.printStackTrace();
+	    	  LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	  System.exit(0);
+	      }
+	      LOG.info("PostGreSQL : Opened database successfully");
+	}
+		
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
 	/**
