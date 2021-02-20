@@ -3,6 +3,7 @@ package fr.sid.miage.dicegameCharlesMassicard.persist;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -88,8 +89,12 @@ public class HighScorePostGreSQL implements HighScore {
 	 */
 	@Override
 	public void add(String playerName, int score) {
-		// TODO Auto-generated method stub
-
+		this.scores.add(new Entry(playerName, score));
+		// Examples : https://dzone.com/articles/java-8-comparator-how-to-sort-a-list
+		this.scores.sort(Comparator.comparing(Entry::getScore).reversed());
+		if (this.scores.size() > NUMBER_OF_SCORES_TO_SAVE) {
+			this.scores.remove(this.scores.size() - 1);
+		}
 	}
 	
 	/**
