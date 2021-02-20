@@ -75,6 +75,7 @@ public class HighScoreXML implements HighScore {
 	public static synchronized HighScoreXML getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new HighScoreXML();
+			LOG.info("A HighScoreXML's Instance is created.");
 		}
 		return INSTANCE;
 	}
@@ -86,8 +87,7 @@ public class HighScoreXML implements HighScore {
 	@Override
 	public void add(String playerName, int score) {
 		this.scores.add(new Entry(playerName, score));
-//		this.scores.sort(Comparator<? extends Entry>);
-		// https://dzone.com/articles/java-8-comparator-how-to-sort-a-list
+		// Examples : https://dzone.com/articles/java-8-comparator-how-to-sort-a-list
 		this.scores.sort(Comparator.comparing(Entry::getScore));
 		if (this.scores.size() > NUMBER_OF_SCORES_TO_SAVE) {
 			this.scores.remove(this.scores.size() - 1);
@@ -103,7 +103,7 @@ public class HighScoreXML implements HighScore {
 		try {
 		encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(SERIALIZED_FILE_NAME)));
 		} catch(FileNotFoundException fileNotFound) {
-			System.out.println("ERROR: While Creating or Opening the saved highScores");
+			LOG.severe("ERROR: While Creating or Opening the saved highScores");
 		}
 		encoder.writeObject(this.scores);
 		encoder.close();	
@@ -119,12 +119,13 @@ public class HighScoreXML implements HighScore {
 		try {
 			decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(SERIALIZED_FILE_NAME)));
 		} catch (FileNotFoundException e) {
-			System.out.println("ERROR: File highscores.xml not found");
+			LOG.severe("ERROR: File highscores.xml not found");
 		}
 		this.scores = (List<Entry>) decoder.readObject();
-//		for (Entry entry : scores) {
-//			System.out.println("nom: " + entry.getName() + ", score: " + entry.getScore());
-//		}
+		LOG.info("All entries that are loaded : ");
+		for (Entry entry : scores) {
+			LOG.info(entry.toString());
+		}
 	}
 	
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
