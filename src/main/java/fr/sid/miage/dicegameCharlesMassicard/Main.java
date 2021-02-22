@@ -26,7 +26,7 @@ public class Main {
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
 	/* ========================================= Main ================================================== */ /*=========================================*/
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		// Déclarations
 		PersistKit persistKit;
@@ -49,5 +49,5 @@ public class Main {
 		highScore.save();
 		
 		highScore.load();
-	}
+	}*/
 }

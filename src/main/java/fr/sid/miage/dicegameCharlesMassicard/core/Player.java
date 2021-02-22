@@ -1,5 +1,7 @@
 package fr.sid.miage.dicegameCharlesMassicard.core;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.logging.Logger;
 
 /**
@@ -30,6 +32,11 @@ public class Player {
 	 * The score is initialized at 0.
 	 */
 	private int score;
+	
+	/**
+	 * Observable
+	 */
+	private PropertyChangeSupport supportPlayer;
 
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
@@ -44,9 +51,23 @@ public class Player {
 		LOG.info("An Player has just been created (score at 0) with name : " + getName());
 		this.setName(name);
 		this.setScore(0);
+		this.supportPlayer = new PropertyChangeSupport(this);
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
+	
+	/**
+	 * Observable
+	 * 
+	 */
+	
+	public void addPropertyChangeListener(PropertyChangeListener pcl) {
+		supportPlayer.addPropertyChangeListener(pcl);
+    }
+ 
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+    	supportPlayer.removePropertyChangeListener(pcl);
+    }
 
 	/**
 	 * Method increaseScore : to add a certain value to player's score.
@@ -80,7 +101,8 @@ public class Player {
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.name = name;
+		//this.name = name;
+		supportPlayer.firePropertyChange("Nom joueur", this.name, name);
 	}
 	
 	/**
@@ -94,7 +116,8 @@ public class Player {
 	 * @param score the score to set
 	 */
 	public void setScore(int score) {
-		this.score = score;
+		//this.score = score;
+		supportPlayer.firePropertyChange("Score Joueur", this.score, score);
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/

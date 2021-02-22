@@ -1,5 +1,6 @@
 package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -92,10 +93,11 @@ public class RollForm implements Initializable {
 	@FXML
 	private Button button_lancer;
 
-	/* ========================================= INITIALISATIONS ! */
+	/* ========================================= INITIALISATIONS ! ********************************************************************************************/
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {	
+		//TODO addPropertyChangeListener();
 		if (location.equals(getClass().getClassLoader().getResource("view/RollForm.fxml"))) {
 			formNickName.setVisible(true);
 			formNickName.setManaged(true);
@@ -107,6 +109,12 @@ public class RollForm implements Initializable {
 			rules.setOnAction(e -> displayRules());
 		}
 	}
+	
+	public void propertyChange(PropertyChangeEvent evt) {
+		//TODO event with view
+    }
+	
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
 	
 	@FXML
     private void closeRollForm(ActionEvent event) {

@@ -1,5 +1,6 @@
 package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,6 +53,7 @@ public class PlayerView implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//TODO addPropertyChangeListener();
 		if (location.equals(getClass().getClassLoader().getResource("view/PlayerView.fxml"))) {
 			nickNamePlayer.setText("salut");
 			//set Invisible Label + Buttons 
@@ -62,6 +64,10 @@ public class PlayerView implements Initializable{
 	public void setView(RollForm rollForm) {
 		parent = rollForm;
 	}
+	
+	public void propertyChange(PropertyChangeEvent evt) {
+		//TODO event with view
+    }
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 	
