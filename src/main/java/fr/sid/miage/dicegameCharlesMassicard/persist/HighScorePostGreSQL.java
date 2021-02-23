@@ -251,7 +251,7 @@ public class HighScorePostGreSQL implements HighScore {
 	 * @param score The entry's player's score.
 	 */
 	public void insertOne (int ID, String name, int score) {
-		LOG.info("Insert into table : " + TABLE_NAME);
+		LOG.info("Insert One into table : " + TABLE_NAME);
 		
 		Connection connection = null;
 		Statement statement = null;
@@ -285,7 +285,7 @@ public class HighScorePostGreSQL implements HighScore {
 	 * @param scores The list of Entry to insert in database/table.
 	 */
 	public void insertMany (List<Entry> scores) {
-		LOG.info("Insert into table : " + TABLE_NAME);
+		LOG.info("Insert Many into table : " + TABLE_NAME);
 		
 		Connection connection = null;
 		Statement statement = null;
@@ -316,6 +316,48 @@ public class HighScorePostGreSQL implements HighScore {
 	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
 	    	System.exit(0);
 	    }
+	}
+	
+	public List<Entry> getMany () {
+		LOG.info("Get Many from table : " + TABLE_NAME);
+		
+		List<Entry> scores = new ArrayList<Entry>();
+		
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+			    	    
+	    try {
+	    	Class.forName(JDBC_DRIVER);
+	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
+	    	connection.setAutoCommit(false);
+	    	
+	    	statement = connection.createStatement();
+	    	resultSet = statement.executeQuery("SELECT * FROM " + TABLE_NAME + ";");
+	    	
+	    	while (resultSet.next()) {
+	    		int ID = resultSet.getInt("id");
+	            String  name = resultSet.getString("name");
+	            int score  = resultSet.getInt("score");
+	            System.out.println( "ID = " + ID );
+	            System.out.println( "NAME = " + name );
+	            System.out.println( "SCORE = " + score );
+	            System.out.println();
+	        }
+	    		    	
+	        resultSet.close();
+	        statement.close();
+	        connection.close();
+	    	
+	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
+	    	
+	    } catch (Exception error) {
+	    	error.printStackTrace();
+	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	System.exit(0);
+	    }
+	    
+	    return scores;
 	}
 	
 //	https://www.tutorialspoint.com/postgresql/postgresql_java.htm
