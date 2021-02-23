@@ -9,6 +9,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
 import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
 
@@ -39,7 +42,7 @@ public class HighScoreMongoDB implements HighScore {
 	/**
 	 * The unique instance of this Singleton class.
 	 */
-	private static HighScorePostGreSQL INSTANCE = null;
+	private static HighScoreMongoDB INSTANCE = null;
 	
 	// JDBC driver name and database URL
 	private static final String JDBC_DRIVER = "org.postgresql.Driver";  
@@ -81,9 +84,9 @@ public class HighScoreMongoDB implements HighScore {
 	 * 
 	 * @return the current Concrete Product or create it.
 	 */
-	public static synchronized HighScorePostGreSQL getInstance() {
+	public static synchronized HighScoreMongoDB getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new HighScorePostGreSQL();
+			INSTANCE = new HighScoreMongoDB();
 			LOG.info("A HighScorePostGreSQL's Instance is created.");
 		}
 		return INSTANCE;
@@ -108,10 +111,10 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	@Override
 	public void save() {
-		this.checkDatabaseConnection();
-		this.createTableIfNotExists();
-		this.truncateTable();
-		this.insertMany(getScores());
+//		this.checkDatabaseConnection();
+//		this.createTableIfNotExists();
+//		this.truncateTable();
+//		this.insertMany(getScores());
 	}
 	
 	/**
@@ -119,9 +122,9 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	@Override
 	public void load() {
-		this.checkDatabaseConnection();
-		this.createTableIfNotExists();
-		this.getMany();
+	//		this.checkDatabaseConnection();
+	//		this.createTableIfNotExists();
+	//		this.getMany();
 	}
 
 	/* ========================================= PostGreSQL Utils ====================================== */ /*=========================================*/
@@ -137,47 +140,11 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	public void checkDatabaseConnection () {
 		LOG.info("Check connection to database : " + DATABASE_URL);
-		
-		// https://www.jvmhost.com/articles/create-drop-databases-dynamically-java-jsp-code/
-		Connection connection = null;
-		Statement statement = null;
-	    ResultSet resultSet = null;
-	    
-	    boolean dbNeedToBeCreated = true;
-	    
+				    
 	    try {
-	    	Class.forName(JDBC_DRIVER);
-	    	connection = DriverManager.getConnection(SERVER_URL, DATABASE_USER, DATABASE_PASS);
-	    	statement = connection.createStatement();
+	    	MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
 	    	
-	        // https://www.postgresqltutorial.com/postgresql-show-databases/
-	    	resultSet = statement.executeQuery("SELECT datname FROM pg_database;");
-	    		    	
-	    	while (resultSet.next()) {
-	        	// Uncomment to debug 
-	    		// System.out.println(resultSet.getString(1));
-	    		// System.out.println(resultSet.getString(1).equals(DATABASE_NAME));
-	        	
-	    		if (resultSet.getString(1).equals(DATABASE_NAME)) {
-	        		dbNeedToBeCreated = false;
-				}
-	        }
-	    	
-	    	if (dbNeedToBeCreated) {
-	    		LOG.info("Initiate and create database for this app : " + DATABASE_NAME);
-	    		statement.executeUpdate("CREATE DATABASE " + DATABASE_NAME + ";");
-	    		
-	    		// https://stackoverflow.com/questions/7945235/how-can-i-create-a-postgresql-database-in-java
-	    		// statement.executeUpdate("DROP DATABASE IF EXISTS dicegame;");
-			} else {
-				LOG.info("The database already exists for this app : " + DATABASE_NAME);
-			}
-	    	
-	    	resultSet.close();
-	    	statement.close();
-	    	connection.close();
-	    	
-	    	LOG.info("PostGreSQL : Opened database successfully");
+	    	LOG.info("MongoDB : Opened database successfully");
 	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();
