@@ -248,26 +248,19 @@ public class HighScorePostGreSQL implements HighScore {
 		
 		Connection connection = null;
 		Statement statement = null;
-		int commandReturn;
-	    	    
+			    	    
 	    try {
 	    	Class.forName(JDBC_DRIVER);
 	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
 	    	connection.setAutoCommit(false);
 	    	
 	    	statement = connection.createStatement();
-	    	String sql = "INSERT INTO " + TABLE_NAME + " (ID,NAME,SCORE) "
-	    			+ "VALUES (1, 'Paul', 32, 'California', 20000.00 );";
-	    	commandReturn = statement.executeUpdate(sql);
+	    	String sql = "INSERT INTO " + TABLE_NAME + " (" + TABLE_FIELD_ID + "," + TABLE_FIELD_NAME + "," + TABLE_FIELD_SCORE + ") "
+	    			+ "VALUES (" + ID + ", " + name + ", " + score +");";
+	    	statement.executeUpdate(sql);
 	    		    	
-	    	if (commandReturn == 0) {
-				LOG.info("SQL statement return nothing.");
-			} else {
-				LOG.info("The row count for SQL Data Manipulation Language (DML) statements.");
-				LOG.info("Row count : " + commandReturn);
-			}
-	    				    	
 	    	statement.close();
+	    	connection.commit();
 	    	connection.close();
 	    	
 	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
