@@ -132,8 +132,9 @@ public class HighScorePostGreSQL implements HighScore {
 	 */
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
-
+		this.checkDatabaseConnection();
+		this.createTableIfNotExists();
+		this.getMany();
 	}
 
 	/* ========================================= PostGreSQL Utils ====================================== */ /*=========================================*/
@@ -271,7 +272,7 @@ public class HighScorePostGreSQL implements HighScore {
 	    	connection.commit();
 	    	connection.close();
 	    	
-	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
+	    	LOG.info("PostGreSQL : the Entry is inserted.");
 	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();
@@ -302,7 +303,7 @@ public class HighScorePostGreSQL implements HighScore {
 	    	for (Entry entry : scores) {
 	    		index++;
 	    		String sql = "INSERT INTO " + TABLE_NAME + " (" + TABLE_FIELD_ID + "," + TABLE_FIELD_NAME + "," + TABLE_FIELD_SCORE + ") "
-	    				+ "VALUES (" + index + ", " + entry.getName() + ", " + entry.getScore() +");";
+	    				+ "VALUES (" + index + ", " + "'"+entry.getName()+"'" + ", " + entry.getScore() +");";
 	    		statement.executeUpdate(sql);
 			}
 	    		    	
@@ -310,7 +311,7 @@ public class HighScorePostGreSQL implements HighScore {
 	    	connection.commit();
 	    	connection.close();
 	    	
-	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
+	    	LOG.info("PostGreSQL : the list of Entry is inserted.");
 	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();
@@ -355,7 +356,7 @@ public class HighScorePostGreSQL implements HighScore {
 	        statement.close();
 	        connection.close();
 	    	
-	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
+//	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
 	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();
