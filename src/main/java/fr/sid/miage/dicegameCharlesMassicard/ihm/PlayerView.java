@@ -66,7 +66,7 @@ public class PlayerView implements Initializable{
 	}
 	
 	public void propertyChange(PropertyChangeEvent evt) {
-		//TODO event with view
+		
     }
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/

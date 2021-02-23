@@ -30,7 +30,7 @@ public class App  extends Application {
 		Parent root =  null;
 		try {
 			//If files in resources
-			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/RollForm.fxml"));
+			root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainView.fxml"));
 			//If in packages in src/main/java
 			//root = FXMLLoader.load(getClass().getResource("views/Main.fxml"));
 		} catch (IOException | NullPointerException e) {
