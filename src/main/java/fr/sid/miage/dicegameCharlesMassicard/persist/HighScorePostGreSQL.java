@@ -243,6 +243,13 @@ public class HighScorePostGreSQL implements HighScore {
 	    }
 	}
 	
+	/**
+	 * Method insertOne : to insert a unique Entry (with decuplate params).
+	 * 
+	 * @param ID The entry's ID.
+	 * @param name The entry's player's name.
+	 * @param score The entry's player's score.
+	 */
 	public void insertOne (int ID, String name, int score) {
 		LOG.info("Insert into table : " + TABLE_NAME);
 		
