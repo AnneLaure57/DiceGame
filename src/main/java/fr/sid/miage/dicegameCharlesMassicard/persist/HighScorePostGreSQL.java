@@ -132,21 +132,15 @@ public class HighScorePostGreSQL implements HighScore {
 	/* ========================================= PostGreSQL Utils ====================================== */ /*=========================================*/
 	
 	/**
-	 * Method connection : to connect the Java application DiceGame to the associated PostGreSQL database.
+	 * Method connection : to check the connection between the Java application DiceGame to the associated PostGreSQL database.
 	 * 
 	 * If you have a running PostGreSQL server, then run this command : sudo pkill -u postgres
 	 * 
 	 * Use PostGreSQL Docker : 
 	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
 	 *  * otherwise : docker start postgres
-	 *  
-	 * If you want to manage your PostGreSQL Docker : docker run -it --rm --link postgres:postgres postgres psql -h postgres -U postgres
-	 * Password : riovas
-	 * To list databases : \l
-	 * Request example : select * from utilisateur;
-	 * To quit : \q
 	 */
-	public void connection () {
+	public void checkDatabaseConnection () {
 		// https://www.jvmhost.com/articles/create-drop-databases-dynamically-java-jsp-code/
 		Connection connection = null;
 		Statement statement = null;
@@ -167,33 +161,37 @@ public class HighScorePostGreSQL implements HighScore {
 	    	LOG.info("List of databases accessible by user " + DATABASE_USER + ":");
 	    	
 	    	while (resultSet.next()) {
-//	        	LOG.info(resultSet.getString(1));
-	    		System.out.println(resultSet.getString(1));
-	    		System.out.println(resultSet.getString(1).equals(DATABASE_NAME));
+	        	// Uncomment to debug 
+	    		// System.out.println(resultSet.getString(1));
+	    		// System.out.println(resultSet.getString(1).equals(DATABASE_NAME));
 	        	if (resultSet.getString(1).equals(DATABASE_NAME)) {
 	        		dbNeedToBeCreated = false;
 				}
 	        }
-	    	resultSet.close();
 	    	
 	    	if (dbNeedToBeCreated) {
 	    		LOG.info("Initiate and create database for this app : " + DATABASE_NAME);
-//	    		statement.executeUpdate("CREATE DATABASE " + DB_NAME + ";");
-	    		
+	    		statement.executeUpdate("CREATE DATABASE " + DATABASE_NAME + ";");
 	    		
 	    		// https://stackoverflow.com/questions/7945235/how-can-i-create-a-postgresql-database-in-java
-	    		statement.executeUpdate("drop database dicegame;");
+	    		// statement.executeUpdate("DROP DATABASE IF EXISTS dicegame;");
 			} else {
 				LOG.info("The database already exists for this app : " + DATABASE_NAME);
 			}
-	        
+	    	
+	    	resultSet.close();
+	    	statement.close();
+	    	connection.close();
+	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();
 	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
 	    	System.exit(0);
-	      }
-	      LOG.info("PostGreSQL : Opened database successfully");
+	    }
+	    LOG.info("PostGreSQL : Opened database successfully");
 	}
+
+
 	
 //	https://www.tutorialspoint.com/postgresql/postgresql_java.htm
 		
