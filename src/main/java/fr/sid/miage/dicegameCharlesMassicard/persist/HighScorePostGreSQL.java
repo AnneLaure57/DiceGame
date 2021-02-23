@@ -279,6 +279,40 @@ public class HighScorePostGreSQL implements HighScore {
 	    }
 	}
 	
+	public void insertMany (List<Entry> scores) {
+		LOG.info("Insert into table : " + TABLE_NAME);
+		
+		Connection connection = null;
+		Statement statement = null;
+			    	    
+	    try {
+	    	Class.forName(JDBC_DRIVER);
+	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
+	    	connection.setAutoCommit(false);
+	    	
+	    	statement = connection.createStatement();
+	    	
+	    	int index = 0;
+	    	for (Entry entry : scores) {
+	    		index++;
+	    		String sql = "INSERT INTO " + TABLE_NAME + " (" + TABLE_FIELD_ID + "," + TABLE_FIELD_NAME + "," + TABLE_FIELD_SCORE + ") "
+	    				+ "VALUES (" + index + ", " + entry.getName() + ", " + entry.getScore() +");";
+	    		statement.executeUpdate(sql);
+			}
+	    		    	
+	    	statement.close();
+	    	connection.commit();
+	    	connection.close();
+	    	
+	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
+	    	
+	    } catch (Exception error) {
+	    	error.printStackTrace();
+	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	System.exit(0);
+	    }
+	}
+	
 //	https://www.tutorialspoint.com/postgresql/postgresql_java.htm
 		
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
