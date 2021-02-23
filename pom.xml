@@ -51,24 +51,27 @@
         <version>1.0.2.Final</version>
     </dependency>
     <!-- BDD -->
-    <!-- POSTGRES -->
+    <!-- PostGreSQL -->
 	<dependency>
 		<groupId>org.postgresql</groupId>
 		<artifactId>postgresql</artifactId>
 		<version>42.2.16</version>
 		<scope>runtime</scope>
 	</dependency>
+	<!-- H2 -->
     <dependency>
         <groupId>com.h2database</groupId>
         <artifactId>h2</artifactId>
         <version>1.4.197</version>
         <scope>runtime</scope>
     </dependency>
+     <!-- MongoDB -->
     <dependency>
 	    <groupId>org.mongodb</groupId>
 	    <artifactId>mongo-java-driver</artifactId>
 	    <version>3.4.1</version>
 	</dependency>
+	<!-- MySQL -->
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>

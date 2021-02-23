@@ -400,8 +400,6 @@ public class HighScorePostGreSQL implements HighScore {
 	        statement.close();
 	        connection.close();
 	    	
-//	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
-	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();
 	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
@@ -410,8 +408,6 @@ public class HighScorePostGreSQL implements HighScore {
 	    
 	    return scores;
 	}
-	
-//	https://www.tutorialspoint.com/postgresql/postgresql_java.htm
 		
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
