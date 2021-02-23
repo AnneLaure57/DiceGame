@@ -20,7 +20,7 @@ import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
  * 
  * Singleton
  * Concrete Product
- * https://www.tutorialspoint.com/postgresql/postgresql_java.htm
+ * PostGresQL Java doc : https://www.tutorialspoint.com/postgresql/postgresql_java.htm
  * 
  * If you have a running PostGreSQL server, then run this command : sudo pkill -u postgres
  * 
@@ -67,6 +67,9 @@ public class HighScorePostGreSQL implements HighScore {
 
 	// Tables informations
 	private static final String TABLE_NAME = "ENTRIES";
+	private static final String TABLE_FIELD_ID = "ID";
+	private static final String TABLE_FIELD_NAME = "NAME";
+	private static final String TABLE_FIELD_SCORE = "SCORE";
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
@@ -135,7 +138,7 @@ public class HighScorePostGreSQL implements HighScore {
 	/* ========================================= PostGreSQL Utils ====================================== */ /*=========================================*/
 	
 	/**
-	 * Method connection : to check the connection between the Java application DiceGame to the associated PostGreSQL database.
+	 * Method checkDatabaseConnection : to check the connection between the Java application DiceGame to the associated PostGreSQL database.
 	 * 
 	 * If you have a running PostGreSQL server, then run this command : sudo pkill -u postgres
 	 * 
@@ -195,12 +198,17 @@ public class HighScorePostGreSQL implements HighScore {
 	}
 
 	/**
+	 * Method createTableIfNotExists : to run the command CREATE TABLE IF NOT EXISTS.
 	 * 
+	 * If you have a running PostGreSQL server, then run this command : sudo pkill -u postgres
+	 * 
+	 * Use PostGreSQL Docker : 
+	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
+	 *  * otherwise : docker start postgres
 	 */
 	public void createTableIfNotExists () {
 		LOG.info("Create table (if not exists), table name : " + TABLE_NAME);
 		
-		// https://www.jvmhost.com/articles/create-drop-databases-dynamically-java-jsp-code/
 		Connection connection = null;
 		Statement statement = null;
 		int commandReturn;
@@ -211,13 +219,49 @@ public class HighScorePostGreSQL implements HighScore {
 	    	statement = connection.createStatement();
 	    	
 	    	String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
-	                " (ID INT PRIMARY KEY NOT NULL," +
-	                " NAME TEXT NOT NULL, " +
-	                " SCORE INT NOT NULL);";
+	                " ("+ TABLE_FIELD_ID + " INT PRIMARY KEY NOT NULL," +
+	                " " + TABLE_FIELD_NAME + " TEXT NOT NULL, " +
+	                " " + TABLE_FIELD_SCORE + " INT NOT NULL);";
 	    	commandReturn = statement.executeUpdate(sql);
 	    		    	
 	    	if (commandReturn == 0) {
-				LOG.info("SQL statements that return nothing.");
+				LOG.info("SQL statement return nothing.");
+			} else {
+				LOG.info("The row count for SQL Data Manipulation Language (DML) statements.");
+				LOG.info("Row count : " + commandReturn);
+			}
+	    				    	
+	    	statement.close();
+	    	connection.close();
+	    	
+	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
+	    	
+	    } catch (Exception error) {
+	    	error.printStackTrace();
+	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	System.exit(0);
+	    }
+	}
+	
+	public void insert (int ID, String name, int score) {
+		LOG.info("Insert into table : " + TABLE_NAME);
+		
+		Connection connection = null;
+		Statement statement = null;
+		int commandReturn;
+	    	    
+	    try {
+	    	Class.forName(JDBC_DRIVER);
+	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
+	    	connection.setAutoCommit(false);
+	    	
+	    	statement = connection.createStatement();
+	    	String sql = "INSERT INTO " + TABLE_NAME + " (ID,NAME,SCORE) "
+	    			+ "VALUES (1, 'Paul', 32, 'California', 20000.00 );";
+	    	commandReturn = statement.executeUpdate(sql);
+	    		    	
+	    	if (commandReturn == 0) {
+				LOG.info("SQL statement return nothing.");
 			} else {
 				LOG.info("The row count for SQL Data Manipulation Language (DML) statements.");
 				LOG.info("Row count : " + commandReturn);
