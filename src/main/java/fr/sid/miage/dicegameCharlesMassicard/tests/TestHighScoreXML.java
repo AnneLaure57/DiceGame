@@ -11,7 +11,7 @@ import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
  * @since %G% - %U% (%I%)
  *
  *
- * Temp class to test backend : HighScoreXML.
+ * Class to test backend : HighScoreXML.
  */
 public class TestHighScoreXML {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -25,6 +25,12 @@ public class TestHighScoreXML {
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
 	/* ========================================= Main ================================================== */ /*=========================================*/
+	
+	/**	
+	 * Main function : run the test.
+	 * 	
+	 * @param args Arguments passed to application's Jar (here, not used).	
+	 */
 	public static void main(String[] args) {
 		
 		// Declarations
