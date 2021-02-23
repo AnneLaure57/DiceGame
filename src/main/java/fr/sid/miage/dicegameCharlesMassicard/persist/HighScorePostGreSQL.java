@@ -2,6 +2,8 @@ package fr.sid.miage.dicegameCharlesMassicard.persist;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -31,6 +33,8 @@ import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
  * To list databases : \l
  * Request example : select * from utilisateur;
  * To quit : \q
+ * 
+ * Other examples : https://stackoverflow.com/questions/769683/postgresql-show-tables-in-postgresql
  */
 public class HighScorePostGreSQL implements HighScore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -50,6 +54,16 @@ public class HighScorePostGreSQL implements HighScore {
 	 * The unique instance of this Singleton class.
 	 */
 	private static HighScorePostGreSQL INSTANCE = null;
+	
+	// JDBC driver name and database URL
+	private static final String JDBC_DRIVER = "org.postgresql.Driver";  
+	private static final String SERVER_URL = "jdbc:postgresql://localhost:5432/";
+	private static final String DATABASE_NAME = "dicegame";
+	private static final String DATABASE_URL = SERVER_URL + DATABASE_NAME;
+
+	//  Database credentials
+	private static final String DATABASE_USER = "postgres";
+	private static final String DATABASE_PASS = "riovas";
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
@@ -133,18 +147,55 @@ public class HighScorePostGreSQL implements HighScore {
 	 * To quit : \q
 	 */
 	public void connection () {
-		@SuppressWarnings("unused")
+		// https://www.jvmhost.com/articles/create-drop-databases-dynamically-java-jsp-code/
 		Connection connection = null;
-	      try {
-	         Class.forName("org.postgresql.Driver");
-	         connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/dicegame", "postgres", "riovas");
-	      } catch (Exception error) {
-	    	  error.printStackTrace();
-	    	  LOG.severe(error.getClass().getName() + ": " + error.getMessage());
-	    	  System.exit(0);
+		Statement statement = null;
+	    ResultSet resultSet = null;
+	    
+	    boolean dbNeedToBeCreated = true;
+	    
+	    try {
+	    	Class.forName(JDBC_DRIVER);
+	    	connection = DriverManager.getConnection(SERVER_URL, DATABASE_USER, DATABASE_PASS);
+	    	statement = connection.createStatement();
+	    	
+	        // https://www.postgresqltutorial.com/postgresql-show-databases/
+	    	resultSet = statement.executeQuery("SELECT datname FROM pg_database;");
+	    	
+	    		
+	    	LOG.info(DATABASE_NAME);
+	    	LOG.info("List of databases accessible by user " + DATABASE_USER + ":");
+	    	
+	    	while (resultSet.next()) {
+//	        	LOG.info(resultSet.getString(1));
+	    		System.out.println(resultSet.getString(1));
+	    		System.out.println(resultSet.getString(1).equals(DATABASE_NAME));
+	        	if (resultSet.getString(1).equals(DATABASE_NAME)) {
+	        		dbNeedToBeCreated = false;
+				}
+	        }
+	    	resultSet.close();
+	    	
+	    	if (dbNeedToBeCreated) {
+	    		LOG.info("Initiate and create database for this app : " + DATABASE_NAME);
+//	    		statement.executeUpdate("CREATE DATABASE " + DB_NAME + ";");
+	    		
+	    		
+	    		// https://stackoverflow.com/questions/7945235/how-can-i-create-a-postgresql-database-in-java
+	    		statement.executeUpdate("drop database dicegame;");
+			} else {
+				LOG.info("The database already exists for this app : " + DATABASE_NAME);
+			}
+	        
+	    } catch (Exception error) {
+	    	error.printStackTrace();
+	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	System.exit(0);
 	      }
 	      LOG.info("PostGreSQL : Opened database successfully");
 	}
+	
+//	https://www.tutorialspoint.com/postgresql/postgresql_java.htm
 		
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
