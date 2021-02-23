@@ -203,23 +203,26 @@ public class HighScorePostGreSQL implements HighScore {
 		// https://www.jvmhost.com/articles/create-drop-databases-dynamically-java-jsp-code/
 		Connection connection = null;
 		Statement statement = null;
-	    ResultSet resultSet = null;
+		int commandReturn;
 	    	    
 	    try {
 	    	Class.forName(JDBC_DRIVER);
 	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
 	    	statement = connection.createStatement();
 	    	
-	        // https://www.postgresqltutorial.com/postgresql-show-databases/
-	    	resultSet = statement.executeQuery("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + ";");
-	    				    		
-	    	while (resultSet.next()) {
-	        	// Uncomment to debug 
-	    		 System.out.println(resultSet.getString(1));
-	    		 System.out.println(resultSet.getString(1).equals(DATABASE_NAME));
-	        }
-	    	
-	    	resultSet.close();
+	    	String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+	                " (ID INT PRIMARY KEY NOT NULL," +
+	                " NAME TEXT NOT NULL, " +
+	                " SCORE INT NOT NULL);";
+	    	commandReturn = statement.executeUpdate(sql);
+	    		    	
+	    	if (commandReturn == 0) {
+				LOG.info("SQL statements that return nothing.");
+			} else {
+				LOG.info("The row count for SQL Data Manipulation Language (DML) statements.");
+				LOG.info("Row count : " + commandReturn);
+			}
+	    				    	
 	    	statement.close();
 	    	connection.close();
 	    	
