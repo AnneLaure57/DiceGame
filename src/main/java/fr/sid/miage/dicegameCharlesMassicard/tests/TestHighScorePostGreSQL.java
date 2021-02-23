@@ -47,6 +47,9 @@ public class TestHighScorePostGreSQL {
 		// Check connection
 		highScore.checkDatabaseConnection();
 		
+		// Check if table exists
+		highScore.createTableIfNotExists();
+		
 		// Test save
 //		highScore.save();
 		
