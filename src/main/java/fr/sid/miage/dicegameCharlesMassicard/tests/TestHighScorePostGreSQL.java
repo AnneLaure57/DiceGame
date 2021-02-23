@@ -45,7 +45,7 @@ public class TestHighScorePostGreSQL {
 		highScore.getScores().forEach(System.out::println);
 		
 		// Connection
-		
+		highScore.connection();
 		
 		// Test save
 //		highScore.save();
