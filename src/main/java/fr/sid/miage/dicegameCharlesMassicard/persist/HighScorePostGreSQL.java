@@ -279,6 +279,11 @@ public class HighScorePostGreSQL implements HighScore {
 	    }
 	}
 	
+	/**
+	 * Method insertMany : to insert a list of Entry.
+	 * 
+	 * @param scores The list of Entry to insert in database/table.
+	 */
 	public void insertMany (List<Entry> scores) {
 		LOG.info("Insert into table : " + TABLE_NAME);
 		
