@@ -4,12 +4,18 @@ Ce projet correspond au projet réalisé tout au long du cours de Patrons en Mas
 
 ## Dans le bibliothequeCharlesYacia.zip qui contient :
 
-* dicegameRapportCharlesMassicard.pdf,
-* dicegameRapportCharlesMassicard.doc,
-* dicegameDesignCharlesMassicard.vpp,
-* dicegameDemoCharlesMassicard.mp4,
-* dicegameReadMeCharlesMassicard.txt,
-* dicegameLogicielCharlesMassicard.jar.
+## **TODO LIST**
+
+* Patrons : Strategy, Memento
+* Interface : Obeservable + reste
+* association imageView et valeur (Dé 1 alors valeur 1 etc) -> OK
+
+* dicegameRapportCharlesMassicard.pdf, -> TODO
+* dicegameRapportCharlesMassicard.doc, -> TODO
+* dicegameDesignCharlesMassicard.vpp, -> TODO
+* dicegameDemoCharlesMassicard.mp4, -> TODO
+* dicegameReadMeCharlesMassicard.txt, -> Check
+* dicegameLogicielCharlesMassicard.jar. -> TODO
 
 Tout est dans le zip.
 
@@ -26,7 +32,7 @@ Tourne sous Windows 10, Mac OS et Unix.
 * Maven 11,
 * Hibernate 5.4.23,
 * H2 Database 1.4.197,
-* MYSQL Database 8.0.19,
+* POSTGRESQL Database 8.0.19,
 * MONGO Database 3.4.1,
 * Lombok 1.18.16,
 * JPA 1.0.2.Final.

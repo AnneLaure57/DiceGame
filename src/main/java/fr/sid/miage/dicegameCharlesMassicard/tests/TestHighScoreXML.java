@@ -25,7 +25,7 @@ public class TestHighScoreXML {
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
 	/* ========================================= Main ================================================== */ /*=========================================*/
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		// Declarations
 		PersistKit persistKit;
@@ -49,5 +49,5 @@ public class TestHighScoreXML {
 		
 		// Test load
 		highScore.load();
-	}
+	}*/
 }

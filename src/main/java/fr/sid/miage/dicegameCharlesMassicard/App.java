@@ -9,23 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/**
- * @author Anne-Laure CHARLES
- * @author Louis MASSICARD (user name : louis)
- * @version 
- * @since %G% - %U% (%I%)
- *
- */
 public class App  extends Application {
 	
-	/**
-	 * Method start : allow to initiate 
-	 *  - the FXML first view
-	 *  - the title of the applicaiton's window 
-	 *  - the icon of the applicaiton's window 
-	 *  - the CSS
-	 * Allow also to param the applicaiton's window (size, etc.).
-	 */
 	public void start(Stage primaryStage) {
 		Parent root =  null;
 		try {
@@ -54,11 +39,6 @@ public class App  extends Application {
 		
 	}
 	
-	/**
-	 * Main function.
-	 * 
-	 * @param args Arguments passed to application's Jar (here, not used).
-	 */
 	public static void main(String[] args) {
 		//Démarrer le menu
 		launch(args);

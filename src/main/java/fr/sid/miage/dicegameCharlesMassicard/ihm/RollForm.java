@@ -1,5 +1,6 @@
 package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,12 +40,23 @@ import javafx.stage.Stage;
  */
 
 public class RollForm implements Initializable {
-
-	/* ========================================= Global ================================================ */ /*=========================================*/
 	
 	private static final Logger LOG = Logger.getLogger(RollForm.class.getName());
+	
+	public String nickNameFound;
 
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
+	
+	@FXML
+	private AnchorPane formNickName;
+	
+	@FXML private TextField addNickName;
+	
+	@FXML private Label errorMessage;
+	
+	@FXML private Button start;
+	
+	/*=========================================*/
 	
 	@FXML
 	private Parent root ;
@@ -52,12 +64,7 @@ public class RollForm implements Initializable {
 	@FXML
 	private AnchorPane content;
 	
-	@FXML
-	private AnchorPane formNickName;
-	
 	@FXML private SplitPane boardDiceGameAnchor;
-	
-	@FXML private TextField addNickName;
 	
 	@FXML private MenuBar mainItems;
 	
@@ -69,14 +76,10 @@ public class RollForm implements Initializable {
 	
 	@FXML private Button quitRules;
 	
-	@FXML private Label nickName;
-	
-	@FXML private Label errorMessage;
-	
-	@FXML private Button start;
-	
 	// TODO : set the player name
 	private static DiceGame diceGame = new DiceGame("");
+	
+	public PlayerView pl = new PlayerView();
 
 	/* ========================================= Composants ================================================ */ /*=========================================*/
 
@@ -90,10 +93,11 @@ public class RollForm implements Initializable {
 	@FXML
 	private Button button_lancer;
 
-	/* ========================================= INITIALISATIONS ! */
+	/* ========================================= INITIALISATIONS ! ********************************************************************************************/
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {	
+		//TODO addPropertyChangeListener();
 		if (location.equals(getClass().getClassLoader().getResource("view/RollForm.fxml"))) {
 			formNickName.setVisible(true);
 			formNickName.setManaged(true);
@@ -104,10 +108,13 @@ public class RollForm implements Initializable {
 			rules.setSelected(true);
 			rules.setOnAction(e -> displayRules());
 		}
-		if (location.equals(getClass().getClassLoader().getResource("view/PlayerView.fxml"))) {
-			
-		}
 	}
+	
+	public void propertyChange(PropertyChangeEvent evt) {
+		//TODO event with view
+    }
+	
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
 	
 	@FXML
     private void closeRollForm(ActionEvent event) {
@@ -149,16 +156,20 @@ public class RollForm implements Initializable {
 	/* ========================================= Start Game ============================================== */
 	
 	@FXML
-    private void startGame() {
+    private void startGame(ActionEvent event) {
 		try {
 			if (!validInput()) {
 	    		errorMessage.setText("Veuillez saisir un pseudo !");
 	    		errorMessage.setTextFill(Color.RED);
 	    	} else {
+	    		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlayerView.fxml"));
+	    		AnchorPane page = loader.load();
+	    		Scene scene = new Scene(page);
 	    		String nickNameFound = addNickName.getText();
-	    		FXMLLoader loader = new FXMLLoader(getClass().getResource("view/PlayerView.fxml"));
 	    		//formNickName.getChildren().clear();
 	    		formNickName.setVisible(false);
+	    		//TODO
+	    		pl.setLabelNickName(nickNameFound);
 	    		//boardDiceGameAnchor.setVisible(true);
 	    		//boardDiceGameAnchor.setManaged(true);
 	    	}
@@ -196,14 +207,14 @@ public class RollForm implements Initializable {
 	
 	@FXML
     private void roll() {
-		try {
+		/*try {
 		  if (!nickName.equals("Label") || nickName != null) {
 			  
 		  }
     	} catch (Exception e) {
     		LOG.severe("Erreur de saisie : "+ e.getMessage());
     		e.printStackTrace();
-    	}
+    	}*/
     }
 	
 	
