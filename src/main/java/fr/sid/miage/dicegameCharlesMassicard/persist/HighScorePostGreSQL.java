@@ -243,7 +243,7 @@ public class HighScorePostGreSQL implements HighScore {
 	    }
 	}
 	
-	public void insert (int ID, String name, int score) {
+	public void insertOne (int ID, String name, int score) {
 		LOG.info("Insert into table : " + TABLE_NAME);
 		
 		Connection connection = null;
