@@ -318,6 +318,11 @@ public class HighScorePostGreSQL implements HighScore {
 	    }
 	}
 	
+	/**
+	 * Method getMany : to get all Entry in database.
+	 * 
+	 * @return The list of Entry to inserted in database/table.
+	 */
 	public List<Entry> getMany () {
 		LOG.info("Get Many from table : " + TABLE_NAME);
 		
