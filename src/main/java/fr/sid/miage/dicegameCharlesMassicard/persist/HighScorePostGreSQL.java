@@ -124,6 +124,7 @@ public class HighScorePostGreSQL implements HighScore {
 	public void save() {
 		this.checkDatabaseConnection();
 		this.createTableIfNotExists();
+		this.truncateTable();
 		this.insertMany(getScores());
 	}
 	
@@ -237,6 +238,49 @@ public class HighScorePostGreSQL implements HighScore {
 	    	connection.close();
 	    	
 	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
+	    	
+	    } catch (Exception error) {
+	    	error.printStackTrace();
+	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	System.exit(0);
+	    }
+	}
+	
+	/**
+	 * Method truncateTable : to run the command TRUNCATE.
+	 * 
+	 * If you have a running PostGreSQL server, then run this command : sudo pkill -u postgres
+	 * 
+	 * Use PostGreSQL Docker : 
+	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
+	 *  * otherwise : docker start postgres
+	 */
+	public void truncateTable () {
+		LOG.info("Truncate table, table name : " + TABLE_NAME);
+		
+		Connection connection = null;
+		Statement statement = null;
+		int commandReturn;
+	    	    
+	    try {
+	    	Class.forName(JDBC_DRIVER);
+	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
+	    	statement = connection.createStatement();
+	    	
+	    	String sql = "TRUNCATE " + TABLE_NAME + ";";
+	    	commandReturn = statement.executeUpdate(sql);
+	    		    	
+	    	if (commandReturn == 0) {
+				LOG.info("SQL statement return nothing.");
+			} else {
+				LOG.info("The row count for SQL Data Manipulation Language (DML) statements.");
+				LOG.info("Row count : " + commandReturn);
+			}
+	    				    	
+	    	statement.close();
+	    	connection.close();
+	    	
+	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is truncated, so now the table is empty.");
 	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();
