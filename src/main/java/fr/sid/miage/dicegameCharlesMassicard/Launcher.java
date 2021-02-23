@@ -10,8 +10,20 @@ import javax.persistence.EntityTransaction;
 
 import javafx.application.Application;
 
+/**	
+ * @author Anne-Laure CHARLES	
+ * @author Louis MASSICARD (user name : louis)	
+ * @version 	
+ * @since %G% - %U% (%I%)	
+ *	
+ */
 public class Launcher {
 
+	/**	
+	 * Main function.	
+	 * 	
+	 * @param args Arguments passed to application's Jar (here, not used).	
+	 */	
   public static void main(String[] args) {
      
 //	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
