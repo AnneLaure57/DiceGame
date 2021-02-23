@@ -1,5 +1,6 @@
 package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,6 +78,10 @@ public class MainView implements Initializable {
 		rules.setOnAction(e -> displayRules());
 		
 	}
+	
+	public void propertyChange(PropertyChangeEvent evt) {
+		
+    }
 	
 	/* ========================================= Start Game ============================================== */
 	
