@@ -64,6 +64,9 @@ public class HighScorePostGreSQL implements HighScore {
 	//  Database credentials
 	private static final String DATABASE_USER = "postgres";
 	private static final String DATABASE_PASS = "riovas";
+
+	// Tables informations
+	private static final String TABLE_NAME = "ENTRIES";
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
@@ -141,6 +144,8 @@ public class HighScorePostGreSQL implements HighScore {
 	 *  * otherwise : docker start postgres
 	 */
 	public void checkDatabaseConnection () {
+		LOG.info("Check connection to database : " + DATABASE_URL);
+		
 		// https://www.jvmhost.com/articles/create-drop-databases-dynamically-java-jsp-code/
 		Connection connection = null;
 		Statement statement = null;
@@ -155,16 +160,13 @@ public class HighScorePostGreSQL implements HighScore {
 	    	
 	        // https://www.postgresqltutorial.com/postgresql-show-databases/
 	    	resultSet = statement.executeQuery("SELECT datname FROM pg_database;");
-	    	
-	    		
-	    	LOG.info(DATABASE_NAME);
-	    	LOG.info("List of databases accessible by user " + DATABASE_USER + ":");
-	    	
+	    		    	
 	    	while (resultSet.next()) {
 	        	// Uncomment to debug 
 	    		// System.out.println(resultSet.getString(1));
 	    		// System.out.println(resultSet.getString(1).equals(DATABASE_NAME));
-	        	if (resultSet.getString(1).equals(DATABASE_NAME)) {
+	        	
+	    		if (resultSet.getString(1).equals(DATABASE_NAME)) {
 	        		dbNeedToBeCreated = false;
 				}
 	        }
@@ -183,15 +185,52 @@ public class HighScorePostGreSQL implements HighScore {
 	    	statement.close();
 	    	connection.close();
 	    	
+	    	LOG.info("PostGreSQL : Opened database successfully");
+	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();
 	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
 	    	System.exit(0);
 	    }
-	    LOG.info("PostGreSQL : Opened database successfully");
 	}
 
-
+	/**
+	 * 
+	 */
+	public void createTableIfNotExists () {
+		LOG.info("Create table (if not exists), table name : " + TABLE_NAME);
+		
+		// https://www.jvmhost.com/articles/create-drop-databases-dynamically-java-jsp-code/
+		Connection connection = null;
+		Statement statement = null;
+	    ResultSet resultSet = null;
+	    	    
+	    try {
+	    	Class.forName(JDBC_DRIVER);
+	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
+	    	statement = connection.createStatement();
+	    	
+	        // https://www.postgresqltutorial.com/postgresql-show-databases/
+	    	resultSet = statement.executeQuery("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + ";");
+	    				    		
+	    	while (resultSet.next()) {
+	        	// Uncomment to debug 
+	    		 System.out.println(resultSet.getString(1));
+	    		 System.out.println(resultSet.getString(1).equals(DATABASE_NAME));
+	        }
+	    	
+	    	resultSet.close();
+	    	statement.close();
+	    	connection.close();
+	    	
+	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is ready.");
+	    	
+	    } catch (Exception error) {
+	    	error.printStackTrace();
+	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	System.exit(0);
+	    }
+	}
 	
 //	https://www.tutorialspoint.com/postgresql/postgresql_java.htm
 		
