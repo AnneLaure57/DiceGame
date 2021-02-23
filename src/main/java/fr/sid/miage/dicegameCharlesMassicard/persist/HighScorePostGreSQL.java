@@ -122,8 +122,9 @@ public class HighScorePostGreSQL implements HighScore {
 	 */
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
-		
+		this.checkDatabaseConnection();
+		this.createTableIfNotExists();
+		this.insertMany(getScores());
 	}
 	
 	/**
