@@ -11,6 +11,7 @@ import org.bson.Document;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
 
@@ -244,39 +245,30 @@ public class HighScoreMongoDB implements HighScore {
 		LOG.info("Get Many from table : " + COLLECTION_NAME);
 		
 		List<Entry> scores = new ArrayList<Entry>();
-//		
-//		Connection connection = null;
-//		Statement statement = null;
-//		ResultSet resultSet = null;
-//			    	    
-//	    try {
-//	    	Class.forName(JDBC_DRIVER);
-//	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
-//	    	connection.setAutoCommit(false);
-//	    	
-//	    	statement = connection.createStatement();
-//	    	resultSet = statement.executeQuery("SELECT * FROM " + TABLE_NAME + ";");
-//	    	
-//	    	while (resultSet.next()) {
-//	    		int ID = resultSet.getInt("id");
-//	            String  name = resultSet.getString("name");
-//	            int score  = resultSet.getInt("score");
-//	            System.out.println( "ID = " + ID );
-//	            System.out.println( "NAME = " + name );
-//	            System.out.println( "SCORE = " + score );
-//	            System.out.println();
-//	        }
-//	    		    	
-//	        resultSet.close();
-//	        statement.close();
-//	        connection.close();
-//	    	
-//	    } catch (Exception error) {
-//	    	error.printStackTrace();
-//	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
-//	    	System.exit(0);
-//	    }
-//	    
+			    	    
+	    try {
+	    	MongoClient mongoClient = new MongoClient(new MongoClientURI(SERVER_URL));
+	    	MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
+	    	MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
+	    	
+	    	MongoCursor<Document> cursor = collection.find().iterator();
+	    	try {
+	    	    while (cursor.hasNext()) {
+	    	        System.out.println(cursor.next().toJson());
+	    	    }
+	    	} finally {
+	    	    cursor.close();
+	    	}
+	    		    	
+	    	mongoClient.close();
+	    	LOG.info("MongoDB : succed to get the list of Entry in database.");
+	    	
+	    } catch (Exception error) {
+	    	error.printStackTrace();
+	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	System.exit(0);
+	    }
+	    
 	    return scores;
 	}
 		
