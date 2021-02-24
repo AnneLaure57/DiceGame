@@ -1,9 +1,6 @@
 package fr.sid.miage.dicegameCharlesMassicard.persist;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,8 +8,6 @@ import java.util.logging.Logger;
 
 import org.bson.Document;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -146,9 +141,10 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	public void checkDatabaseConnection () {
 		LOG.info("Check connection to database : " + DATABASE_URL);
-				    
+		
 	    try {
 	    	MongoClient mongoClient = new MongoClient(new MongoClientURI(SERVER_URL));
+	    	
 	    	// Deprecated
 //	    	DB database = mongoClient.getDB(DATABASE_NAME);
 //	    	List<String> databases = mongoClient.getDatabaseNames();
@@ -157,12 +153,18 @@ public class HighScoreMongoDB implements HighScore {
 //			}
 //	    	DBCollection collection = database.getCollection(COLLECTION_NAME);
 	    	
+	    	// Non deprecated
 	    	MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
 	    	MongoIterable<String> collectionNames = database.listCollectionNames();
 	    	MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
 	    	
 	    	// Uncomment if you want more details
-	    	// this.displayExistingDatabaseNames(mongoClient);
+//	    	 MongoIterable<String> databaseNames = mongoClient.listDatabaseNames();
+//	    	for (String string : databaseNames) {
+//	    		System.out.println("DB name : " + string);
+//	    	}
+	    	
+	    	mongoClient.close();
 	    	
 	    	LOG.info("MongoDB : Opened database successfully");
 	    	
@@ -173,13 +175,6 @@ public class HighScoreMongoDB implements HighScore {
 	    }
 	}
 	
-//	private void displayExistingDatabaseNames (MongoClient mongoClient) {
-//		MongoIterable<String> databaseNames = mongoClient.listDatabaseNames();
-//    	for (String string : databaseNames) {
-//    		System.out.println("DB name : " + string);
-//    	}
-//	}
-
 	/**
 	 * Method createTableIfNotExists : to run the command CREATE TABLE IF NOT EXISTS.
 	 * 
@@ -275,37 +270,37 @@ public class HighScoreMongoDB implements HighScore {
 	 * @param scores The list of Entry to insert in database/table.
 	 */
 	public void insertMany (List<Entry> scores) {
-//		LOG.info("Insert Many into table : " + TABLE_NAME);
-//		
-//		Connection connection = null;
-//		Statement statement = null;
-//			    	    
-//	    try {
-//	    	Class.forName(JDBC_DRIVER);
-//	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
-//	    	connection.setAutoCommit(false);
-//	    	
-//	    	statement = connection.createStatement();
-//	    	
-//	    	int index = 0;
-//	    	for (Entry entry : scores) {
-//	    		index++;
-//	    		String sql = "INSERT INTO " + TABLE_NAME + " (" + TABLE_FIELD_ID + "," + TABLE_FIELD_NAME + "," + TABLE_FIELD_SCORE + ") "
-//	    				+ "VALUES (" + index + ", " + "'"+entry.getName()+"'" + ", " + entry.getScore() +");";
-//	    		statement.executeUpdate(sql);
-//			}
-//	    		    	
-//	    	statement.close();
-//	    	connection.commit();
-//	    	connection.close();
-//	    	
-//	    	LOG.info("PostGreSQL : the list of Entry is inserted.");
-//	    	
-//	    } catch (Exception error) {
-//	    	error.printStackTrace();
-//	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
-//	    	System.exit(0);
-//	    }
+		LOG.info("Insert Many into collection : " + COLLECTION_NAME);
+		
+		Connection connection = null;
+		Statement statement = null;
+			    	    
+	    try {
+	    	Class.forName(JDBC_DRIVER);
+	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
+	    	connection.setAutoCommit(false);
+	    	
+	    	statement = connection.createStatement();
+	    	
+	    	int index = 0;
+	    	for (Entry entry : scores) {
+	    		index++;
+	    		String sql = "INSERT INTO " + TABLE_NAME + " (" + TABLE_FIELD_ID + "," + TABLE_FIELD_NAME + "," + TABLE_FIELD_SCORE + ") "
+	    				+ "VALUES (" + index + ", " + "'"+entry.getName()+"'" + ", " + entry.getScore() +");";
+	    		statement.executeUpdate(sql);
+			}
+	    		    	
+	    	statement.close();
+	    	connection.commit();
+	    	connection.close();
+	    	
+	    	LOG.info("PostGreSQL : the list of Entry is inserted.");
+	    	
+	    } catch (Exception error) {
+	    	error.printStackTrace();
+	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	System.exit(0);
+	    }
 	}
 	
 	/**
