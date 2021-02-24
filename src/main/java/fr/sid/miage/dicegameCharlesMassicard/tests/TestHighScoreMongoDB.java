@@ -45,13 +45,10 @@ public class TestHighScoreMongoDB {
 		highScore.getScores().forEach(System.out::println);
 		
 		// Check connection
-		highScore.checkDatabaseConnection();
-		
-		// Check if table exists
-//		highScore.createTableIfNotExists();
+//		highScore.checkDatabaseConnection();
 		
 		// Test save
-//		highScore.save();
+		highScore.save();
 		
 		// Test load
 //		highScore.load();
