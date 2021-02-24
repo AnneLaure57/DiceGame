@@ -112,9 +112,9 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	@Override
 	public void save() {
-//		this.checkDatabaseConnection();
-//		this.removeAllDocuments();
-//		this.insertMany(getScores());
+		this.checkDatabaseConnection();
+		this.removeAllDocuments();
+		this.insertMany(getScores());
 	}
 	
 	/**
@@ -165,7 +165,6 @@ public class HighScoreMongoDB implements HighScore {
 //	    	}
 	    	
 	    	mongoClient.close();
-	    	
 	    	LOG.info("MongoDB : Opened database successfully");
 	    	
 	    } catch (Exception error) {
@@ -192,7 +191,8 @@ public class HighScoreMongoDB implements HighScore {
 	    	MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
 	    	MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
 	    	
-	    	collection.deleteMany(null);
+//	    	collection.deleteMany(null);
+	    	collection.drop();
 	    	
 	    	mongoClient.close();
 	    	LOG.info("MongoDB : all documents are deleted in collection : " + COLLECTION_NAME);
