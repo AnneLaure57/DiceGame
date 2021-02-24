@@ -56,10 +56,10 @@ public class HighScoreMongoDB implements HighScore {
 //	private static final String DATABASE_PASS = "riovas";
 
 	// Collection's informations
-	private static final String COLLECTION_NAME = "ENTRIES";
-	private static final String TABLE_FIELD_ID = "ID";
-	private static final String TABLE_FIELD_NAME = "NAME";
-	private static final String TABLE_FIELD_SCORE = "SCORE";
+	private static final String COLLECTION_NAME = "entries";
+	private static final String COLLECTION_FIELD_ID = "_id";
+	private static final String COLLECTION_FIELD_NAME = "name";
+	private static final String COLLECTION_FIELD_SCORE = "score";
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
@@ -155,8 +155,10 @@ public class HighScoreMongoDB implements HighScore {
 	    	
 	    	// Non deprecated
 	    	MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-	    	MongoIterable<String> collectionNames = database.listCollectionNames();
-	    	MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
+	    	@SuppressWarnings("unused")
+			MongoIterable<String> collectionNames = database.listCollectionNames();
+	    	@SuppressWarnings("unused")
+			MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
 	    	
 	    	// Uncomment if you want more details
 //	    	 MongoIterable<String> databaseNames = mongoClient.listDatabaseNames();
@@ -230,38 +232,24 @@ public class HighScoreMongoDB implements HighScore {
 	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
 	 *  * otherwise : docker start postgres
 	 */
-	public void truncateTable () {
-//		LOG.info("Truncate table, table name : " + TABLE_NAME);
-//		
-//		Connection connection = null;
-//		Statement statement = null;
-//		int commandReturn;
-//	    	    
-//	    try {
-//	    	Class.forName(JDBC_DRIVER);
-//	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
-//	    	statement = connection.createStatement();
-//	    	
-//	    	String sql = "TRUNCATE " + TABLE_NAME + ";";
-//	    	commandReturn = statement.executeUpdate(sql);
-//	    		    	
-//	    	if (commandReturn == 0) {
-//				LOG.info("SQL statement return nothing.");
-//			} else {
-//				LOG.info("The row count for SQL Data Manipulation Language (DML) statements.");
-//				LOG.info("Row count : " + commandReturn);
-//			}
-//	    				    	
-//	    	statement.close();
-//	    	connection.close();
-//	    	
-//	    	LOG.info("PostGreSQL : the table " + TABLE_NAME + " is truncated, so now the table is empty.");
-//	    	
-//	    } catch (Exception error) {
-//	    	error.printStackTrace();
-//	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
-//	    	System.exit(0);
-//	    }
+	public void removeAllDocuments () {
+		LOG.info("Remove all documents in collection : " + COLLECTION_NAME);
+		
+	    try {
+	    	MongoClient mongoClient = new MongoClient(new MongoClientURI(SERVER_URL));
+	    	MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
+	    	MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
+	    	
+	    	collection.deleteMany(null);
+	    	
+	    	mongoClient.close();
+	    	LOG.info("MongoDB : all documents are deleted in collection : " + COLLECTION_NAME);
+	    	
+	    } catch (Exception error) {
+	    	error.printStackTrace();
+	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
+	    	System.exit(0);
+	    }
 	}
 	
 	/**
@@ -271,30 +259,22 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	public void insertMany (List<Entry> scores) {
 		LOG.info("Insert Many into collection : " + COLLECTION_NAME);
-		
-		Connection connection = null;
-		Statement statement = null;
-			    	    
+		  
 	    try {
-	    	Class.forName(JDBC_DRIVER);
-	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
-	    	connection.setAutoCommit(false);
+	    	MongoClient mongoClient = new MongoClient(new MongoClientURI(SERVER_URL));
+	    	MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
+	    	MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
 	    	
-	    	statement = connection.createStatement();
-	    	
+	    	List<Document> documents = new ArrayList<Document>();
 	    	int index = 0;
 	    	for (Entry entry : scores) {
 	    		index++;
-	    		String sql = "INSERT INTO " + TABLE_NAME + " (" + TABLE_FIELD_ID + "," + TABLE_FIELD_NAME + "," + TABLE_FIELD_SCORE + ") "
-	    				+ "VALUES (" + index + ", " + "'"+entry.getName()+"'" + ", " + entry.getScore() +");";
-	    		statement.executeUpdate(sql);
+	    		documents.add(new Document(COLLECTION_FIELD_ID, index).append(COLLECTION_FIELD_NAME, entry.getName()).append(COLLECTION_FIELD_SCORE, entry.getScore()));
 			}
-	    		    	
-	    	statement.close();
-	    	connection.commit();
-	    	connection.close();
+	    	collection.insertMany(documents);
 	    	
-	    	LOG.info("PostGreSQL : the list of Entry is inserted.");
+   	    	mongoClient.close();
+	    	LOG.info("MongoDB : the list of Entry is inserted.");
 	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();
