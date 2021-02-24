@@ -140,7 +140,7 @@ public class HighScoreMongoDB implements HighScore {
 	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
 	 *  * otherwise : docker start postgres
 	 */
-	public void checkDatabaseConnection () {
+	private void checkDatabaseConnection () {
 		LOG.info("Check connection to database : " + DATABASE_URL);
 		
 	    try {
@@ -186,7 +186,7 @@ public class HighScoreMongoDB implements HighScore {
 	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
 	 *  * otherwise : docker start postgres
 	 */
-	public void removeAllDocuments () {
+	private void removeAllDocuments () {
 		LOG.info("Remove all documents in collection : " + COLLECTION_NAME);
 		
 	    try {
@@ -212,7 +212,7 @@ public class HighScoreMongoDB implements HighScore {
 	 * 
 	 * @param scores The list of Entry to insert in database/table.
 	 */
-	public void insertMany (List<Entry> scores) {
+	private void insertMany (List<Entry> scores) {
 		LOG.info("Insert Many into collection : " + COLLECTION_NAME);
 		  
 	    try {
@@ -243,7 +243,7 @@ public class HighScoreMongoDB implements HighScore {
 	 * 
 	 * @return The list of Entry to inserted in database/table.
 	 */
-	public List<Entry> getMany () {
+	private List<Entry> getMany () {
 		LOG.info("Get Many from table : " + COLLECTION_NAME);
 		
 		List<Entry> scores = new ArrayList<Entry>();
