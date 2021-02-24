@@ -33,7 +33,7 @@ public class Die {
 	/**
 	 * Observable
 	 */
-	private PropertyChangeSupport supportDie;
+	PropertyChangeSupport supportDie = new PropertyChangeSupport(this);;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 	
@@ -45,7 +45,6 @@ public class Die {
 		LOG.info("An Die has just been created.");
 //		this.setFaceValue(new Random().nextInt(7));
 		this.setFaceValue(1);
-		this.supportDie = new PropertyChangeSupport(this);
 	}
 
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -57,11 +56,7 @@ public class Die {
 	 */
 	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
-		supportDie.addPropertyChangeListener(pcl);
-    }
- 
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-    	supportDie.removePropertyChangeListener(pcl);
+		supportDie.addPropertyChangeListener("faceValue", pcl);
     }
 		
 	/**
@@ -94,9 +89,8 @@ public class Die {
 	 * @param faceValue the faceValue to set
 	 */
 	public void setFaceValue(int faceValue) {
-		//this.faceValue = faceValue;
-		// remplace le notify 
 		supportDie.firePropertyChange("valeur dé", this.faceValue, faceValue);
+		this.faceValue = faceValue;
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/

@@ -1,11 +1,14 @@
 package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
+import fr.sid.miage.dicegameCharlesMassicard.core.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,11 +24,13 @@ import javafx.scene.layout.AnchorPane;
  * @since %G% - %U% (%I%)
  *
  */
-public class PlayerView implements Initializable{
+public class PlayerView implements PropertyChangeListener, Initializable{
 	
 	private static final Logger LOG = Logger.getLogger(PlayerView.class.getName());
 	
 	public String nickNameFound;
+	
+	private Player player;
 
 	/* ========================================= Components FXML ============================================= */ /*=========================================*/
 	
@@ -45,31 +50,37 @@ public class PlayerView implements Initializable{
 	
 	@FXML private Label bestScore;
 	
-	@FXML private Button roll;
+	@FXML private Label labelWorseScore;
 	
-	@FXML private Button cancel;
+	@FXML private Label worseScore;
 
 	/* ========================================= Initialize ============================================== */ /*=========================================*/
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//TODO addPropertyChangeListener();
+		//player = DiceGame.getInstance().getPlayer();
+		//player.addPropertyChangeListener(this);
+		//nickNamePlayer.setText(player.getName());
+		//actualiseScore(0);
 		if (location.equals(getClass().getClassLoader().getResource("view/PlayerView.fxml"))) {
-			nickNamePlayer.setText("salut");
-			//set Invisible Label + Buttons 
-			//setInvisibleComponents();
+			nickNamePlayer.setText("GROS PUTE");
 		}
 	}
+	
+	public void propertyChange(PropertyChangeEvent evt) {
+		int score = (int) evt.getNewValue();
+		actualiseScore(score);
+    }
+	
+	private void actualiseScore(int score) {
+		scoreCurrentParty.setText(Integer.toString(score));
+    } 
+	
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
 	
 	public void setView(RollForm rollForm) {
 		parent = rollForm;
 	}
-	
-	public void propertyChange(PropertyChangeEvent evt) {
-		
-    }
-	
-	/* ========================================= Methodes ============================================== */ /*=========================================*/
 	
 	@FXML
 	public void setLabelNickName(String nickname) throws IOException {
@@ -81,19 +92,5 @@ public class PlayerView implements Initializable{
     	nickNamePlayer.setText(nickname);
     	System.out.println(nickNamePlayer.getText());
     } 
-
 	
-	@FXML
-    private void setInvisibleComponents() {
-        labelNickName.setVisible(false);
-        nickNamePlayer.setVisible(false);
-        labelScoreCurrentParty.setVisible(false);
-        scoreCurrentParty.setVisible(false);
-        labelBestScore.setVisible(false);
-        bestScore.setVisible(false);
-        roll.setVisible(false);
-        cancel.setVisible(false);
-    } 
-
-
 }
