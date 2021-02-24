@@ -51,6 +51,6 @@ public class TestHighScoreMongoDB {
 		highScore.save();
 		
 		// Test load
-//		highScore.load();
+		highScore.load();
 	}
 }
