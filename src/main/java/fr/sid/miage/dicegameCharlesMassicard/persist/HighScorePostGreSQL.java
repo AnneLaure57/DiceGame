@@ -65,7 +65,7 @@ public class HighScorePostGreSQL implements HighScore {
 	private static final String DATABASE_USER = "postgres";
 	private static final String DATABASE_PASS = "riovas";
 
-	// Tables informations
+	// Table's informations
 	private static final String TABLE_NAME = "ENTRIES";
 	private static final String TABLE_FIELD_ID = "ID";
 	private static final String TABLE_FIELD_NAME = "NAME";
