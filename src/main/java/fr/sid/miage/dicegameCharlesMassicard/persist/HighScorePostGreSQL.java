@@ -390,9 +390,9 @@ public class HighScorePostGreSQL implements HighScore {
 	    		int ID = resultSet.getInt("id");
 	            String  name = resultSet.getString("name");
 	            int score  = resultSet.getInt("score");
-	            System.out.println( "ID = " + ID );
-	            System.out.println( "NAME = " + name );
-	            System.out.println( "SCORE = " + score );
+	            System.out.println( TABLE_FIELD_ID + " = " + ID );
+	            System.out.println( TABLE_FIELD_NAME + " = " + name );
+	            System.out.println( TABLE_FIELD_SCORE + " = " + score );
 	            System.out.println();
 	        }
 	    		    	
