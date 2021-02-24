@@ -66,10 +66,10 @@ public class HighScorePostGreSQL implements HighScore {
 	private static final String DATABASE_PASS = "riovas";
 
 	// Table's informations
-	private static final String TABLE_NAME = "ENTRIES";
-	private static final String TABLE_FIELD_ID = "ID";
-	private static final String TABLE_FIELD_NAME = "NAME";
-	private static final String TABLE_FIELD_SCORE = "SCORE";
+	private static final String TABLE_NAME = "entries";
+	private static final String TABLE_FIELD_ID = "id";
+	private static final String TABLE_FIELD_NAME = "name";
+	private static final String TABLE_FIELD_SCORE = "score";
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
