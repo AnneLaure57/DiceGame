@@ -290,42 +290,6 @@ public class HighScorePostGreSQL implements HighScore {
 	}
 	
 	/**
-	 * Method insertOne : to insert a unique Entry (with decuplate params).
-	 * 
-	 * @param ID The entry's ID.
-	 * @param name The entry's player's name.
-	 * @param score The entry's player's score.
-	 */
-	public void insertOne (int ID, String name, int score) {
-		LOG.info("Insert One into table : " + TABLE_NAME);
-		
-		Connection connection = null;
-		Statement statement = null;
-			    	    
-	    try {
-	    	Class.forName(JDBC_DRIVER);
-	    	connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASS);
-	    	connection.setAutoCommit(false);
-	    	
-	    	statement = connection.createStatement();
-	    	String sql = "INSERT INTO " + TABLE_NAME + " (" + TABLE_FIELD_ID + "," + TABLE_FIELD_NAME + "," + TABLE_FIELD_SCORE + ") "
-	    			+ "VALUES (" + ID + ", " + name + ", " + score +");";
-	    	statement.executeUpdate(sql);
-	    		    	
-	    	statement.close();
-	    	connection.commit();
-	    	connection.close();
-	    	
-	    	LOG.info("PostGreSQL : the Entry is inserted.");
-	    	
-	    } catch (Exception error) {
-	    	error.printStackTrace();
-	    	LOG.severe(error.getClass().getName() + ": " + error.getMessage());
-	    	System.exit(0);
-	    }
-	}
-	
-	/**
 	 * Method insertMany : to insert a list of Entry.
 	 * 
 	 * @param scores The list of Entry to insert in database/table.
