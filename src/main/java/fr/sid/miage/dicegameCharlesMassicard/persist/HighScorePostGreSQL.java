@@ -149,7 +149,7 @@ public class HighScorePostGreSQL implements HighScore {
 	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
 	 *  * otherwise : docker start postgres
 	 */
-	private void checkDatabaseConnection () {
+	public void checkDatabaseConnection () {
 		LOG.info("Check connection to database : " + DATABASE_URL);
 		
 		// https://www.jvmhost.com/articles/create-drop-databases-dynamically-java-jsp-code/
@@ -209,7 +209,7 @@ public class HighScorePostGreSQL implements HighScore {
 	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
 	 *  * otherwise : docker start postgres
 	 */
-	private void createTableIfNotExists () {
+	public void createTableIfNotExists () {
 		LOG.info("Create table (if not exists), table name : " + TABLE_NAME);
 		
 		Connection connection = null;
@@ -255,7 +255,7 @@ public class HighScorePostGreSQL implements HighScore {
 	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
 	 *  * otherwise : docker start postgres
 	 */
-	private void truncateTable () {
+	public void truncateTable () {
 		LOG.info("Truncate table, table name : " + TABLE_NAME);
 		
 		Connection connection = null;
@@ -330,7 +330,7 @@ public class HighScorePostGreSQL implements HighScore {
 	 * 
 	 * @param scores The list of Entry to insert in database/table.
 	 */
-	private void insertMany (List<Entry> scores) {
+	public void insertMany (List<Entry> scores) {
 		LOG.info("Insert Many into table : " + TABLE_NAME);
 		
 		Connection connection = null;
@@ -369,7 +369,7 @@ public class HighScorePostGreSQL implements HighScore {
 	 * 
 	 * @return The list of Entry to inserted in database/table.
 	 */
-	private List<Entry> getMany () {
+	public List<Entry> getMany () {
 		LOG.info("Get Many from table : " + TABLE_NAME);
 		
 		List<Entry> scores = new ArrayList<Entry>();
