@@ -26,7 +26,9 @@ import fr.sid.miage.dicegameCharlesMassicard.core.HighScore;
  * 
  * Singleton
  * Concrete Product
- * Mongodb Java doc : https://www.mongodb.com/blog/post/getting-started-with-mongodb-and-java-part-i
+ * Mongodb Java doc : 
+ *   * https://www.mongodb.com/blog/post/getting-started-with-mongodb-and-java-part-i
+ *   * https://mongodb.github.io/mongo-java-driver/3.4/driver/getting-started/quick-start/
  */
 public class HighScoreMongoDB implements HighScore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
