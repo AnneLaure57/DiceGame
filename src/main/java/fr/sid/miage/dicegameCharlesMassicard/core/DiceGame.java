@@ -20,6 +20,11 @@ public class DiceGame {
 	private static final Logger LOG = Logger.getLogger(DiceGame.class.getName());
 	
 	/**
+	 * The unique instance of this Singleton class.
+	 */
+	private static DiceGame INSTANCE = null;
+	
+	/**
 	 * The maximum number of throw in a game.
 	 */
 	private static final int MAX_NUMBER_OF_THROWS = 10;
@@ -71,7 +76,7 @@ public class DiceGame {
 	 * No Args Constructor.
 	 * When DiceGame is created, two dice are initialized to play.
 	 */
-	public DiceGame(String playerName) {
+	private DiceGame(String playerName) {
 		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
 		this.setPlayer(new Player(playerName));
 		this.setDie1(new Die());
@@ -81,7 +86,20 @@ public class DiceGame {
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
-
+	
+	/**
+	 * Method getInstance : return the instance of the current Concrete Product or create it.
+	 * 
+	 * @return the current Concrete Product or create it.
+	 */
+	public static synchronized DiceGame getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new DiceGame("");
+			LOG.info("A DiceGame's Instance is created.");
+		}
+		return INSTANCE;
+	}
+	
 	/**
 	 * Method newGame : to start a new game.
 	 * 
