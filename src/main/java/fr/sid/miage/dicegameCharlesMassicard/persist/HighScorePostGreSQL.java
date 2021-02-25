@@ -45,15 +45,15 @@ public class HighScorePostGreSQL implements HighScore {
 	private static final Logger LOG = Logger.getLogger(HighScorePostGreSQL.class.getName());
 	
 	/**
+	 * The unique instance of this Singleton class.
+	 */
+	private static HighScorePostGreSQL INSTANCE = null;
+	
+	/**
 	 * Maximum number of scores to save.
 	 * If there is too much to score, then smaller scores aren't saved.
 	 */
 	private static final int NUMBER_OF_SCORES_TO_SAVE = 100;
-	
-	/**
-	 * The unique instance of this Singleton class.
-	 */
-	private static HighScorePostGreSQL INSTANCE = null;
 	
 	// JDBC driver name and database URL
 	private static final String JDBC_DRIVER = "org.postgresql.Driver";  
