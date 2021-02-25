@@ -39,16 +39,16 @@ public class HighScoreMongoDB implements HighScore {
 	private static final Logger LOG = Logger.getLogger(HighScoreMongoDB.class.getName());
 	
 	/**
-	 * Maximum number of scores to save.
-	 * If there is too much to score, then smaller scores aren't saved.
-	 */
-	private static final int NUMBER_OF_SCORES_TO_SAVE = 100;
-	
-	/**
 	 * The unique instance of this Singleton class.
 	 */
 	private static HighScoreMongoDB INSTANCE = null;
 	
+	/**
+	 * Maximum number of scores to save.
+	 * If there is too much to score, then smaller scores aren't saved.
+	 */
+	private static final int NUMBER_OF_SCORES_TO_SAVE = 100;
+		
 	// Name and database URL
 	private static final String SERVER_URL = "mongodb://localhost:27017";
 	private static final String DATABASE_NAME = "dicegame";
