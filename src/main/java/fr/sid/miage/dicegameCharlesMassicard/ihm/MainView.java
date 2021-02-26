@@ -79,10 +79,6 @@ public class MainView implements Initializable {
 		
 	}
 	
-	public void propertyChange(PropertyChangeEvent evt) {
-		
-    }
-	
 	/* ========================================= Start Game ============================================== */
 	
 	@FXML
@@ -158,17 +154,23 @@ public class MainView implements Initializable {
     private void openViewNewNickName() {
 		try {
 		  Stage stage = new Stage();
-		  root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FormNewNickName.fxml"));
-		  stage.setScene(new Scene(root));
+		  root = FXMLLoader.load(getClass().getClassLoader().getResource("view/MainView.fxml"));
+		  AnchorPane content = new AnchorPane();
+		  Scene scene = new Scene(root);
+		  stage.setScene(scene);
+		  scene.getStylesheets().add(getClass().getResource("/app.css").toExternalForm());
 		  stage.getIcons().add(new Image("images/dice-game.png"));
 		  stage.setTitle("Ajouter un nouveau pseudo");
-		  stage.initModality(Modality.WINDOW_MODAL);
 		  //stage.initOwner(((Node)event.getSource()).getScene().getWindow() );
 		  stage.show();
     	} catch (Exception e) {
     		LOG.severe("Erreur de saisie : "+ e.getMessage());
     		e.printStackTrace();
     	}
+    }
+	
+	public void propertyChange(PropertyChangeEvent evt) {
+		
     }
 
 }
