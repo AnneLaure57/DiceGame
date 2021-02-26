@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
+import fr.sid.miage.dicegameCharlesMassicard.core.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -88,16 +90,23 @@ public class MainView implements Initializable {
 	    		errorMessage.setText("Veuillez saisir un pseudo !");
 	    		errorMessage.setTextFill(Color.RED);
 	    	} else {
+	    		String nickNameFound = addNickName.getText();
+	    		DiceGame dicegame = DiceGame.getInstance();
+	    		//Player player = new Player(nickNameFound);
+	    		//dicegame.getPlayer().setName(nickNameFound);
+	    		//dicegame.getPlayer().setScore(0);
+	    		formNickName.setVisible(false);
+	    		rollForm.setVisible(true);
+	    		System.out.println(nickNameFound);
+	    		//System.out.println(dicegame.getPlayer());
 //	    		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlayerView.fxml"));
 //	    		AnchorPane page = loader.load();
 //	    		Scene scene = new Scene(page);
-	    		//String nickNameFound = addNickName.getText();
-	    		formNickName.setVisible(false);
-	    		rollForm.setVisible(true);
-	    		//formNickName.getChildren().clear();
-	    		//diceGame = new DiceGame(nickNameFound);
-	    		//boardDiceGameAnchor.setVisible(true);
-	    		//boardDiceGameAnchor.setManaged(true);
+//	    		String nickNameFound = addNickName.getText();
+//	    		formNickName.getChildren().clear();
+//	    		diceGame = new DiceGame(nickNameFound);
+//	    		boardDiceGameAnchor.setVisible(true);
+//	    		boardDiceGameAnchor.setManaged(true);
 	    	}
     	} catch (Exception e) {
     		LOG.severe("Erreur de saisie : "+ e.getMessage());

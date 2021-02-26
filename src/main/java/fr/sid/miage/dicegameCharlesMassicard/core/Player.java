@@ -44,10 +44,9 @@ public class Player {
 	 * Player Constructor :
 	 *  - The player indicates his/her name.
 	 *  - When player is created, the score is initialized at value 0.
-	 *  
-	 * @param name The player's name.
+	 * @param playerName 
 	 */
-	public Player(String name) {
+	public Player(String playerName) {
 		LOG.info("An Player has just been created (score at 0) with name : " + getName());
 		this.setName(name);
 		this.setScore(0);

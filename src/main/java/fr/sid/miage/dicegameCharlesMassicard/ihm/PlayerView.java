@@ -10,10 +10,7 @@ import java.util.logging.Logger;
 import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
 import fr.sid.miage.dicegameCharlesMassicard.core.Player;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
@@ -58,15 +55,17 @@ public class PlayerView implements PropertyChangeListener, Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//TODO find why cause exception
 		//player = DiceGame.getInstance().getPlayer();
 		//player.addPropertyChangeListener(this);
 		//nickNamePlayer.setText(player.getName());
-		//actualiseScore(0);
+		actualiseScore(0);
 		if (location.equals(getClass().getClassLoader().getResource("view/PlayerView.fxml"))) {
-			nickNamePlayer.setText("GROS PUTE");
+			nickNamePlayer.setText("GROSSE PUTE");
 		}
 	}
 	
+	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		int score = (int) evt.getNewValue();
 		actualiseScore(score);
@@ -74,6 +73,8 @@ public class PlayerView implements PropertyChangeListener, Initializable{
 	
 	private void actualiseScore(int score) {
 		scoreCurrentParty.setText(Integer.toString(score));
+		bestScore.setText(Integer.toString(score));
+		worseScore.setText(Integer.toString(score));
     } 
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -82,15 +83,15 @@ public class PlayerView implements PropertyChangeListener, Initializable{
 		parent = rollForm;
 	}
 	
-	@FXML
+	/*@FXML
 	public void setLabelNickName(String nickname) throws IOException {
 		/*FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlayerView.fxml"));
 		loader.setController(this);
 		page = loader.load();
-		Scene scene = new Scene(page);*/
+		Scene scene = new Scene(page);
     	LOG.info(nickname);
     	nickNamePlayer.setText(nickname);
     	System.out.println(nickNamePlayer.getText());
-    } 
+    } */
 	
 }

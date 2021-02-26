@@ -94,7 +94,8 @@ public class DiceGame {
 	 */
 	public static synchronized DiceGame getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new DiceGame("");
+			//INSTANCE = new DiceGame("");
+			INSTANCE = null;
 			LOG.info("A DiceGame's Instance is created.");
 		}
 		return INSTANCE;
