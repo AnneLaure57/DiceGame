@@ -46,10 +46,17 @@ public class Player {
 	 *  - When player is created, the score is initialized at value 0.
 	 * @param playerName 
 	 */
-	public Player(String playerName) {
-		LOG.info("An Player has just been created (score at 0) with name : " + getName());
-		this.setName(name);
+	/*public Player(String playerName) {
+		LOG.info("An Player has just been created (score at 0) with name : " + playerName);
+		this.setName(playerName);
 		this.setScore(0);
+		this.supportPlayer = new PropertyChangeSupport(this);
+	}*/
+	
+	public Player() {
+		//LOG.info("An Player has just been created (score at 0) with name : " + playerName);
+		this.name = "";
+		this.score = 0;
 		this.supportPlayer = new PropertyChangeSupport(this);
 	}
 	

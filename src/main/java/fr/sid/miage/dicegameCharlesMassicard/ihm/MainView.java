@@ -91,13 +91,11 @@ public class MainView implements Initializable {
 	    		errorMessage.setTextFill(Color.RED);
 	    	} else {
 	    		String nickNameFound = addNickName.getText();
-	    		DiceGame dicegame = DiceGame.getInstance();
-	    		//Player player = new Player(nickNameFound);
-	    		//dicegame.getPlayer().setName(nickNameFound);
-	    		//dicegame.getPlayer().setScore(0);
 	    		formNickName.setVisible(false);
 	    		rollForm.setVisible(true);
-	    		System.out.println(nickNameFound);
+	    		DiceGame dicegame = DiceGame.getInstance();
+	    		dicegame.getPlayer().setName(nickNameFound);
+	    		dicegame.getPlayer().setScore(0);
 	    		//System.out.println(dicegame.getPlayer());
 //	    		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlayerView.fxml"));
 //	    		AnchorPane page = loader.load();

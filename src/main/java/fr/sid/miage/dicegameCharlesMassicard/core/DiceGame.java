@@ -1,5 +1,6 @@
 package fr.sid.miage.dicegameCharlesMassicard.core;
 
+import java.beans.PropertyChangeSupport;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.utils.TooMuchDiceThrowException;
@@ -38,6 +39,8 @@ public class DiceGame {
 	 * Number of points to add when the sum of dice's face value allow to win.
 	 */
 	private static final int POINTS_TO_ADD_WHEN_WIN = 7;
+	
+	PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 		
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
@@ -76,11 +79,21 @@ public class DiceGame {
 	 * No Args Constructor.
 	 * When DiceGame is created, two dice are initialized to play.
 	 */
-	private DiceGame(String playerName) {
+	/*private DiceGame(String playerName) {
 		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
 		this.setPlayer(new Player(playerName));
 		this.setDie1(new Die());
 		this.setDie2(new Die());
+		this.setThrowNumber(0);
+		this.setPlayerPoints(0);
+	}*/
+	
+	private DiceGame(String playerName) {
+		super();
+		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
+		this.player = new Player();
+		this.die1 = new Die();
+		this.die2 = new Die();
 		this.setThrowNumber(0);
 		this.setPlayerPoints(0);
 	}

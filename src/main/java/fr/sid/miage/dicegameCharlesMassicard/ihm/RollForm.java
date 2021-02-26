@@ -66,12 +66,7 @@ public class RollForm implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {	
-		//TODO addPropertyChangeListener();
-		if (location.equals(getClass().getClassLoader().getResource("view/RollForm.fxml"))) {
-			//formNickName.setVisible(true);
-			//formNickName.setManaged(true);
-			//formNickName.setViewOrder(0);
-		}
+		this.diceGame = DiceGame.getInstance();
 	}
 	
 	public void propertyChange(PropertyChangeEvent evt) {
