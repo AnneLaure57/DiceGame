@@ -108,7 +108,7 @@ public class MainView implements Initializable {
 	    	}
     	} catch (Exception e) {
     		LOG.severe("Erreur de saisie : "+ e.getMessage());
-    		//e.printStackTrace();
+    		e.printStackTrace();
     	}
     }
 	

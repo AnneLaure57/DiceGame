@@ -114,6 +114,9 @@ public class DiceGame {
 		return INSTANCE;
 	}
 	
+	public static void resetDiceGame() {
+		INSTANCE = null;
+	}
 	/**
 	 * Method newGame : to start a new game.
 	 * 

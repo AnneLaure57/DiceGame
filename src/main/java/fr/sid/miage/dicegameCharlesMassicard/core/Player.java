@@ -36,7 +36,7 @@ public class Player {
 	/**
 	 * Observable
 	 */
-	private PropertyChangeSupport supportPlayer;
+	private PropertyChangeSupport supportPlayer = new PropertyChangeSupport(this);
 
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
@@ -55,9 +55,7 @@ public class Player {
 	
 	public Player() {
 		//LOG.info("An Player has just been created (score at 0) with name : " + playerName);
-		this.name = "";
-		this.score = 0;
-		this.supportPlayer = new PropertyChangeSupport(this);
+		super();
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -68,13 +66,9 @@ public class Player {
 	 */
 	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
-		supportPlayer.addPropertyChangeListener(pcl);
+		supportPlayer.addPropertyChangeListener("score", pcl);
     }
  
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-    	supportPlayer.removePropertyChangeListener(pcl);
-    }
-
 	/**
 	 * Method increaseScore : to add a certain value to player's score.
 	 * 
@@ -107,7 +101,7 @@ public class Player {
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		//this.name = name;
+		this.name = name;
 		supportPlayer.firePropertyChange("Nom joueur", this.name, name);
 	}
 	
@@ -122,7 +116,7 @@ public class Player {
 	 * @param score the score to set
 	 */
 	public void setScore(int score) {
-		//this.score = score;
+		this.score = score;
 		supportPlayer.firePropertyChange("Score Joueur", this.score, score);
 	}
 	
