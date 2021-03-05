@@ -1,6 +1,5 @@
 package fr.sid.miage.dicegameCharlesMassicard.utils.strategy;
 
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Die;
@@ -13,24 +12,21 @@ import fr.sid.miage.dicegameCharlesMassicard.core.Die;
  *
  */
 
-public class RollDices implements RollStrategy{
-
+public class Context {
+	
 	/**
 	 * Logger for this class : RollDices.
 	 */
 	private static final Logger LOG = Logger.getLogger(RollDices.class.getName());
+	
+	private RollStrategy strategy;
 
-	@Override
-	public boolean rollDices(Die die1, Die die2) {
-		try {
-			// Roll the dice.
-			die1.roll();
-			die2.roll();
-			return true;
-		} catch (Exception e) {
-			LOG.severe("An error occurred during the pattern Strategy in class \"RollDices\" :");
-			LOG.severe(e.toString());
-			return false;
-		}
-	}
+   public Context(RollStrategy strategy){
+      this.strategy = strategy;
+   }
+
+   public boolean executeStrategy(Die die1, Die die2){
+      return strategy.rollDices(die1, die2);
+   }
+
 }
