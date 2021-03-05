@@ -2,7 +2,6 @@ package fr.sid.miage.dicegameCharlesMassicard.core;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.Date;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.utils.Randomizer;

@@ -148,7 +148,7 @@ public class DiceGame {
 			}
 			this.throwNumber++;
 			
-			// TODO : Momento & Strategie
+			// TODO : Momento & Strategy
 			
 			// Roll the dice.
 			die1.roll();
