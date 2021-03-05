@@ -79,21 +79,11 @@ public class DiceGame {
 	 * No Args Constructor.
 	 * When DiceGame is created, two dice are initialized to play.
 	 */
-	/*private DiceGame(String playerName) {
+	private DiceGame() {
 		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
-		this.setPlayer(new Player(playerName));
+		this.setPlayer(new Player(""));
 		this.setDie1(new Die());
 		this.setDie2(new Die());
-		this.setThrowNumber(0);
-		this.setPlayerPoints(0);
-	}*/
-	
-	private DiceGame(String playerName) {
-		super();
-		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
-		this.player = new Player();
-		this.die1 = new Die();
-		this.die2 = new Die();
 		this.setThrowNumber(0);
 		this.setPlayerPoints(0);
 	}
@@ -107,8 +97,7 @@ public class DiceGame {
 	 */
 	public static synchronized DiceGame getInstance() {
 		if (INSTANCE == null) {
-			//INSTANCE = new DiceGame("");
-			INSTANCE = null;
+			INSTANCE = new DiceGame();
 			LOG.info("A DiceGame's Instance is created.");
 		}
 		return INSTANCE;
@@ -117,6 +106,7 @@ public class DiceGame {
 	public static void resetDiceGame() {
 		INSTANCE = null;
 	}
+	
 	/**
 	 * Method newGame : to start a new game.
 	 * 
@@ -134,6 +124,17 @@ public class DiceGame {
 		}
 	}
 	
+	public boolean changePlayerName(String playerName) {
+		try {
+			this.getPlayer().setName(playerName);
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'changePlayerName' from DiceGame class :");
+			LOG.severe(e.toString());
+			return false;
+		}
+	}
+	
 	/**
 	 * Method throwDice : to throw dice.
 	 * 
@@ -143,7 +144,7 @@ public class DiceGame {
 		try {
 			// Increase the number of throws.
 			if (this.getThrowNumber() >= MAX_NUMBER_OF_THROWS) {
-				throw new TooMuchDiceThrowException("You exceed the maximum throw number of : ");
+				throw new TooMuchDiceThrowException("You exceed the maximum throw number for this game. You already throw dice " + this.throwNumber + " times.");
 			}
 			this.throwNumber++;
 			

@@ -39,23 +39,30 @@ public class Player {
 	private PropertyChangeSupport supportPlayer = new PropertyChangeSupport(this);
 
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
-
+	
+	/**
+	 * No Args Player Constructor :
+	 *  - When player is created, the score is initialized at value 0 and there is no name for the player.
+	 */
+	public Player() {
+		LOG.info("An Player has just been initialized (score at 0 and no name).");
+		this.setName("");
+		this.setScore(0);
+		this.supportPlayer = new PropertyChangeSupport(this);
+	}
+	
 	/**
 	 * Player Constructor :
 	 *  - The player indicates his/her name.
 	 *  - When player is created, the score is initialized at value 0.
+	 *  
 	 * @param playerName 
 	 */
-	/*public Player(String playerName) {
+	public Player(String playerName) {
 		LOG.info("An Player has just been created (score at 0) with name : " + playerName);
 		this.setName(playerName);
 		this.setScore(0);
 		this.supportPlayer = new PropertyChangeSupport(this);
-	}*/
-	
-	public Player() {
-		//LOG.info("An Player has just been created (score at 0) with name : " + playerName);
-		super();
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
