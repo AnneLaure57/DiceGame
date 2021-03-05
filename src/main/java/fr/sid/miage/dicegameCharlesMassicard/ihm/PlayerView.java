@@ -56,13 +56,11 @@ public class PlayerView implements PropertyChangeListener, Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//TODO find why cause exception
-		//player = DiceGame.getInstance().getPlayer();
-		//player.addPropertyChangeListener(this);
-		//nickNamePlayer.setText(player.getName());
+		player = DiceGame.getInstance().getPlayer();
+		player.addPropertyChangeListener(this);
+		nickNamePlayer.setText(player.getName());
 		actualiseScore(0);
-		if (location.equals(getClass().getClassLoader().getResource("view/PlayerView.fxml"))) {
-			nickNamePlayer.setText("GROSSE PUTE");
-		}
+		nickNamePlayer.setText("GROSSE PUTE");
 	}
 	
 	@Override

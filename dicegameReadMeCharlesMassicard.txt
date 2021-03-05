@@ -26,7 +26,7 @@ Tourne sous Windows 10, Mac OS et Unix.
 * Maven 11,
 * Hibernate 5.4.23,
 * H2 Database 1.4.197,
-* MYSQL Database 8.0.19,
+* POSTGRESQL Database 8.0.19,
 * MONGO Database 3.4.1,
 * Lombok 1.18.16,
 * JPA 1.0.2.Final.

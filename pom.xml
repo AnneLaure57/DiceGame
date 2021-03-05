@@ -3,7 +3,7 @@
   <groupId>fr.miage.sid</groupId>
   <artifactId>dicegameCharlesMassicard</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-<description>Bibliotheque CharlesYacia</description>
+<description>DiceGame Charles - Massicard </description>
   
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -94,6 +94,8 @@ public class MainView implements Initializable {
 	    		formNickName.setVisible(false);
 	    		rollForm.setVisible(true);
 	    		DiceGame dicegame = DiceGame.getInstance();
+	    		//dicegame.getPlayer().setName(nickNameFound);
+	    		dicegame.changePlayerName(nickNameFound);
 	    		dicegame.getPlayer().setName(nickNameFound);
 	    		dicegame.getPlayer().setScore(0);
 	    		//System.out.println(dicegame.getPlayer());
