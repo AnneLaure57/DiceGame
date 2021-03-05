@@ -1,5 +1,5 @@
 package fr.sid.miage.dicegameCharlesMassicard.utils.strategy;
 
-public class RollDieOneFirst {
+public class RollDieOneFirst implements RollStrategy{
 
 }
