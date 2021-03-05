@@ -150,6 +150,21 @@ public class DiceGame {
 			
 			// TODO : Momento & Strategy
 			
+			//TODO discuss with Louis For Strategy
+			//How call the right strat ? With number ? Boolean ? in params ?
+			// From front -> RadioButtons ? MenuItem ?
+			// put switch case ? conditions if/else ?
+			
+			//Context context = null;
+			//context = new Context(new RollDices());
+			//context.executeStrategy(die1, die2)
+			
+			//context = new Context(new rollDieOneFirst());
+			//context.executeStrategy(die1, die2)
+			
+			//context = new Context(new rollDieTwoFirst());
+			//context.executeStrategy(die1, die2)
+			
 			// Roll the dice.
 			die1.roll();
 			die2.roll();

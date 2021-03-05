@@ -25,12 +25,14 @@ public class RollDieTwoFirst implements RollStrategy {
 		try {
 			//set Die Two first value
 			die2.roll();
+			LOG.severe("value of Die 2 : " + die2.getFaceValue());
 			
 			//pause 
 			TimeUnit.SECONDS.sleep(3);
 			
 			//set Die One value
 			die1.roll();
+			LOG.severe("value of Die 1 : " + die1.getFaceValue());
 			
 			return true;
 		} catch (Exception e) {
