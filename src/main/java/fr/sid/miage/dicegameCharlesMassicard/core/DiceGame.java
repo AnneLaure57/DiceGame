@@ -13,6 +13,16 @@ import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.Context;
  * @version 
  * @since %G% - %U% (%I%)
  * 
+ * A game with two dice to throw.
+ * 
+ * You throw the couple of dice 10 times.
+ * 
+ * Each time you throw dice, 
+ * if you the sum of dice's face value is equal to 7,
+ * then you win 10 points.
+ * 
+ * If you have a good final score,
+ * then you can reach the top ladder!
  */
 public class DiceGame {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -98,16 +108,14 @@ public class DiceGame {
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
-	
 
-	
 	/**
-	 * Observable
+	 * Method addPropertyChangeListener : allow DiceGame to be an Observable.
 	 * 
+	 * @param pcl PropertyChangeListener 
 	 */
-	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
-		System.out.println("add PropertyChangeListener : " + pcl.getClass().toString());
+		System.out.println("Add PropertyChangeListener : " + pcl.getClass().toString());
 		supportDiceGame.addPropertyChangeListener("Tour partie", pcl);
     }
 	
@@ -167,7 +175,8 @@ public class DiceGame {
 			if (this.getThrowNumber() >= MAX_NUMBER_OF_THROWS) {
 				throw new TooMuchDiceThrowException("You exceed the maximum throw number for this game. You already throw dice " + this.throwNumber + " times.");
 			}
-			this.throwNumber++;
+//			this.throwNumber++;
+			this.setThrowNumber(this.getThrowNumber() + 1);
 			
 			// TODO : Momento
 			
