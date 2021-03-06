@@ -12,8 +12,15 @@
         <menus>
           <Menu mnemonicParsing="false" text="Nouvelle Partie">
                <items>
-                  <MenuItem fx:id="newPseudo" onAction="#openViewNewNickName" mnemonicParsing="false" text="Nouveau Pseudo" />
+                  <MenuItem fx:id="newPseudo" mnemonicParsing="false" onAction="#openViewNewNickName" text="Nouveau Pseudo" />
                   <MenuItem fx:id="keepPseudo" mnemonicParsing="false" text="Garder Pseudo" />
+               </items>
+            </Menu>
+            <Menu fx:id="parameters1" mnemonicParsing="false" text="Stratégies">
+               <items>
+                  <MenuItem fx:id="strategyOne" mnemonicParsing="false" text="Stratégie 1 : Lancer les deux dés" />
+                  <MenuItem fx:id="strategyTwo" mnemonicParsing="false" text="Stratégie 2 : Lancer dé 1 avant dé 2" />
+                  <MenuItem fx:id="strategyThree" mnemonicParsing="false" text="Stratégie 3 : Lancer dé 2 avant dé 1" />
                </items>
             </Menu>
           <Menu fx:id="parameters" mnemonicParsing="false" text="Paramètres">
@@ -21,7 +28,7 @@
               <MenuItem fx:id="saveXML" mnemonicParsing="false" text="XML" />
                   <MenuItem fx:id="saveMySQL" mnemonicParsing="false" text="MySQL" />
                   <MenuItem fx:id="saveMongo" mnemonicParsing="false" text="Mongo" />
-                  <MenuItem fx:id="quit" onAction="#closeRollForm" mnemonicParsing="false" text="Quitter" />
+                  <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#closeRollForm" text="Quitter" />
             </items>
           </Menu>
             <Menu fx:id="help" mnemonicParsing="false" text="Aide">
