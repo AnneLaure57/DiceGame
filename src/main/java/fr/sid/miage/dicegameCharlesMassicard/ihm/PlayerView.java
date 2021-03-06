@@ -35,19 +35,11 @@ public class PlayerView implements PropertyChangeListener, Initializable{
 	
 	@FXML private AnchorPane page;
 	
-	@FXML private Label labelNickName;
-	
 	@FXML private Label nickNamePlayer;
-	
-	@FXML private Label labelScoreCurrentParty;
 	
 	@FXML private Label scoreCurrentParty;
 	
-	@FXML private Label labelBestScore;
-	
 	@FXML private Label bestScore;
-	
-	@FXML private Label labelWorseScore;
 	
 	@FXML private Label worseScore;
 

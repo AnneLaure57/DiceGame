@@ -12,6 +12,7 @@ import fr.sid.miage.dicegameCharlesMassicard.core.Die;
 import fr.sid.miage.dicegameCharlesMassicard.core.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -26,16 +27,43 @@ public class DieView implements Initializable, PropertyChangeListener{
 	
 	private static final Logger LOG = Logger.getLogger(DieView.class.getName());
 	
+	/************************************************* FXML **************************************************/
+	
 	@FXML private ImageView dOne;
 	
 	@FXML private ImageView dTwo;
 	
+	@FXML private Label turnNumber;
+	
+	@FXML private Label scoreDie1;
+	
+	@FXML private Label scoreDie2;
+	
+	@FXML private Label scoreTurn;
+	
+	@FXML private Label scorePreviousTurn;
+	
+	@FXML private Label scorePlayer;
+	
 	private Die die;
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		//nothing here
+		actualiseInformationsGame(0);
+		actualiseScorePlayer(0);
 	}
 	
+	private void actualiseInformationsGame(int score) {
+		turnNumber.setText(Integer.toString(score));
+		scoreDie1.setText(Integer.toString(score));
+		scoreDie2.setText(Integer.toString(score));
+	}
+	
+	private void actualiseScorePlayer(int score) {
+		scoreTurn.setText(Integer.toString(score));
+		scorePreviousTurn.setText(Integer.toString(score));
+		scorePlayer.setText(Integer.toString(score));
+	}
+
 	public void setDie(Die die) {
 		this.die = die;
 		this.die.addPropertyChangeListener(this);
@@ -43,7 +71,6 @@ public class DieView implements Initializable, PropertyChangeListener{
 	
 	public void propertyChange(PropertyChangeEvent evt) {
 		//TODO event with view
-		//TODO call checkFaceValue
 		int faceValue1 = (int) evt.getNewValue();
 		int faceValue2 = (int) evt.getNewValue();
 		

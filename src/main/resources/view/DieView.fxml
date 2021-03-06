@@ -8,35 +8,35 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.sid.miage.dicegameCharlesMassicard.ihm.DieView">
    <children>
-      <Label layoutX="22.0" layoutY="29.0" text="N° du tour :" />
-      <Label fx:id="turnNumber" layoutX="134.0" layoutY="29.0" text="Label" />
-      <AnchorPane id="boardGameAnchor" fx:id="boardGame" layoutX="170.0" layoutY="13.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0" prefWidth="581.0">
+      <Label layoutX="23.0" layoutY="46.0" text="N° du tour :" />
+      <Label fx:id="turnNumber" layoutX="134.0" layoutY="46.0" text="Label" />
+      <AnchorPane id="boardGameAnchor" fx:id="boardGame" layoutX="183.0" layoutY="28.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0" prefWidth="568.0">
          <children>
             <Label layoutX="135.0" layoutY="17.0" styleClass="bg-white-style" text="Dé 1 :" />
             <Label layoutX="367.0" layoutY="17.0" styleClass="bg-white-style" text="Dé 2 :" />
-            <ImageView fx:id="dOne" fitHeight="126.0" fitWidth="115.0" layoutX="99.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="dOne" fitHeight="126.0" fitWidth="115.0" layoutX="93.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/face_one.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="dTwo" fitHeight="136.0" fitWidth="115.0" layoutX="325.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="dTwo" fitHeight="136.0" fitWidth="115.0" layoutX="325.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/face_one.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <Button layoutX="240.0" layoutY="369.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="171.0" text="Jouer" />
+      <Button layoutX="271.0" layoutY="369.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="171.0" text="Jouer" />
       <Button layoutX="518.0" layoutY="369.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="171.0" text="Annuler" />
-      <Label layoutX="22.0" layoutY="79.0" text="Score Dé 1 :" />
-      <Label fx:id="turnNumber1" layoutX="134.0" layoutY="79.0" text="Label" />
-      <Label layoutX="21.0" layoutY="122.0" text="Score Dé 2 :" />
-      <Label fx:id="turnNumber11" layoutX="134.0" layoutY="122.0" text="Label" />
-      <Label layoutX="21.0" layoutY="176.0" text="Total score tour  :" />
-      <Label fx:id="turnNumber111" layoutX="134.0" layoutY="176.0" text="Label" />
-      <Label layoutX="21.0" layoutY="226.0" text="Score tour -1  :" />
-      <Label fx:id="turnNumber1111" layoutX="134.0" layoutY="226.0" text="Label" />
-      <Label layoutX="21.0" layoutY="269.0" text="Score cumulé :" />
-      <Label fx:id="turnNumber11111" layoutX="134.0" layoutY="269.0" text="Label" />
+      <Label layoutX="22.0" layoutY="96.0" text="Score Dé 1 :" />
+      <Label fx:id="scoreDie1" layoutX="134.0" layoutY="96.0" text="Label" />
+      <Label layoutX="22.0" layoutY="148.0" text="Score Dé 2 :" />
+      <Label fx:id="scoreDie2" layoutX="134.0" layoutY="148.0" text="Label" />
+      <Label layoutX="22.0" layoutY="203.0" text="Total score tour  :" />
+      <Label fx:id="scoreTurn" layoutX="134.0" layoutY="203.0" text="Label" />
+      <Label layoutX="22.0" layoutY="256.0" text="Score tour -1  :" />
+      <Label fx:id="scorePreviousTurn" layoutX="134.0" layoutY="256.0" text="Label" />
+      <Label layoutX="22.0" layoutY="309.0" text="Score cumulé :" />
+      <Label fx:id="scorePlayer" layoutX="134.0" layoutY="309.0" text="Label" />
    </children>
 </AnchorPane>
