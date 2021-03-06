@@ -53,8 +53,9 @@ public class TestsStrategyPattern {
 		    System.out.println("Je lance la strat 1 : lancer le dé 1 en premier, pause de 3 sec entre les deux lancés");
 		    context = new Context(new RollDieOneFirst());
 			for (int i = 0; i < 11; i++) {
-				context.executeStrategy(theGame.getDie1(), theGame.getDie2());
 				System.out.println("---------------------------------------");
+				System.out.println("Tour numéro : " + (i+1));
+				context.executeStrategy(theGame.getDie1(), theGame.getDie2());
 			}
 		    break;
 		  case 2:
@@ -62,6 +63,8 @@ public class TestsStrategyPattern {
 			context = new Context(new RollDieOneFirst());
 			context = new Context(new RollDieTwoFirst());
 			for (int i = 0; i < 11; i++) {
+				System.out.println("---------------------------------------");
+				System.out.println("Tour numéro : " + (i+1));
 				context.executeStrategy(theGame.getDie1(), theGame.getDie2());
 			}
 		    break;
@@ -69,6 +72,8 @@ public class TestsStrategyPattern {
 		    System.out.println("Je lance la strat 3 : lancer les dés en même temps");
 			context = new Context(new RollDices());
 			for (int i = 0; i < 11; i++) {
+				System.out.println("---------------------------------------");
+				System.out.println("Tour numéro : " + (i+1));
 				context.executeStrategy(theGame.getDie1(), theGame.getDie2());
 			}
 		    break;
