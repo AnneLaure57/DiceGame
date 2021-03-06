@@ -28,11 +28,13 @@
                         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="784.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/red-dice.png" />
-                           </image></ImageView>
+                           </image>
+                        </ImageView>
                         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="59.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/des.jpg" />
-                           </image></ImageView>
+                           </image>
+                        </ImageView>
                         <Label id="title2" alignment="CENTER" layoutX="-1.0" layoutY="84.0" prefHeight="17.0" prefWidth="1042.0" styleClass="title2" text="Bienvenue sur le jeu DiceGame" textAlignment="CENTER" />
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutY="141.0" prefHeight="17.0" prefWidth="1042.0" styleClass="bg-white-style" text="Pseudo :" />
                         <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" layoutY="194.0" prefHeight="17.0" prefWidth="1042.0" styleClass="errorLabel" />

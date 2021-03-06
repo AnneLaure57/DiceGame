@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.sid.miage.dicegameCharlesMassicard.ihm.MainView">
    <children>
-      <MenuBar fx:id="mainStrategies" layoutY="0" prefHeight="38.0" prefWidth="1042.0">
+      <MenuBar fx:id="mainItems" layoutY="0" prefHeight="38.0" prefWidth="1042.0">
         <menus>
           <Menu mnemonicParsing="false" text="Nouvelle Partie">
                <items>
@@ -16,11 +16,11 @@
                   <MenuItem fx:id="keepPseudo" mnemonicParsing="false" text="Garder Pseudo" />
                </items>
             </Menu>
-            <Menu fx:id="parameters1" mnemonicParsing="false" text="Stratégies">
+            <Menu fx:id="mainStrategies" mnemonicParsing="false" onAction="#changeStrategy" text="Stratégies">
                <items>
-                  <MenuItem fx:id="strategyOne" mnemonicParsing="false" text="Stratégie 1 : Lancer les deux dés" />
-                  <MenuItem fx:id="strategyTwo" mnemonicParsing="false" text="Stratégie 2 : Lancer dé 1 avant dé 2" />
-                  <MenuItem fx:id="strategyThree" mnemonicParsing="false" text="Stratégie 3 : Lancer dé 2 avant dé 1" />
+                  <CheckMenuItem fx:id="strategyOne" mnemonicParsing="false" text="Stratégie 1 : Lancer les deux dés" />
+                  <CheckMenuItem fx:id="strategyTwo" mnemonicParsing="false" text="Stratégie 2 : Lancer dé 1 avant dé 2" />
+                  <CheckMenuItem fx:id="strategyThree" mnemonicParsing="false" text="Stratégie 3 : Lancer dé 2 avant dé 1" />
                </items>
             </Menu>
           <Menu fx:id="parameters" mnemonicParsing="false" text="Paramètres">

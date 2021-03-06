@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -50,6 +51,16 @@ public class MainView implements Initializable {
 	
 	@FXML private MenuBar mainItems;
 	
+	@FXML private Menu mainStrategies;
+	
+	@FXML private CheckMenuItem strategyOne;
+	
+	@FXML private CheckMenuItem strategyTwo;
+	
+	@FXML private CheckMenuItem strategyThree;
+	
+	@FXML private Label displayNameStrategy;
+	
 	@FXML private Menu help;
 	
 	@FXML private CheckMenuItem rules;
@@ -73,57 +84,27 @@ public class MainView implements Initializable {
 			//formNickName.setManaged(true);
 			//formNickName.setViewOrder(0);
 		}
-		
-		//load rules view
-		CheckMenuItem rules = new CheckMenuItem("Règles");
-		rules.setSelected(true);
-		rules.setOnAction(e -> displayRules());
-		
+		if (location.equals(getClass().getClassLoader().getResource("view/MainBar.fxml"))) {
+
+			strategyOne.setSelected(true);
+			
+			//load rules view
+			rules.setSelected(true);
+			rules.setOnAction(e -> displayRules());
+		}
 	}
 	
-	/* ========================================= Start Game ============================================== */
+	/* ========================================= PropertyChange ============================================== */
 	
-	@FXML
-    private void startGame(ActionEvent event) {
-		try {
-			if (!validInput()) {
-	    		errorMessage.setText("Veuillez saisir un pseudo !");
-	    		errorMessage.setTextFill(Color.RED);
-	    	} else {
-	    		String nickNameFound = addNickName.getText();
-	    		
-	    		formNickName.setVisible(false);
-	    		rollForm.setVisible(true);
-	    		
-	    		DiceGame dicegame = DiceGame.getInstance();
-//	    		System.out.println("nickname found " + nickNameFound);
-	    		dicegame.changePlayerName(nickNameFound);
-	    		dicegame.getPlayer().setScore(0);
-	    		
-	    		
-	    		//System.out.println(dicegame.getPlayer());
-//	    		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlayerView.fxml"));
-//	    		AnchorPane page = loader.load();
-//	    		Scene scene = new Scene(page);
-//	    		String nickNameFound = addNickName.getText();
-//	    		formNickName.getChildren().clear();
-//	    		diceGame = new DiceGame(nickNameFound);
-//	    		boardDiceGameAnchor.setVisible(true);
-//	    		boardDiceGameAnchor.setManaged(true);
-	    	}
-    	} catch (Exception e) {
-    		LOG.severe("Erreur de saisie : "+ e.getMessage());
-    		e.printStackTrace();
-    	}
+	public void propertyChange(PropertyChangeEvent evt) {
+		
     }
 	
-	public boolean validInput(){
-		if (addNickName.getText() == null || addNickName.getText().trim().isEmpty()) {
-			return false;
-		}
-        return true;
-    }
-
+	/* ========================================= Main ============================================== */
+	
+	/*
+	 * Click on X on the Windows
+	 */
 	
 	@FXML
     private void closeRollForm(ActionEvent event) {
@@ -136,6 +117,10 @@ public class MainView implements Initializable {
     	}
     } 
 	
+	/*
+	 * Paramètres > Quitter
+	 */
+	
 	@FXML
     private void closeView() {
         // get a handle to the stage
@@ -144,6 +129,43 @@ public class MainView implements Initializable {
         stage.close();
     } 
 	
+	/*
+	 * Change Strategy
+	 */
+	
+	@FXML 
+	void changeStrategy() {
+		strategyOne.setOnAction(e -> 
+    	{
+	    	if (strategyOne.isSelected())
+	    	{
+	    		strategyTwo.setSelected(false);
+	    		strategyThree.setSelected(false);
+	    		
+	    	}
+    	});
+		strategyTwo.setOnAction(e -> 
+    	{
+	    	if (strategyTwo.isSelected())
+	    	{
+	    		strategyOne.setSelected(false);
+	    		strategyThree.setSelected(false);
+	    	}
+    	});
+		strategyThree.setOnAction(e -> 
+    	{
+	    	if (strategyThree.isSelected())
+	    	{
+	    		strategyTwo.setSelected(false);
+	    		strategyOne.setSelected(false);
+	    	}
+    	});
+	} 
+	
+	
+	/*
+	 * View Rules
+	 */
 	@FXML 
 	void displayRules() {
 		try {
@@ -162,6 +184,9 @@ public class MainView implements Initializable {
         }
 	} 
 	
+	/*
+	 * New Game
+	 */
 	@FXML
     private void openViewNewNickName() {
 		try {
@@ -181,8 +206,35 @@ public class MainView implements Initializable {
     	}
     }
 	
-	public void propertyChange(PropertyChangeEvent evt) {
-		
+	/* ========================================= Start Game ============================================== */
+	
+	@FXML
+    private void startGame(ActionEvent event) {
+		try {
+			if (!validInput()) {
+	    		errorMessage.setText("Veuillez saisir un pseudo !");
+	    		errorMessage.setTextFill(Color.RED);
+	    	} else {
+	    		String nickNameFound = addNickName.getText();
+	    		
+	    		formNickName.setVisible(false);
+	    		rollForm.setVisible(true);
+	  
+	    		DiceGame dicegame = DiceGame.getInstance();
+	    		dicegame.changePlayerName(nickNameFound);
+	    		dicegame.getPlayer().setScore(0);
+	    	}
+    	} catch (Exception e) {
+    		LOG.severe("Erreur de saisie : "+ e.getMessage());
+    		e.printStackTrace();
+    	}
+    }
+	
+	public boolean validInput(){
+		if (addNickName.getText() == null || addNickName.getText().trim().isEmpty()) {
+			return false;
+		}
+        return true;
     }
 
 }

@@ -25,8 +25,8 @@
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="380.0" prefHeight="86.0" prefWidth="756.0">
                                  <children>
-                                    <Button layoutX="418.0" layoutY="12.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="210.0" text="Annuler" />
-                                    <Button layoutX="79.0" layoutY="12.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="210.0" text="Valider" />
+                                    <Button fx:id="cancel" layoutX="418.0" layoutY="12.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="210.0" text="Annuler" />
+                                    <Button fx:id="roll" layoutX="79.0" layoutY="12.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="210.0" text="Lancer" />
                                  </children>
                               </AnchorPane>
                               <fx:include source="DieView.fxml" />
@@ -38,10 +38,10 @@
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView layoutY="82.0" prefHeight="485.0" prefWidth="265.0">
+                  <TableView fx:id="tableViewScore" layoutY="82.0" prefHeight="485.0" prefWidth="265.0">
                     <columns>
-                      <TableColumn prefWidth="133.0" text="Pseudo" />
-                      <TableColumn prefWidth="131.0" text="Score" />
+                      <TableColumn fx:id="tabNamePlayer" prefWidth="133.0" text="Pseudo" />
+                      <TableColumn fx:id="tabScorePlayer" prefWidth="131.0" text="Score" />
                     </columns>
                   </TableView>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutY="31.0" prefHeight="17.0" prefWidth="265.0" text="Tableau des scores" />
