@@ -42,7 +42,7 @@ public class TestCore {
 		// On regarde l'initialisation des variables liées au jeu
 		System.out.println("Player : " + theGame.getPlayer().getName());
 		System.out.println("Throw Number : " + theGame.getThrowNumber());
-		System.out.println("Player Points : " + theGame.getPlayerPoints());
+		System.out.println("Player Points : " + theGame.getPlayer().getScore());
 		
 		for (int i = 0; i < 12; i++) {
 			// On jette les dés
@@ -52,7 +52,7 @@ public class TestCore {
 			System.out.println("------------------------------------------");
 			System.out.println("Player : " + theGame.getPlayer().getName());
 			System.out.println("Throw Number : " + theGame.getThrowNumber());
-			System.out.println("Player Points : " + theGame.getPlayerPoints());
+			System.out.println("Player Points : " + theGame.getPlayer().getScore());
 		}
 	}
 }
