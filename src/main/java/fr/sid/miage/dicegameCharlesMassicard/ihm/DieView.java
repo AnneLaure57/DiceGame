@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import antlr.debug.Event;
+import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
 import fr.sid.miage.dicegameCharlesMassicard.core.Die;
 import fr.sid.miage.dicegameCharlesMassicard.core.Player;
 import javafx.fxml.FXML;
@@ -29,41 +30,15 @@ public class DieView implements Initializable, PropertyChangeListener{
 	
 	/************************************************* FXML **************************************************/
 	
-	@FXML private ImageView dOne;
-	
-	@FXML private ImageView dTwo;
-	
-	@FXML private Label turnNumber;
-	
-	@FXML private Label scoreDie1;
-	
-	@FXML private Label scoreDie2;
-	
-	@FXML private Label scoreTurn;
-	
-	@FXML private Label scorePreviousTurn;
-	
-	@FXML private Label scorePlayer;
+	@FXML private ImageView dieFace;
 	
 	private Die die;
 	
+	private DiceGame dicegame;
+	
 	public void initialize(URL location, ResourceBundle resources) {
-		actualiseInformationsGame(0);
-		actualiseScorePlayer(0);
 	}
 	
-	private void actualiseInformationsGame(int score) {
-		turnNumber.setText(Integer.toString(score));
-		scoreDie1.setText(Integer.toString(score));
-		scoreDie2.setText(Integer.toString(score));
-	}
-	
-	private void actualiseScorePlayer(int score) {
-		scoreTurn.setText(Integer.toString(score));
-		scorePreviousTurn.setText(Integer.toString(score));
-		scorePlayer.setText(Integer.toString(score));
-	}
-
 	public void setDie(Die die) {
 		this.die = die;
 		this.die.addPropertyChangeListener(this);
@@ -71,15 +46,12 @@ public class DieView implements Initializable, PropertyChangeListener{
 	
 	public void propertyChange(PropertyChangeEvent evt) {
 		//TODO event with view
-		int faceValue1 = (int) evt.getNewValue();
-		int faceValue2 = (int) evt.getNewValue();
+		int faceValue = (int) evt.getNewValue();
 		
-		if(faceValue1 != 0 && faceValue2 != 0) {
-			dOne.setImage(new Image(getClass().getResource("/images/" + checkFaceValue(faceValue1) + ".png").toExternalForm()));
-			dTwo.setImage(new Image(getClass().getResource("/images/" + checkFaceValue(faceValue2) + ".png").toExternalForm()));
+		if(faceValue != 0) {
+			dieFace.setImage(new Image(getClass().getResource("/images/" + checkFaceValue(faceValue) + ".png").toExternalForm()));
 		} else {
-			dOne.setImage(null);
-			dTwo.setImage(null);
+			dieFace.setImage(null);
 		}
     }
 	

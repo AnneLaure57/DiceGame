@@ -77,6 +77,7 @@ public class Player {
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		System.out.println("add PropertyChangeListener : " + pcl.getClass().toString());
 		supportPlayer.addPropertyChangeListener("Nom joueur", pcl);
+		supportPlayer.addPropertyChangeListener("Score Joueur", pcl);
     }
  
 	/**
