@@ -9,9 +9,9 @@ import fr.sid.miage.dicegameCharlesMassicard.core.Die;
  * @author Louis MASSICARD (user name : louis)
  * @version 
  * @since %G% - %U% (%I%)
- *
+ * 
+ * The strategy to use to roll dice : Roll two dice at the same time.
  */
-
 public class RollDices implements RollStrategy{
 	/* ========================================= Global ================================================ */ /*=========================================*/
 	
