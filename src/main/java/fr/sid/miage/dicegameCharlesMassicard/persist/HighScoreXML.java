@@ -117,15 +117,16 @@ public class HighScoreXML implements HighScore {
 	public void load() {
 		XMLDecoder decoder=null;
 		try {
-			decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(SERIALIZED_FILE_NAME)));
+			decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(SERIALIZED_FILE_NAME)));
 		} catch (FileNotFoundException e) {
 			LOG.severe("ERROR: File highscores.xml not found");
 		}
 		this.scores = (List<Entry>) decoder.readObject();
-		LOG.info("All entries that are loaded : ");
-		for (Entry entry : scores) {
-			LOG.info(entry.toString());
-		}
+		LOG.info("All entries that are loaded.");
+//		LOG.info("All entries that are loaded : ");
+//		for (Entry entry : scores) {
+//			LOG.info(entry.toString());
+//		}
 	}
 	
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
