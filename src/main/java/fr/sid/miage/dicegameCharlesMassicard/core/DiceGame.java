@@ -39,7 +39,7 @@ public class DiceGame {
 	/**
 	 * Number of points to add when the sum of dice's face value allow to win.
 	 */
-	private static final int POINTS_TO_ADD_WHEN_WIN = 7;
+	private static final int POINTS_TO_ADD_WHEN_WIN = 10;
 	
 	/**
 	 * TODO javadoc
