@@ -38,14 +38,14 @@ public class RollDieOneFirst implements RollStrategy {
 	@Override
 	public boolean rollDices(Die die1, Die die2) {
 		try {
-			// Set Die One first value
+			// Dice one rolls : set Die One first value
 			die1.roll();
 			LOG.severe("value of Die 1 : " + die1.getFaceValue());
 			
 			// Pause during 3 seconds
 			TimeUnit.SECONDS.sleep(3);
 			
-			// Set Die Two value
+			// Dice two rolls : set Die Two value
 			die2.roll();
 			LOG.severe("value of Die 2 : " + die2.getFaceValue());
 			
