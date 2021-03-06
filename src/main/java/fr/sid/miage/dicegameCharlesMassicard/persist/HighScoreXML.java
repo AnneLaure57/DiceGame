@@ -122,8 +122,11 @@ public class HighScoreXML implements HighScore {
 			LOG.severe("ERROR: File highscores.xml not found");
 		}
 		this.scores = (List<Entry>) decoder.readObject();
-		LOG.info("All entries that are loaded.");
-//		LOG.info("All entries that are loaded : ");
+		LOG.info("All entries are loaded.");
+		
+		// Uncomment if you want to log more informations:
+		
+//		LOG.info("Display all entries that are loaded : ");
 //		for (Entry entry : scores) {
 //			LOG.info(entry.toString());
 //		}
