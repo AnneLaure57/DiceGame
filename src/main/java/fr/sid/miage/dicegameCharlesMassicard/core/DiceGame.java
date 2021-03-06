@@ -70,6 +70,11 @@ public class DiceGame {
 	 */
 	private int throwNumber;
 	
+	/**
+	 * The stratregy tu use to roll dice.
+	 * Example : Die one rolls first, then Die two rolls some seconds after dice one.
+	 * Other example : Two dice roll together at the same time.
+	 */
 	private String strategyToUseToRollDice;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
