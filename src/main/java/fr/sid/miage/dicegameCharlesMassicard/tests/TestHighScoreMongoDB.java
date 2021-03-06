@@ -25,6 +25,12 @@ public class TestHighScoreMongoDB {
 	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
 
 	/* ========================================= Main ================================================== */ /*=========================================*/
+	
+	/**	
+	 * Main function : run the test.
+	 * 	
+	 * @param args Arguments passed to application's Jar (here, not used).
+	 */
 	public static void main(String[] args) {
 		
 		// Declarations

@@ -29,7 +29,7 @@ public class TestHighScoreXML {
 	/**	
 	 * Main function : run the test.
 	 * 	
-	 * @param args Arguments passed to application's Jar (here, not used).	
+	 * @param args Arguments passed to application's Jar (here, not used).
 	 */
 	public static void main(String[] args) {
 		

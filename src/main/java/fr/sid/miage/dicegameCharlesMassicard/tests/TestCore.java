@@ -9,7 +9,7 @@ import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
  * @since %G% - %U% (%I%)
  *
  *
- * Class to test backend : HighScoreXML.
+ * Class to test backend : simulate a game of DiceGame.
  */
 public class TestCore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -27,7 +27,7 @@ public class TestCore {
 	/**	
 	 * Main function : run the test.
 	 * 	
-	 * @param args Arguments passed to application's Jar (here, not used).	
+	 * @param args Arguments passed to application's Jar (here, not used).
 	 */
 	public static void main(String[] args) {
 		// On lance le jeu

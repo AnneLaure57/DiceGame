@@ -6,8 +6,33 @@ import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDices;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieOneFirst;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieTwoFirst;
 
+/**
+ * @author Anne-Laure CHARLES
+ * @author Louis MASSICARD (user name : louis)
+ * @version 
+ * @since %G% - %U% (%I%)
+ *
+ *
+ * Class to test backend : HighScoreXML.
+ */
 public class TestsStrategyPattern {
+	/* ========================================= Global ================================================ */ /*=========================================*/
 
+	/* ========================================= Attributs ============================================= */ /*=========================================*/
+
+	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
+
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
+
+	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
+
+	/* ========================================= Main ================================================== */ /*=========================================*/
+	
+	/**	
+	 * Main function : run the test.
+	 * 	
+	 * @param args Arguments passed to application's Jar (here, not used).
+	 */
 	public static void main(String[] args) {
 		
 		// On lance le jeu
@@ -21,7 +46,7 @@ public class TestsStrategyPattern {
 		
 		Context context = null;
 		
-		int n = 3;
+		int n = 1;
 		
 		switch (n) {
 		  case 1:
@@ -29,6 +54,7 @@ public class TestsStrategyPattern {
 		    context = new Context(new RollDieOneFirst());
 			for (int i = 0; i < 11; i++) {
 				context.executeStrategy(theGame.getDie1(), theGame.getDie2());
+				System.out.println("---------------------------------------");
 			}
 		    break;
 		  case 2:
