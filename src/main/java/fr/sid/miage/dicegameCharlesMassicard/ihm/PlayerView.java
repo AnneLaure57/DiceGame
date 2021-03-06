@@ -55,18 +55,34 @@ public class PlayerView implements PropertyChangeListener, Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//TODO find why cause exception
 		player = DiceGame.getInstance().getPlayer();
 		player.addPropertyChangeListener(this);
-		nickNamePlayer.setText(player.getName());
 		actualiseScore(0);
-		nickNamePlayer.setText("GROSSE PUTE");
 	}
 	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		int score = (int) evt.getNewValue();
-		actualiseScore(score);
+		System.out.println("event property name : " + evt.getPropertyName());
+		
+		switch(evt.getPropertyName()) {
+		case "Nom joueur":
+			String playerName = (String) evt.getNewValue();
+			this.nickNamePlayer.setText(playerName);
+			break;
+		case "Score Joueur":
+			int score = (int) evt.getNewValue();
+			//TODO
+			//if(firstDieScore == 0){
+			//	actualiseScore(firstDieScore + score);
+			//	firstDieScore = 0;
+			//} else {
+			//	firstDieScore = score
+			//}
+			break;
+		default :
+			break;
+		}
+		
     }
 	
 	private void actualiseScore(int score) {

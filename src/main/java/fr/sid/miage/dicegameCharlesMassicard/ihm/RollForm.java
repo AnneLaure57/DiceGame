@@ -56,21 +56,18 @@ public class RollForm implements Initializable {
 	@FXML private SplitPane boardDiceGameAnchor;
 	
 	public PlayerView pl = new PlayerView();
-	
-	// TODO : set the player name
-	private static DiceGame diceGame = null;
 
 	@FXML private Button button_lancer;
 
 	/* ========================================= INITIALISATIONS ! ********************************************************************************************/
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {	
-		this.diceGame = DiceGame.getInstance();
+	public void initialize(URL location, ResourceBundle resources) {
+
 	}
 	
 	public void propertyChange(PropertyChangeEvent evt) {
-		//TODO event with view
+		System.out.println("change detected");
     }
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/

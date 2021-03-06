@@ -6,8 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8.0.171" 
-xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.sid.miage.dicegameCharlesMassicard.ihm.DieView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.sid.miage.dicegameCharlesMassicard.ihm.DieView">
    <children>
       <Label layoutX="22.0" layoutY="29.0" text="N° du tour :" />
       <Label fx:id="turnNumber" layoutX="134.0" layoutY="29.0" text="Label" />
@@ -15,12 +14,12 @@ xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.sid.miage.dicegameCharlesM
          <children>
             <Label layoutX="135.0" layoutY="17.0" styleClass="bg-white-style" text="Dé 1 :" />
             <Label layoutX="367.0" layoutY="17.0" styleClass="bg-white-style" text="Dé 2 :" />
-            <ImageView fx:id="dOne" fitHeight="126.0" fitWidth="115.0" layoutX="99.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dOne" fitHeight="126.0" fitWidth="115.0" layoutX="99.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/face_one.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="dTwo" fitHeight="136.0" fitWidth="115.0" layoutX="325.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dTwo" fitHeight="136.0" fitWidth="115.0" layoutX="325.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/face_one.png" />
                </image>

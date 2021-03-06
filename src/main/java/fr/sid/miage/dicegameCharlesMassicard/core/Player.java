@@ -36,7 +36,7 @@ public class Player {
 	/**
 	 * Observable
 	 */
-	private PropertyChangeSupport supportPlayer = new PropertyChangeSupport(this);
+	private PropertyChangeSupport supportPlayer ;
 
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 	
@@ -46,9 +46,9 @@ public class Player {
 	 */
 	public Player() {
 		LOG.info("An Player has just been initialized (score at 0 and no name).");
+		this.supportPlayer = new PropertyChangeSupport(this);
 		this.setName("");
 		this.setScore(0);
-		this.supportPlayer = new PropertyChangeSupport(this);
 	}
 	
 	/**
@@ -60,9 +60,9 @@ public class Player {
 	 */
 	public Player(String playerName) {
 		LOG.info("An Player has just been created (score at 0) with name : " + playerName);
+		this.supportPlayer = new PropertyChangeSupport(this);
 		this.setName(playerName);
 		this.setScore(0);
-		this.supportPlayer = new PropertyChangeSupport(this);
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -73,7 +73,8 @@ public class Player {
 	 */
 	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
-		supportPlayer.addPropertyChangeListener("score", pcl);
+		System.out.println("add PropertyChangeListener : " + pcl.getClass().toString());
+		supportPlayer.addPropertyChangeListener("Nom joueur", pcl);
     }
  
 	/**
@@ -108,8 +109,8 @@ public class Player {
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.name = name;
 		supportPlayer.firePropertyChange("Nom joueur", this.name, name);
+		this.name = name;
 	}
 	
 	/**
