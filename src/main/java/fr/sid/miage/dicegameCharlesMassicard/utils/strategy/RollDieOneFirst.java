@@ -12,25 +12,31 @@ import fr.sid.miage.dicegameCharlesMassicard.core.Die;
  * @since %G% - %U% (%I%)
  *
  */
-
 public class RollDieOneFirst implements RollStrategy {
-	
+	/* ========================================= Global ================================================ */ /*=========================================*/
+
 	/**
 	 * Logger for this class : RollDieOneFirst.
 	 */
 	private static final Logger LOG = Logger.getLogger(RollDieOneFirst.class.getName());
 
+	/* ========================================= Attributs ============================================= */ /*=========================================*/
+
+	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
+
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
+	
 	@Override
 	public boolean rollDices(Die die1, Die die2) {
 		try {
-			//set Die One first value
+			// Set Die One first value
 			die1.roll();
 			LOG.severe("value of Die 1 : " + die1.getFaceValue());
 			
-			//pause 
+			// Pause during 3 seconds
 			TimeUnit.SECONDS.sleep(3);
 			
-			//set Die Two value
+			// Set Die Two value
 			die2.roll();
 			LOG.severe("value of Die 2 : " + die2.getFaceValue());
 			
@@ -41,4 +47,8 @@ public class RollDieOneFirst implements RollStrategy {
 			return false;
 		}
 	}
+
+	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
+
+	/* ========================================= Main ================================================== */ /*=========================================*/
 }
