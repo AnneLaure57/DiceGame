@@ -50,16 +50,11 @@ public class RollForm implements Initializable {
 	@FXML
 	private Parent root ;
 	
-	@FXML
-	private AnchorPane content;
+	@FXML private AnchorPane content;
 	
 	@FXML private SplitPane boardDiceGameAnchor;
 	
 	public PlayerView pl = new PlayerView();
-
-	@FXML private Button button_lancer;
-
-	/* ========================================= INITIALISATIONS ! ********************************************************************************************/
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -70,11 +65,11 @@ public class RollForm implements Initializable {
 		System.out.println("change detected");
     }
 	
-	/* ========================================= Methodes ============================================== */ /*=========================================*/
+	/* ========================================= Display Best Score ================================ */
 	
+	//TODO
 	
-	
-	/* ========================================= New Game ============================================== */
+	/* ========================================= Roll ============================================== */
 	
 	@FXML
     private void roll() {
@@ -87,5 +82,7 @@ public class RollForm implements Initializable {
     		e.printStackTrace();
     	}*/
     }
+	
+	/* ========================================= Cancel Roll ============================================== */
 
 }
