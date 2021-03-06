@@ -2,7 +2,7 @@ package fr.sid.miage.dicegameCharlesMassicard.tests;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.Context;
-import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDices;
+import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollTwoDiceAtSameTime;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieOneFirst;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieTwoFirst;
 
@@ -71,7 +71,7 @@ public class TestsStrategyPattern {
 		    break;
 		  case 3:
 		    System.out.println("Je lance la strat 3 : lancer les dés en même temps");
-			context = new Context(new RollDices());
+			context = new Context(new RollTwoDiceAtSameTime());
 			for (int i = 0; i < 11; i++) {
 				System.out.println("--------------------------------------- \n Tour numéro : " + (i+1));
 				System.out.println("Tour numéro : " + (i+1));

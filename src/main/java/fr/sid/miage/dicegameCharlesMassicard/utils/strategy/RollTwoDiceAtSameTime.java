@@ -12,13 +12,13 @@ import fr.sid.miage.dicegameCharlesMassicard.core.Die;
  * 
  * The strategy to use to roll dice : Roll two dice at the same time.
  */
-public class RollDices implements RollStrategy{
+public class RollTwoDiceAtSameTime implements RollStrategy{
 	/* ========================================= Global ================================================ */ /*=========================================*/
 	
 	/**
 	 * Logger for this class : RollDices.
 	 */
-	private static final Logger LOG = Logger.getLogger(RollDices.class.getName());
+	private static final Logger LOG = Logger.getLogger(RollTwoDiceAtSameTime.class.getName());
 
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
