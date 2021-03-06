@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.utils.TooMuchDiceThrowException;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.Context;
+import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollTwoDiceAtSameTime;
 
 /**
  * @author Anne-Laure CHARLES
@@ -105,6 +106,7 @@ public class DiceGame {
 		this.setDie1(new Die());
 		this.setDie2(new Die());
 		this.setThrowNumber(0);
+		this.setStrategyToUseToRollDice(new Context(new RollTwoDiceAtSameTime()));
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -185,19 +187,20 @@ public class DiceGame {
 			// From front -> RadioButtons ? MenuItem ?
 			// put switch case ? conditions if/else ?
 			
-			//Context context = null;
-			//context = new Context(new RollDices());
-			//context.executeStrategy(die1, die2)
-			
-			//context = new Context(new rollDieOneFirst());
-			//context.executeStrategy(die1, die2)
-			
-			//context = new Context(new rollDieTwoFirst());
-			//context.executeStrategy(die1, die2)
+//			Context context = null;
+//			context = new Context(new RollDices());
+//			context.executeStrategy(die1, die2)
+//			
+//			context = new Context(new rollDieOneFirst());
+//			context.executeStrategy(die1, die2)
+//			
+//			context = new Context(new rollDieTwoFirst());
+//			context.executeStrategy(die1, die2)
 			
 			// Roll the dice.
-			die1.roll();
-			die2.roll();
+			this.getStrategyToUseToRollDice().executeStrategy(die1, die2);
+//			die1.roll();
+//			die2.roll();
 			
 			// If the player wins (The sum of the dice's face value for which the player win some points)
 			// then increase the player's score.

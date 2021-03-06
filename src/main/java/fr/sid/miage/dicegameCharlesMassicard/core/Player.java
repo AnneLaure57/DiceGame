@@ -89,7 +89,7 @@ public class Player {
 	public boolean increaseScore(int valueToAdd) {
 		try {
 			if (valueToAdd > 0) {
-				this.score += 7;
+				this.setScore(this.getScore() + valueToAdd);
 			}
 			return true;
 		} catch (Exception e) {
