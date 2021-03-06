@@ -40,8 +40,11 @@ public class DiceGame {
 	 */
 	private static final int POINTS_TO_ADD_WHEN_WIN = 7;
 	
+	/**
+	 * TODO
+	 */
 	PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-		
+	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	/**
@@ -66,13 +69,6 @@ public class DiceGame {
 	 */
 	private int throwNumber;
 	
-	/**
-	 * Points earned by the player during the game.
-	 * Begin at 0.
-	 * Add 10 points when the sum of dices is equal to 7.
-	 */
-	private int playerPoints;
-	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	/**
@@ -85,7 +81,6 @@ public class DiceGame {
 		this.setDie1(new Die());
 		this.setDie2(new Die());
 		this.setThrowNumber(0);
-		this.setPlayerPoints(0);
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -256,20 +251,6 @@ public class DiceGame {
 	 */
 	public void setThrowNumber(int throwNumber) {
 		this.throwNumber = throwNumber;
-	}
-
-	/**
-	 * @return the playerPoints
-	 */
-	public int getPlayerPoints() {
-		return playerPoints;
-	}
-
-	/**
-	 * @param playerPoints the playerPoints to set
-	 */
-	public void setPlayerPoints(int playerPoints) {
-		this.playerPoints = playerPoints;
 	}
 
 	/**
