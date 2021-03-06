@@ -9,28 +9,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 /**
  * @author Anne-Laure CHARLES
@@ -75,7 +59,7 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		this.diceGame.getDie1().addPropertyChangeListener(this);
 		this.diceGame.getDie2().addPropertyChangeListener(this);
 		actualiseInformationsGame(0);
-		actualiseScorePlayer(0);
+		actualiseScore(0);
 	}
 	
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -90,7 +74,7 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		scoreDie2.setText(Integer.toString(score));
 	}
 	
-	private void actualiseScorePlayer(int score) {
+	private void actualiseScore(int score) {
 		scoreTurn.setText(Integer.toString(score));
 		scorePreviousTurn.setText(Integer.toString(score));
 		scorePlayer.setText(Integer.toString(score));
