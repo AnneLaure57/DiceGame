@@ -44,7 +44,7 @@ public class RollDieOneFirst implements RollStrategy {
 			LOG.severe("value of Die 1 : " + die1.getFaceValue());
 			
 			// Pause during some seconds
-			TimeUnit.SECONDS.sleep(3);
+			TimeUnit.SECONDS.sleep(Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW);
 			
 			// Dice two rolls : set Die Two value
 			die2.roll();

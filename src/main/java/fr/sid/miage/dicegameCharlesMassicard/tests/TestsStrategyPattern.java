@@ -13,7 +13,7 @@ import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieTwoFirst;
  * @since %G% - %U% (%I%)
  *
  *
- * Class to test backend : HighScoreXML.
+ * Class to test backend : check if all strategies (strategy to use to roll dice) are OK.
  */
 public class TestsStrategyPattern {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -44,6 +44,7 @@ public class TestsStrategyPattern {
 		// On commance la partie
 		theGame.newGame();
 		
+		// Initialisation du contexte des stratégie à utiliser pour le jeu
 		Context context = null;
 		
 		// Change the n value to choose the strategy to test :
@@ -51,20 +52,19 @@ public class TestsStrategyPattern {
 		
 		switch (n) {
 		  case 1:
-		    System.out.println("Je lance la strat 1 : lancer le dé 1 en premier, pause de 3 sec entre les deux lancés");
+		    System.out.println("Je lance la strat 1 : lancer le dé 1 en premier, pause de " + Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW + " sec entre les deux lancés");
 		    context = new Context(new RollDieOneFirst());
 			for (int i = 0; i < 11; i++) {
-				System.out.println("---------------------------------------");
-				System.out.println("Tour numéro : " + (i+1));
+				System.out.println("--------------------------------------- \n Tour numéro : " + (i+1));
 				context.executeStrategy(theGame.getDie1(), theGame.getDie2());
 			}
 		    break;
 		  case 2:
-			System.out.println("Je lance la strat 2 : lancer le dé 2 en premier, pause de 3 sec entre les deux lancés");
+			System.out.println("Je lance la strat 2 : lancer le dé 2 en premier, pause de " + Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW + " sec entre les deux lancés");
 			context = new Context(new RollDieOneFirst());
 			context = new Context(new RollDieTwoFirst());
 			for (int i = 0; i < 11; i++) {
-				System.out.println("---------------------------------------");
+				System.out.println("--------------------------------------- \n Tour numéro : " + (i+1));
 				System.out.println("Tour numéro : " + (i+1));
 				context.executeStrategy(theGame.getDie1(), theGame.getDie2());
 			}
@@ -73,7 +73,7 @@ public class TestsStrategyPattern {
 		    System.out.println("Je lance la strat 3 : lancer les dés en même temps");
 			context = new Context(new RollDices());
 			for (int i = 0; i < 11; i++) {
-				System.out.println("---------------------------------------");
+				System.out.println("--------------------------------------- \n Tour numéro : " + (i+1));
 				System.out.println("Tour numéro : " + (i+1));
 				context.executeStrategy(theGame.getDie1(), theGame.getDie2());
 			}

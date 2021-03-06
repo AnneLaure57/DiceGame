@@ -19,7 +19,9 @@ public class Context {
 	 * Logger for this class : RollDices.
 	 */
 	private static final Logger LOG = Logger.getLogger(Context.class.getName());
-
+	
+	public static final int NB_SEC_BEFORE_ANOTHER_DIE_THROW = 3;
+	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	/**
