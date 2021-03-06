@@ -50,6 +50,11 @@ public class DiceGame {
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	/**
+	 * Observable
+	 */
+	private PropertyChangeSupport supportDiceGame;
+	
+	/**
 	 * Player who plays the game DiceGame.
 	 */
 	private Player player;
@@ -94,10 +99,7 @@ public class DiceGame {
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 	
-	/**
-	 * Observable
-	 */
-	private PropertyChangeSupport supportDiceGame;
+
 	
 	/**
 	 * Observable
