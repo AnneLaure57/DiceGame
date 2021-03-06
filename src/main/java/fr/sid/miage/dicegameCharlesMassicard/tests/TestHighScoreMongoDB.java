@@ -1,5 +1,8 @@
 package fr.sid.miage.dicegameCharlesMassicard.tests;
 
+import java.util.ArrayList;
+
+import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
 import fr.sid.miage.dicegameCharlesMassicard.persist.HighScoreMongoDB;
 import fr.sid.miage.dicegameCharlesMassicard.persist.PersistKit;
 import fr.sid.miage.dicegameCharlesMassicard.persist.MongoDBKit;
@@ -56,7 +59,16 @@ public class TestHighScoreMongoDB {
 		// Test save
 		highScore.save();
 		
+		// Drop all scores before load
+		highScore.setScores(new ArrayList<Entry>());
+		if (highScore.getScores().size() == 0) {
+			System.out.println("La liste des scores a été ré-initialisée avant de tester la méthode 'load'.");
+		}
+		
 		// Test load
 		highScore.load();
+		
+		// Display scores after loaded
+		highScore.getScores().forEach(System.out::println);
 	}
 }
