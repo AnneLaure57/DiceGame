@@ -42,7 +42,7 @@ public class DiceGame {
 	private static final int POINTS_TO_ADD_WHEN_WIN = 7;
 	
 	/**
-	 * TODO
+	 * TODO javadoc
 	 */
 	PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
