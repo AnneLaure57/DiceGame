@@ -125,8 +125,8 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	@Override
 	public void load() {
-			this.checkDatabaseConnection();
-			this.getMany();
+		this.checkDatabaseConnection();
+		this.scores = this.getMany();
 	}
 
 	/* ========================================= PostGreSQL Utils ====================================== */ /*=========================================*/
