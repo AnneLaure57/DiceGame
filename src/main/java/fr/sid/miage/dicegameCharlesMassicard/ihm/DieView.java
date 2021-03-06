@@ -30,9 +30,7 @@ public class DieView implements Initializable, PropertyChangeListener{
 	
 	/************************************************* FXML **************************************************/
 	
-	@FXML private ImageView dOne;
-	
-	@FXML private ImageView dTwo;
+	@FXML private ImageView dieFace;
 	
 	private Die die;
 	
@@ -48,15 +46,12 @@ public class DieView implements Initializable, PropertyChangeListener{
 	
 	public void propertyChange(PropertyChangeEvent evt) {
 		//TODO event with view
-		int faceValue1 = (int) evt.getNewValue();
-		int faceValue2 = (int) evt.getNewValue();
+		int faceValue = (int) evt.getNewValue();
 		
-		if(faceValue1 != 0 && faceValue2 != 0) {
-			dOne.setImage(new Image(getClass().getResource("/images/" + checkFaceValue(faceValue1) + ".png").toExternalForm()));
-			dTwo.setImage(new Image(getClass().getResource("/images/" + checkFaceValue(faceValue2) + ".png").toExternalForm()));
+		if(faceValue != 0) {
+			dieFace.setImage(new Image(getClass().getResource("/images/" + checkFaceValue(faceValue) + ".png").toExternalForm()));
 		} else {
-			dOne.setImage(null);
-			dTwo.setImage(null);
+			dieFace.setImage(null);
 		}
     }
 	
