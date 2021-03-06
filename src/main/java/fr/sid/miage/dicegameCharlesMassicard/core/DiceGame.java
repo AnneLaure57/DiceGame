@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.utils.TooMuchDiceThrowException;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.Context;
+import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieOneFirst;
+import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieTwoFirst;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollTwoDiceAtSameTime;
 
 /**
@@ -155,12 +157,50 @@ public class DiceGame {
 		}
 	}
 	
+	/**
+	 * TODO
+	 * 
+	 * @param playerName
+	 * 
+	 * @return
+	 */
 	public boolean changePlayerName(String playerName) {
 		try {
 			this.getPlayer().setName(playerName);
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'changePlayerName' from DiceGame class :");
+			LOG.severe(e.toString());
+			return false;
+		}
+	}
+	
+	/**
+	 * TODO
+	 * 
+	 * @param newStrategy
+	 * 
+	 * @return
+	 */
+	public boolean changeStrategy(String newStrategy) {
+		try {
+			switch (newStrategy) {
+			case "1":
+				this.setStrategyToUseToRollDice(new Context(new RollTwoDiceAtSameTime()));
+				break;
+			case "2":
+				this.setStrategyToUseToRollDice(new Context(new RollDieOneFirst()));
+				break;
+			case "3":
+				this.setStrategyToUseToRollDice(new Context(new RollDieTwoFirst()));
+				break;
+
+			default:
+				break;
+			}
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'changeStrategy' from DiceGame class :");
 			LOG.severe(e.toString());
 			return false;
 		}
@@ -217,6 +257,8 @@ public class DiceGame {
 	}
 	
 	/**
+	 *TODO
+	 * 
 	 * @return Return true if the player's score is saved, otherwise return false.
 	 */
 	public boolean savePlayerScore() {
