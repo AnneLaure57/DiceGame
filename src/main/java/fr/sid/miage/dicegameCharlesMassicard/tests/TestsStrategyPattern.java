@@ -46,6 +46,7 @@ public class TestsStrategyPattern {
 		
 		Context context = null;
 		
+		// Change the n value to choose the strategy to test :
 		int n = 1;
 		
 		switch (n) {
