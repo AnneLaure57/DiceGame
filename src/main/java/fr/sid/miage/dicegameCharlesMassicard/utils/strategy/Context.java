@@ -35,6 +35,7 @@ public class Context {
 	 * @param strategy The strategy to use to roll dice.
 	 */
 	public Context(RollStrategy strategy){
+		LOG.info("Create a context with the strategy : " + strategy.getClass().getName());
 		this.strategy = strategy;
 	}
 
