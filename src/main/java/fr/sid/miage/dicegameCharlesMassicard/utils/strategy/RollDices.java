@@ -38,7 +38,7 @@ public class RollDices implements RollStrategy{
 	@Override
 	public boolean rollDices(Die die1, Die die2) {
 		try {
-			// Roll the dice.
+			// Roll two dice at the same time.
 			die1.roll();
 			die2.roll();
 			return true;
