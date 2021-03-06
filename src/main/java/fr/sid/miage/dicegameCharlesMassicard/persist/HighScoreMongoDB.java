@@ -256,7 +256,9 @@ public class HighScoreMongoDB implements HighScore {
 	    	MongoCursor<Document> cursor = collection.find().iterator();
 	    	try {
 	    	    while (cursor.hasNext()) {
-	    	        System.out.println(cursor.next().toJson());
+//	    	        System.out.println(cursor.next().toJson());
+	    	    	Document entry = cursor.next();
+	    	        scores.add(new Entry(entry.getString("name"), entry.getInteger("score")));
 	    	    }
 	    	} finally {
 	    	    cursor.close();
