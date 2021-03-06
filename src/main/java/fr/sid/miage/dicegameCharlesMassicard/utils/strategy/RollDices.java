@@ -1,6 +1,5 @@
 package fr.sid.miage.dicegameCharlesMassicard.utils.strategy;
 
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Die;
