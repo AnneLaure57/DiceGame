@@ -72,11 +72,11 @@ public class PlayerView implements PropertyChangeListener, Initializable{
 		case "Score Joueur":
 			int score = (int) evt.getNewValue();
 			//TODO
-			//if(firstDieScore == 0){
+			//if(firstDieScore != 0){
 			//	actualiseScore(firstDieScore + score);
 			//	firstDieScore = 0;
 			//} else {
-			//	firstDieScore = score
+			//	firstDieScore = score;
 			//}
 			break;
 		default :

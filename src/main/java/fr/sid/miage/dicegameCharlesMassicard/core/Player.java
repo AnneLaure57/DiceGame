@@ -109,7 +109,9 @@ public class Player {
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
+		//Do nothing if this.name=name before
 		supportPlayer.firePropertyChange("Nom joueur", this.name, name);
+		//change after
 		this.name = name;
 	}
 	
@@ -124,8 +126,10 @@ public class Player {
 	 * @param score the score to set
 	 */
 	public void setScore(int score) {
-		this.score = score;
+		//Do nothing if this.score=score before
 		supportPlayer.firePropertyChange("Score Joueur", this.score, score);
+		//change after
+		this.score = score;
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/
