@@ -1,6 +1,7 @@
 package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,7 +40,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class RollForm implements Initializable {
+public class RollForm implements PropertyChangeListener, Initializable {
 	
 	private static final Logger LOG = Logger.getLogger(RollForm.class.getName());
 	
@@ -54,16 +55,46 @@ public class RollForm implements Initializable {
 	
 	@FXML private SplitPane boardDiceGameAnchor;
 	
-	public PlayerView pl = new PlayerView();
+	@FXML private Label turnNumber;
+	
+	@FXML private Label scoreDie1;
+	
+	@FXML private Label scoreDie2;
+	
+	@FXML private Label scoreTurn;
+	
+	@FXML private Label scorePreviousTurn;
+	
+	@FXML private Label scorePlayer;
+
+	private DiceGame diceGame;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		this.diceGame = DiceGame.getInstance();
+		this.diceGame.getDie1().addPropertyChangeListener(this);
+		this.diceGame.getDie2().addPropertyChangeListener(this);
+		actualiseInformationsGame(0);
+		actualiseScorePlayer(0);
 	}
 	
 	public void propertyChange(PropertyChangeEvent evt) {
 		System.out.println("change detected");
     }
+	
+	/* ========================================= Initialisation ================================ */
+	
+	private void actualiseInformationsGame(int score) {
+		turnNumber.setText(Integer.toString(score));
+		scoreDie1.setText(Integer.toString(score));
+		scoreDie2.setText(Integer.toString(score));
+	}
+	
+	private void actualiseScorePlayer(int score) {
+		scoreTurn.setText(Integer.toString(score));
+		scorePreviousTurn.setText(Integer.toString(score));
+		scorePlayer.setText(Integer.toString(score));
+	}
 	
 	/* ========================================= Display Best Score ================================ */
 	
@@ -73,14 +104,32 @@ public class RollForm implements Initializable {
 	
 	@FXML
     private void roll() {
-		/*try {
-		  if (!nickName.equals("Label") || nickName != null) {
-			  
+		try {
+		  if (diceGame.getPlayer().getName() != null) {
+			  System.out.println("C'est OK");
+			  diceGame.setThrowNumber(1);
+		  } else {
+			  System.out.println("C'est pas OK");
 		  }
     	} catch (Exception e) {
     		LOG.severe("Erreur de saisie : "+ e.getMessage());
     		e.printStackTrace();
-    	}*/
+    	}
+    }
+	
+	@FXML
+    private void cancel() {
+		try {
+			DiceGame diceGame = DiceGame.getInstance();
+		  if (diceGame.getPlayer().getName() != null) {
+			  System.out.println("C'est OK");
+		  } else {
+			  System.out.println("C'est pas OK");
+		  }
+    	} catch (Exception e) {
+    		LOG.severe("Erreur de saisie : "+ e.getMessage());
+    		e.printStackTrace();
+    	}
     }
 	
 	/* ========================================= Cancel Roll ============================================== */

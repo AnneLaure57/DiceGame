@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import antlr.debug.Event;
+import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
 import fr.sid.miage.dicegameCharlesMassicard.core.Die;
 import fr.sid.miage.dicegameCharlesMassicard.core.Player;
 import javafx.fxml.FXML;
@@ -33,37 +34,13 @@ public class DieView implements Initializable, PropertyChangeListener{
 	
 	@FXML private ImageView dTwo;
 	
-	@FXML private Label turnNumber;
-	
-	@FXML private Label scoreDie1;
-	
-	@FXML private Label scoreDie2;
-	
-	@FXML private Label scoreTurn;
-	
-	@FXML private Label scorePreviousTurn;
-	
-	@FXML private Label scorePlayer;
-	
 	private Die die;
 	
+	private DiceGame dicegame;
+	
 	public void initialize(URL location, ResourceBundle resources) {
-		actualiseInformationsGame(0);
-		actualiseScorePlayer(0);
 	}
 	
-	private void actualiseInformationsGame(int score) {
-		turnNumber.setText(Integer.toString(score));
-		scoreDie1.setText(Integer.toString(score));
-		scoreDie2.setText(Integer.toString(score));
-	}
-	
-	private void actualiseScorePlayer(int score) {
-		scoreTurn.setText(Integer.toString(score));
-		scorePreviousTurn.setText(Integer.toString(score));
-		scorePlayer.setText(Integer.toString(score));
-	}
-
 	public void setDie(Die die) {
 		this.die = die;
 		this.die.addPropertyChangeListener(this);

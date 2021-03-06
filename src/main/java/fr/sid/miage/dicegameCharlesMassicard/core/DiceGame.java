@@ -1,5 +1,6 @@
 package fr.sid.miage.dicegameCharlesMassicard.core;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.logging.Logger;
 
@@ -89,6 +90,21 @@ public class DiceGame {
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
+	
+	/**
+	 * Observable
+	 */
+	private PropertyChangeSupport supportDiceGame;
+	
+	/**
+	 * Observable
+	 * 
+	 */
+	
+	public void addPropertyChangeListener(PropertyChangeListener pcl) {
+		System.out.println("add PropertyChangeListener : " + pcl.getClass().toString());
+		supportDiceGame.addPropertyChangeListener("Tour partie", pcl);
+    }
 	
 	/**
 	 * Method getInstance : return the instance of the current Concrete Product or create it.
@@ -255,6 +271,8 @@ public class DiceGame {
 	 * @param throwNumber the throwNumber to set
 	 */
 	public void setThrowNumber(int throwNumber) {
+		//Do nothing if this.throwNumber=throwNumber before
+		//supportDiceGame.firePropertyChange("Tour partie", this.throwNumber, throwNumber);
 		this.throwNumber = throwNumber;
 	}
 
