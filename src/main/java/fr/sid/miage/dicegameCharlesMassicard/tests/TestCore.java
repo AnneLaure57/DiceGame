@@ -9,7 +9,7 @@ import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
  * @since %G% - %U% (%I%)
  *
  *
- * Class to test backend : HighScoreXML.
+ * Class to test backend : simulate a game of DiceGame.
  */
 public class TestCore {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -27,7 +27,7 @@ public class TestCore {
 	/**	
 	 * Main function : run the test.
 	 * 	
-	 * @param args Arguments passed to application's Jar (here, not used).	
+	 * @param args Arguments passed to application's Jar (here, not used).
 	 */
 	public static void main(String[] args) {
 		// On lance le jeu
@@ -42,7 +42,7 @@ public class TestCore {
 		// On regarde l'initialisation des variables liées au jeu
 		System.out.println("Player : " + theGame.getPlayer().getName());
 		System.out.println("Throw Number : " + theGame.getThrowNumber());
-		System.out.println("Player Points : " + theGame.getPlayerPoints());
+		System.out.println("Player Points : " + theGame.getPlayer().getScore());
 		
 		for (int i = 0; i < 12; i++) {
 			// On jette les dés
@@ -52,7 +52,7 @@ public class TestCore {
 			System.out.println("------------------------------------------");
 			System.out.println("Player : " + theGame.getPlayer().getName());
 			System.out.println("Throw Number : " + theGame.getThrowNumber());
-			System.out.println("Player Points : " + theGame.getPlayerPoints());
+			System.out.println("Player Points : " + theGame.getPlayer().getScore());
 		}
 	}
 }

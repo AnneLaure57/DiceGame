@@ -135,7 +135,7 @@ public class HighScorePostGreSQL implements HighScore {
 	public void load() {
 		this.checkDatabaseConnection();
 		this.createTableIfNotExists();
-		this.getMany();
+		this.scores = this.getMany();
 	}
 
 	/* ========================================= PostGreSQL Utils ====================================== */ /*=========================================*/
@@ -351,18 +351,25 @@ public class HighScorePostGreSQL implements HighScore {
 	    	resultSet = statement.executeQuery("SELECT * FROM " + TABLE_NAME + ";");
 	    	
 	    	while (resultSet.next()) {
-	    		int ID = resultSet.getInt("id");
 	            String  name = resultSet.getString("name");
 	            int score  = resultSet.getInt("score");
-	            System.out.println( TABLE_FIELD_ID + " = " + ID );
-	            System.out.println( TABLE_FIELD_NAME + " = " + name );
-	            System.out.println( TABLE_FIELD_SCORE + " = " + score );
-	            System.out.println();
+	            
+	            scores.add(new Entry(name, score));
+	            
+	         // Uncomment if you want to log more informations:
+//	    		int ID = resultSet.getInt("id");
+	            
+//	            System.out.println( TABLE_FIELD_ID + " = " + ID );
+//	            System.out.println( TABLE_FIELD_NAME + " = " + name );
+//	            System.out.println( TABLE_FIELD_SCORE + " = " + score );
+//	            System.out.println();
 	        }
 	    		    	
 	        resultSet.close();
 	        statement.close();
 	        connection.close();
+	        
+	        LOG.info("PostGreSQL : the list of Entry is loaded.");
 	    	
 	    } catch (Exception error) {
 	    	error.printStackTrace();

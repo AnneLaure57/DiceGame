@@ -30,6 +30,8 @@ public class Player {
 	/**
 	 * The player's score.
 	 * The score is initialized at 0.
+	 * So start game with 0 point.
+	 * Add 10 points when the sum of dices is equal to 7.
 	 */
 	private int score;
 	
