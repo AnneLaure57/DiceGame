@@ -10,23 +10,49 @@ import fr.sid.miage.dicegameCharlesMassicard.core.Die;
  * @version 
  * @since %G% - %U% (%I%)
  *
+ * Context used to choose a strategy to use to roll dice.
  */
-
 public class Context {
-	
+	/* ========================================= Global ================================================ */ /*=========================================*/
+
 	/**
 	 * Logger for this class : RollDices.
 	 */
-	private static final Logger LOG = Logger.getLogger(RollDices.class.getName());
-	
+	private static final Logger LOG = Logger.getLogger(Context.class.getName());
+
+	/* ========================================= Attributs ============================================= */ /*=========================================*/
+
+	/**
+	 * The strategy to use to roll dice.
+	 */
 	private RollStrategy strategy;
 
-   public Context(RollStrategy strategy){
-      this.strategy = strategy;
-   }
+	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
-   public boolean executeStrategy(Die die1, Die die2){
-      return strategy.rollDices(die1, die2);
-   }
+	/**
+	 * Create a context using a strategy to use to roll dice.
+	 * 
+	 * @param strategy The strategy to use to roll dice.
+	 */
+	public Context(RollStrategy strategy){
+		this.strategy = strategy;
+	}
 
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
+
+	/**
+	 * Method executeStrategy : roll dice using the chooed strategy.
+	 * 
+	 * @param die1 The first die used for the Dice Game.
+	 * @param die2 The second die used for the Dice Game.
+	 * 
+	 * @return Return true if you succed to roll dice, otherwise return false.
+	 */
+	public boolean executeStrategy(Die die1, Die die2){
+		return strategy.rollDices(die1, die2);
+	}
+
+	/* ========================================= Accesseurs ============================================ */ /*=========================================*/
+
+	/* ========================================= Main ================================================== */ /*=========================================*/
 }
