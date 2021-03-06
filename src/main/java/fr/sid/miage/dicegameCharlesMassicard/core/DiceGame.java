@@ -5,6 +5,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.utils.TooMuchDiceThrowException;
+import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.Context;
 
 /**
  * @author Anne-Laure CHARLES
@@ -75,7 +76,7 @@ public class DiceGame {
 	 * Example : Die one rolls first, then Die two rolls some seconds after dice one.
 	 * Other example : Two dice roll together at the same time.
 	 */
-	private String strategyToUseToRollDice;
+	private Context strategyToUseToRollDice;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
@@ -295,14 +296,14 @@ public class DiceGame {
 	/**
 	 * @return the strategyToUseToRollDice
 	 */
-	public String getStrategyToUseToRollDice() {
+	public Context getStrategyToUseToRollDice() {
 		return strategyToUseToRollDice;
 	}
 
 	/**
 	 * @param strategyToUseToRollDice the strategyToUseToRollDice to set
 	 */
-	public void setStrategyToUseToRollDice(String strategyToUseToRollDice) {
+	public void setStrategyToUseToRollDice(Context strategyToUseToRollDice) {
 		this.strategyToUseToRollDice = strategyToUseToRollDice;
 	}
 	
