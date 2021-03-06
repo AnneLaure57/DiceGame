@@ -10,7 +10,8 @@ import fr.sid.miage.dicegameCharlesMassicard.core.Die;
  * @author Louis MASSICARD (user name : louis)
  * @version 
  * @since %G% - %U% (%I%)
- *
+ * 
+ * The strategy to use to roll dice : Die one rolls first, then Die two rolls some seconds after dice one.
  */
 public class RollDieOneFirst implements RollStrategy {
 	/* ========================================= Global ================================================ */ /*=========================================*/
