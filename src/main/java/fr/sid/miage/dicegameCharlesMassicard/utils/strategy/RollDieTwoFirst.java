@@ -29,7 +29,7 @@ public class RollDieTwoFirst implements RollStrategy {
 	
 	/**
 	 * Method rollDices : roll dice using a specific strategy.
-	 * Die one rolls first, then Die two rolls 3 seconds after dice one.
+	 * Die one rolls first, then Die two rolls some seconds after dice one.
 	 * 
 	 * @param die1 The first die used for the Dice Game.
 	 * @param die2 The second die used for the Dice Game.
@@ -43,7 +43,7 @@ public class RollDieTwoFirst implements RollStrategy {
 			die2.roll();
 			LOG.severe("value of Die 2 : " + die2.getFaceValue());
 			
-			// Pause during 3 seconds 
+			// Pause during some seconds 
 			TimeUnit.SECONDS.sleep(3);
 			
 			//set Die One value
