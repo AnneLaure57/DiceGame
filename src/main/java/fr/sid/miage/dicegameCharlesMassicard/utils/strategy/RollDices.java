@@ -28,7 +28,7 @@ public class RollDices implements RollStrategy{
 	
 	/**
 	 * Method rollDices : roll dice using a specific strategy.
-	 * Die one rolls first, then Die two rolls 3 seconds after dice one.
+	 * Roll two dice at the same time.
 	 * 
 	 * @param die1 The first die used for the Dice Game.
 	 * @param die2 The second die used for the Dice Game.
