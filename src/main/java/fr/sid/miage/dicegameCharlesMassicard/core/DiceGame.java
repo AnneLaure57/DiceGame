@@ -40,7 +40,7 @@ public class DiceGame {
 	 * Number of points to add when the sum of dice's face value allow to win.
 	 */
 	private static final int POINTS_TO_ADD_WHEN_WIN = 10;
-	
+		
 	/**
 	 * TODO javadoc
 	 */
@@ -69,6 +69,8 @@ public class DiceGame {
 	 * Max value 10.
 	 */
 	private int throwNumber;
+	
+	private String strategyToUseToRollDice;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
@@ -159,7 +161,7 @@ public class DiceGame {
 			}
 			this.throwNumber++;
 			
-			// TODO : Momento & Strategy
+			// TODO : Momento
 			
 			//TODO discuss with Louis For Strategy
 			//How call the right strat ? With number ? Boolean ? in params ?
@@ -283,6 +285,20 @@ public class DiceGame {
 	 */
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	/**
+	 * @return the strategyToUseToRollDice
+	 */
+	public String getStrategyToUseToRollDice() {
+		return strategyToUseToRollDice;
+	}
+
+	/**
+	 * @param strategyToUseToRollDice the strategyToUseToRollDice to set
+	 */
+	public void setStrategyToUseToRollDice(String strategyToUseToRollDice) {
+		this.strategyToUseToRollDice = strategyToUseToRollDice;
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/
