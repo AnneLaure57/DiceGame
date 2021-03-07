@@ -194,12 +194,15 @@ public class DiceGame {
 			// TODO
 			switch (newStrategy) {
 			case "1":
+				LOG.info("Now, you use this strategy : " + RollTwoDiceAtSameTime.class.getName());
 				this.setStrategyToUseToRollDice(new Context(new RollTwoDiceAtSameTime()));
 				break;
 			case "2":
+				LOG.info("Now, you use this strategy : " + RollDieOneFirst.class.getName());
 				this.setStrategyToUseToRollDice(new Context(new RollDieOneFirst()));
 				break;
 			case "3":
+				LOG.info("Now, you use this strategy : " + RollDieTwoFirst.class.getName());
 				this.setStrategyToUseToRollDice(new Context(new RollDieTwoFirst()));
 				break;
 			default:

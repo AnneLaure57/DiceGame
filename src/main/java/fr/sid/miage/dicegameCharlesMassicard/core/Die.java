@@ -44,7 +44,6 @@ public class Die {
 		LOG.info("An Die has just been created.");
 		this.supportDie = new PropertyChangeSupport(this);
 		this.setFaceValue(Randomizer.getInstance().getValue(5) + 1);
-		//this.setFaceValue(1);
 	}
 
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -66,7 +65,7 @@ public class Die {
 	 */
 	public boolean roll() {
 		try {
-			this.setFaceValue(Randomizer.getInstance().getValue(6));
+			this.setFaceValue(Randomizer.getInstance().getValue(5) + 1);
 			LOG.info("The die rolls, new face value is : " + getFaceValue());
 			return true;
 		} catch (Exception e) {
