@@ -178,6 +178,10 @@ public class DiceGame {
 	/**
 	 * TODO
 	 * 
+	 * How call the right strat ? With number ? Boolean ? in params ?
+	 * From front -> RadioButtons ? MenuItem ?
+	 * put switch case ? conditions if/else ?
+	 * 
 	 * @param newStrategy
 	 * 
 	 * @return
@@ -221,25 +225,8 @@ public class DiceGame {
 			
 			// TODO : Momento
 			
-			//TODO discuss with Louis For Strategy
-			//How call the right strat ? With number ? Boolean ? in params ?
-			// From front -> RadioButtons ? MenuItem ?
-			// put switch case ? conditions if/else ?
-			
-//			Context context = null;
-//			context = new Context(new RollDices());
-//			context.executeStrategy(die1, die2)
-//			
-//			context = new Context(new rollDieOneFirst());
-//			context.executeStrategy(die1, die2)
-//			
-//			context = new Context(new rollDieTwoFirst());
-//			context.executeStrategy(die1, die2)
-			
 			// Roll the dice.
 			this.getStrategyToUseToRollDice().executeStrategy(die1, die2);
-//			die1.roll();
-//			die2.roll();
 			
 			// If the player wins (The sum of the dice's face value for which the player win some points)
 			// then increase the player's score.
