@@ -17,35 +17,25 @@
                   <SplitPane dividerPositions="0.15724381625441697" orientation="VERTICAL" prefHeight="568.0" prefWidth="769.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                           <children>
-                              <fx:include source="PlayerView.fxml" AnchorPane.bottomAnchor="483.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                        </AnchorPane>
+                          <children>
+                             <fx:include source="PlayerView.fxml" AnchorPane.bottomAnchor="483.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                      </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="767.0">
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="380.0" prefHeight="86.0" prefWidth="756.0">
                                  <children>
-                                    <Button layoutX="418.0" layoutY="12.0" mnemonicParsing="false" fx:id="undoButton" onAction="#cancel" prefHeight="63.0" prefWidth="210.0" text="Annuler" />
-                                    <Button layoutX="79.0" layoutY="12.0" mnemonicParsing="false" fx:id="throwButton" onAction="#roll" prefHeight="63.0" prefWidth="210.0" text="Lancer" />
+                                    <Button fx:id="undoButton" layoutX="418.0" layoutY="12.0" mnemonicParsing="false" onAction="#cancel" prefHeight="63.0" prefWidth="210.0" text="Annuler" />
+                                    <Button fx:id="throwButton" layoutX="79.0" layoutY="12.0" mnemonicParsing="false" onAction="#roll" prefHeight="63.0" prefWidth="210.0" text="Lancer" />
                                  </children>
                               </AnchorPane>
                               <Separator layoutX="1.0" layoutY="379.0" prefHeight="4.0" prefWidth="769.0" />
-                              <AnchorPane id="boardGameAnchor" fx:id="boardGame" layoutX="196.0" layoutY="47.0" prefHeight="279.0" prefWidth="571.0">
-                                 <children>
-                                 	<Label layoutX="135.0" layoutY="17.0" styleClass="bg-white-style" text="Dé 1 :" />
-            						<Label layoutX="367.0" layoutY="17.0" styleClass="bg-white-style" text="Dé 2 :" />
-                                    <AnchorPane layoutX="84.0" layoutY="81.0" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
-                                       <children>
-                                          <fx:include source="DieView.fxml" />
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane layoutX="316.0" layoutY="81.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
-                                       <children>
-                                          <fx:include source="DieView.fxml" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
+                              <AnchorPane layoutX="199.0" layoutY="46.0" prefHeight="317.0" prefWidth="571.0">
+                              	<children>
+                              		<fx:include source="DieView.fxml" />
+                              	</children>
                               </AnchorPane>
+                              
                               <Label layoutX="23.0" layoutY="46.0" text="N° du tour :" />
       						  <Label fx:id="turnNumber" layoutX="134.0" layoutY="46.0" text="Label" />
                               <Label layoutX="22.0" layoutY="96.0" text="Score Dé 1 :" />

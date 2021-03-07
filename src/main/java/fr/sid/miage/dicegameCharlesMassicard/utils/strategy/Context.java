@@ -20,7 +20,7 @@ public class Context {
 	 */
 	private static final Logger LOG = Logger.getLogger(Context.class.getName());
 	
-	public static final int NB_SEC_BEFORE_ANOTHER_DIE_THROW = 3;
+	public static final int NB_SEC_BEFORE_ANOTHER_DIE_THROW = 1;
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
