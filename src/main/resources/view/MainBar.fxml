@@ -26,9 +26,9 @@
           <Menu fx:id="parameters" mnemonicParsing="false" text="Paramètres">
             <items>
               <MenuItem fx:id="saveXML" mnemonicParsing="false" text="XML" />
-                  <MenuItem fx:id="saveMySQL" mnemonicParsing="false" text="MySQL" />
-                  <MenuItem fx:id="saveMongo" mnemonicParsing="false" text="Mongo" />
-                  <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#closeRollForm" text="Quitter" />
+              <MenuItem fx:id="saveMySQL" mnemonicParsing="false" text="MySQL" />
+              <MenuItem fx:id="saveMongo" mnemonicParsing="false" text="Mongo" />
+              <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#closeRollForm" text="Quitter" />
             </items>
           </Menu>
             <Menu fx:id="help" mnemonicParsing="false" text="Aide">
