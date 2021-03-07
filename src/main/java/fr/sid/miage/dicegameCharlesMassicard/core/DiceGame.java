@@ -217,7 +217,6 @@ public class DiceGame {
 			if (this.getThrowNumber() >= MAX_NUMBER_OF_THROWS) {
 				throw new TooMuchDiceThrowException("You exceed the maximum throw number for this game. You already throw dice " + this.throwNumber + " times.");
 			}
-//			this.throwNumber++;
 			this.setThrowNumber(this.getThrowNumber() + 1);
 			
 			// TODO : Momento
