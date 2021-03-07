@@ -201,7 +201,6 @@ public class DiceGame {
 			case "3":
 				this.setStrategyToUseToRollDice(new Context(new RollDieTwoFirst()));
 				break;
-
 			default:
 				break;
 			}
