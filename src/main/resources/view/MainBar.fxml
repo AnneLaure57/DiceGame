@@ -16,25 +16,29 @@
                   <MenuItem fx:id="keepPseudo" mnemonicParsing="false" text="Garder Pseudo" />
                </items>
             </Menu>
-            <Menu fx:id="mainStrategies" mnemonicParsing="false" onAction="#changeStrategy" text="Stratégies">
+            <Menu fx:id="mainStrategies" mnemonicParsing="false" onAction="#changeStrategy" text="Choisir stratégie">
                <items>
                   <CheckMenuItem fx:id="strategyOne" mnemonicParsing="false" text="Stratégie 1 : Lancer les deux dés" />
                   <CheckMenuItem fx:id="strategyTwo" mnemonicParsing="false" text="Stratégie 2 : Lancer dé 1 avant dé 2" />
                   <CheckMenuItem fx:id="strategyThree" mnemonicParsing="false" text="Stratégie 3 : Lancer dé 2 avant dé 1" />
                </items>
             </Menu>
-          <Menu fx:id="parameters" mnemonicParsing="false" text="Paramètres">
-            <items>
-              <MenuItem fx:id="saveXML" mnemonicParsing="false" text="XML" />
-                  <MenuItem fx:id="saveMySQL" mnemonicParsing="false" text="MySQL" />
-                  <MenuItem fx:id="saveMongo" mnemonicParsing="false" text="Mongo" />
-                  <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#closeRollForm" text="Quitter" />
-            </items>
+          <Menu fx:id="parameters" mnemonicParsing="false" text="Choisir sauvegarde">
+               <items>
+                  <CheckMenuItem mnemonicParsing="false" text="XML" fx:id="xmlCheckItem" />
+                  <CheckMenuItem fx:id="mongoCheckItem" mnemonicParsing="false" text="Mongo" />
+                  <CheckMenuItem fx:id="posgresCheckItem" mnemonicParsing="false" text="PostgreSQL" />
+               </items>
           </Menu>
             <Menu fx:id="help" mnemonicParsing="false" text="Aide">
                <items>
                   <CheckMenuItem fx:id="rules" mnemonicParsing="false" onAction="#displayRules" text="Règles" />
                </items></Menu>
+            <Menu mnemonicParsing="false" text="Quitter">
+               <items>
+                  <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#closeRollForm" text="Quitter" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>
