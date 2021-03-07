@@ -158,6 +158,15 @@ public class MainView implements Initializable {
     	}
     }
 	
+	/**
+	 * Method validInput : to check if a player's name is OK :
+	 *  - not null
+	 *  - not blank 
+	 * 
+	 * @param nickName The player's name to check.
+	 * 
+	 * @return Return true if the player's name is OK, otherwise return false.
+	 */
 	public boolean validInput(String nickName){
 //		if (addNickName.getText() == null || addNickName.getText().trim().isEmpty()) {
 //			return false;
