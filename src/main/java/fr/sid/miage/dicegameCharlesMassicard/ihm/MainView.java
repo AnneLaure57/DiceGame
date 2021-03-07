@@ -222,28 +222,34 @@ public class MainView implements Initializable {
 	@FXML 
 	private void changeStrategy() {
 		try {
-			// TODO Appeler la bonne strat dans le back
-			strategyOne.setOnAction(event -> {
+    		// Get the Dice Game instance
+    		DiceGame dicegame = DiceGame.getInstance();
+    		
+    		// Set the clicked strategy
+			strategyOne.setOnAction(event -> { // Strategy 1
 				if (strategyOne.isSelected()) {
 					LOG.info("L'utilisateur a choisi la stratégie 1.");
+					dicegame.changeStrategy("1");
 					strategyTwo.setSelected(false);
 					strategyThree.setSelected(false);
 				} else {
 					strategyOne.setSelected(true);
 				}
 			});
-			strategyTwo.setOnAction(event -> {
+			strategyTwo.setOnAction(event -> { // Strategy 2
 				if (strategyTwo.isSelected()) {
 					LOG.info("L'utilisateur a choisi la stratégie 2.");
+					dicegame.changeStrategy("2");
 					strategyOne.setSelected(false);
 					strategyThree.setSelected(false);
 				} else {
 					strategyTwo.setSelected(true);
 				}
 			});
-			strategyThree.setOnAction(event -> {
+			strategyThree.setOnAction(event -> { // Strategy 3
 				if (strategyThree.isSelected())	{
 					LOG.info("L'utilisateur a choisi la stratégie 3.");
+					dicegame.changeStrategy("3");
 					strategyTwo.setSelected(false);
 					strategyOne.setSelected(false);
 				} else {
