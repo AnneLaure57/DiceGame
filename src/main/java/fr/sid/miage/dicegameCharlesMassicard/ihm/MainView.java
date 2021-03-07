@@ -143,7 +143,7 @@ public class MainView implements Initializable {
 	    		errorMessage.setText("Veuillez saisir un pseudo !");
 	    		errorMessage.setTextFill(Color.RED);
 	    	} else {
-	    		String nickNameFound = addNickName.getText();
+	    		String nickNameFound = addNickName.getText().trim();
 	    		
 	    		formNickName.setVisible(false);
 	    		rollForm.setVisible(true);
@@ -160,11 +160,11 @@ public class MainView implements Initializable {
 	
 	public boolean validInput(String nickName){
 //		if (addNickName.getText() == null || addNickName.getText().trim().isEmpty()) {
-		if (nickName == null || nickName.trim().isEmpty()) {
-			return false;
-		} else {
-			return true;
-		}
+//			return false;
+//		} else {
+//			return true;
+//		}
+		return ! (nickName == null || nickName.trim().isEmpty());
     }
 	
 	/* ========================================= PropertyChange ============================================== */
@@ -337,10 +337,12 @@ public class MainView implements Initializable {
     		} else if (option.get() == annuler) {
     			LOG.info("L'utilisateur a annulé lors de la demande de changement de pseudo.");
     		} else if (option.get() == valider) {
-    			LOG.info("L'utilisateur modifié son pseudo.");
-    			LOG.info("Acien pseudo : " + dicegame.getPlayer().getName());
-    			dicegame.changePlayerName( textArea.getText() );
-    			LOG.info("Nouveau pseudo : " + dicegame.getPlayer().getName());
+    			if (this.validInput(textArea.getText())) {
+    				LOG.info("L'utilisateur modifié son pseudo.");
+    				LOG.info("Acien pseudo : " + dicegame.getPlayer().getName());
+    				dicegame.changePlayerName( textArea.getText().trim() );
+    				LOG.info("Nouveau pseudo : " + dicegame.getPlayer().getName());
+				}
     		} else {
     			LOG.info("Aucune action n'a été réalisée lors de la demande de changement de pseudo.");
     		}
