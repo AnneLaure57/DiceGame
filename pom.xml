@@ -72,12 +72,6 @@
 	    <artifactId>mongo-java-driver</artifactId>
 	    <version>3.4.1</version>
 	</dependency>
-	<!-- MySQL -->
-	<dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
-	    <version>8.0.19</version>
-	</dependency>
 	<!-- JAVAFX  -->
     <dependency>
         <groupId>org.openjfx</groupId>
