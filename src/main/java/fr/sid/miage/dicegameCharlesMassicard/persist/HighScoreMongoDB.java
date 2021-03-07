@@ -132,13 +132,8 @@ public class HighScoreMongoDB implements HighScore {
 	/* ========================================= PostGreSQL Utils ====================================== */ /*=========================================*/
 	
 	/**
-	 * Method checkDatabaseConnection : to check the connection between the Java application DiceGame to the associated PostGreSQL database.
+	 * Method checkDatabaseConnection : to check the connection between the Java application DiceGame to the associated MongoDB database.
 	 * 
-	 * If you have a running PostGreSQL server, then run this command : sudo pkill -u postgres
-	 * 
-	 * Use PostGreSQL Docker : 
-	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
-	 *  * otherwise : docker start postgres
 	 */
 	private void checkDatabaseConnection () {
 		LOG.info("Check connection to database : " + DATABASE_URL);
