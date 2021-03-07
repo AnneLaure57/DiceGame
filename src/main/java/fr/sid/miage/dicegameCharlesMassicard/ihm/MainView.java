@@ -103,7 +103,7 @@ public class MainView implements Initializable {
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 
-	/* ========================================= Initialize ============================================== */ /*=========================================*/
+	/* ========================================= Initialize ============================================ */
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -122,6 +122,12 @@ public class MainView implements Initializable {
 			rules.setSelected(true);
 			rules.setOnAction(e -> displayRules());
 		}
+	}
+
+	/* ========================================= Property Change ============================================== */
+	
+	public void propertyChange(PropertyChangeEvent evt) {
+		
 	}
 	
 	/* ========================================= Start Game ============================================== */
@@ -174,12 +180,6 @@ public class MainView implements Initializable {
 //			return true;
 //		}
 		return ! (nickName == null || nickName.trim().isEmpty());
-    }
-	
-	/* ========================================= PropertyChange ============================================== */
-	
-	public void propertyChange(PropertyChangeEvent evt) {
-		
     }
 	
 	/* ========================================= Main ============================================== */

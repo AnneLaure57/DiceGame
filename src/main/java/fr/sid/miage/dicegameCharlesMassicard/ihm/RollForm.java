@@ -23,21 +23,36 @@ import javafx.scene.layout.AnchorPane;
  * @since %G% - %U% (%I%)
  *
  */
-
 public class RollForm implements PropertyChangeListener, Initializable {
+	/* ========================================= Global ================================================ */ /*=========================================*/
 	
+	/**
+	 * Logger for this class : RollForm.
+	 */
 	private static final Logger LOG = Logger.getLogger(RollForm.class.getName());
 	
-	public String nickNameFound;
-
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 	
+	/**
+	 * The player's name. 
+	 */
+	public String nickNameFound;
+
+	// TODO : a garder ?
+	private DiceGame diceGame;
+
+	/* ========================================= Vues ================================================== */ /*=========================================*/
+
 	@FXML
 	private Parent root ;
 	
 	@FXML private AnchorPane content;
-	
+
 	@FXML private SplitPane boardDiceGameAnchor;
+
+	/* ========================================= Composants ================================================ */ /*=========================================*/
+
+	/* ========================================= Labels */
 	
 	@FXML private Label turnNumber;
 	
@@ -51,8 +66,12 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	
 	@FXML private Label scorePlayer;
 
-	private DiceGame diceGame;
+	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 	
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
+
+	/* ========================================= Initialize ============================================ */
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.diceGame = DiceGame.getInstance();
@@ -62,6 +81,8 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		actualiseInformationsGame(0);
 		actualiseScore(0);
 	}
+	
+	/* ========================================= Property Change ============================================== */
 	
 	public void propertyChange(PropertyChangeEvent evt) {
 		System.out.println("change detected");
