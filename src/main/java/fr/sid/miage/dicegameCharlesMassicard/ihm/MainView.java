@@ -36,18 +36,30 @@ import javafx.stage.Stage;
  * @since %G% - %U% (%I%)
  *
  */
-
 public class MainView implements Initializable {
+	/* ========================================= Global ================================================ */ /*=========================================*/
 	
+	/**
+	 * Logger for this class : MainView.
+	 */
 	private static final Logger LOG = Logger.getLogger(MainView.class.getName());
+
+	/* ========================================= Attributs ============================================= */ /*=========================================*/
 	
-	@FXML private Parent root ;
+	/* ========================================= Vues ================================================ */ /*=========================================*/
+
+	@FXML 
+	private Parent root ;
 	
 	@FXML
 	private AnchorPane formNickName;
 	
 	@FXML
 	private AnchorPane rollForm;
+
+	/* ========================================= Composants ================================================ */ /*=========================================*/
+	
+	/* ========================================= Menus & Check Menu Items */
 	
 	@FXML private MenuBar mainItems;
 	
@@ -58,23 +70,35 @@ public class MainView implements Initializable {
 	@FXML private CheckMenuItem strategyTwo;
 	
 	@FXML private CheckMenuItem strategyThree;
-	
-	@FXML private Label displayNameStrategy;
-	
+		
 	@FXML private Menu help;
 	
-	@FXML private CheckMenuItem rules;
+	@FXML private CheckMenuItem rules; // TODO check ?
 	
-	@FXML private MenuItem quit;
+	@FXML private MenuItem quit; // TODO Change the place
+	
+	/* ========================================= Buttons */
 	
 	@FXML private Button quitRules;
 	
-	@FXML private TextField addNickName;
-	
-	@FXML private Label errorMessage;
-	
 	@FXML private Button start;
 
+	/* ========================================= Text Fileds */
+
+	@FXML private TextField addNickName;
+	
+	/* ========================================= Labels */
+
+	@FXML private Label displayNameStrategy;
+
+	@FXML private Label errorMessage;
+	
+	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
+	
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
+
+	/* ========================================= Initialize ============================================== */ /*=========================================*/
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -102,31 +126,36 @@ public class MainView implements Initializable {
 	
 	/* ========================================= Main ============================================== */
 	
-	/*
-	 * Click on X on the Windows
+	/**
+	 * Method closeRollForm : Paramètres > Quitter.
+	 * 
+	 * @param event Event incoming : want click on X button to close the window. 
 	 */
-	
 	@FXML
     private void closeRollForm(ActionEvent event) {
 		try {
 			//TODO check if a party is in progress
     		System.exit(0);
     	} catch (Exception e) {
-    		LOG.severe("Erreur de saisie : "+ e.getMessage());
+    		LOG.severe("Erreur lorsque vous avez voulu quitter le jeu via la barre de menu : " + e.getMessage());
     		e.printStackTrace();
     	}
     } 
 	
-	/*
-	 * Paramètres > Quitter
+	/**
+	 * Method closeView : Click on X on the Windows Pop-Up Rules.
 	 */
-	
 	@FXML
     private void closeView() {
-        // get a handle to the stage
-        Stage stage = (Stage) quitRules.getScene().getWindow();
-        // do what you have to do
-        stage.close();
+		try {
+			// Get a handle to the stage
+			Stage stage = (Stage) quitRules.getScene().getWindow();
+			// Do what you have to do
+			stage.close();
+		} catch (Exception e) {
+			LOG.severe("Erreur lorsque vous avez voulu quitter le jeu via la barre de menu : " + e.getMessage());
+    		e.printStackTrace();
+		}
     } 
 	
 	/*
