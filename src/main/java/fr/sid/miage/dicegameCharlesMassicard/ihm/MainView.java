@@ -204,20 +204,29 @@ public class MainView implements Initializable {
 			// TODO Appeler la bonne strat dans le back
 			strategyOne.setOnAction(event -> {
 				if (strategyOne.isSelected()) {
+					LOG.info("L'utilisateur a choisi la stratégie 1.");
 					strategyTwo.setSelected(false);
-					strategyThree.setSelected(false);	
+					strategyThree.setSelected(false);
+				} else {
+					strategyOne.setSelected(true);
 				}
 			});
 			strategyTwo.setOnAction(event -> {
 				if (strategyTwo.isSelected()) {
+					LOG.info("L'utilisateur a choisi la stratégie 2.");
 					strategyOne.setSelected(false);
 					strategyThree.setSelected(false);
+				} else {
+					strategyTwo.setSelected(true);
 				}
 			});
 			strategyThree.setOnAction(event -> {
 				if (strategyThree.isSelected())	{
+					LOG.info("L'utilisateur a choisi la stratégie 3.");
 					strategyTwo.setSelected(false);
 					strategyOne.setSelected(false);
+				} else {
+					strategyThree.setSelected(true);
 				}
 			});
 		} catch (Exception e) {
