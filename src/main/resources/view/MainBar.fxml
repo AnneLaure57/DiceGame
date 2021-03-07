@@ -12,7 +12,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Nouvelle Partie">
                <items>
-                  <MenuItem fx:id="newPseudo" mnemonicParsing="false" onAction="#openViewNewNickName" text="Nouveau Pseudo" />
+                  <!-- <MenuItem fx:id="newPseudo" mnemonicParsing="false" onAction="#openViewNewNickName" text="Nouveau Pseudo" /> -->
+                  <MenuItem fx:id="newPseudo" mnemonicParsing="false" onAction="#showChangeEncode" text="Nouveau Pseudo" />
                   <MenuItem fx:id="keepPseudo" mnemonicParsing="false" text="Garder Pseudo" />
                </items>
             </Menu>
