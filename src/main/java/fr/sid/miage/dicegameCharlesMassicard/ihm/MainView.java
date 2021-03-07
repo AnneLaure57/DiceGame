@@ -126,6 +126,12 @@ public class MainView implements Initializable {
 	
 	/* ========================================= Start Game ============================================== */
 	
+	/**
+	 * Method startGame : to start the dice game.
+	 * When 
+	 * 
+	 * @param event Event click on the button 
+	 */
 	@FXML
     private void startGame(ActionEvent event) {
 		try {
