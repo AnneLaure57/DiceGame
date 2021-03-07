@@ -4,7 +4,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.utils.TooMuchDiceThrowException;
@@ -273,12 +272,10 @@ public class DiceGame {
 			
 			// TODO : Momento
 			
-			// Roll the dice.
+			// Roll all dice.
 			this.getStrategyToUseToRollDice().executeStrategy(die1, die2);
 			
 			if (this.isUseScheduleStrategy()) {
-//				long period = Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW;
-//				long millisecondes = TimeUnit.SECONDS.toMillis(period);
 				Timer timer = new Timer();
 				timer.schedule(new TimerTask() {
 					@Override
@@ -290,9 +287,10 @@ public class DiceGame {
 							// If the player wins (The sum of the dice's face value for which the player win some points)
 							// then increase the player's score.
 							checkIfPlayerWins();
+							timer.cancel();
 						});
 					}
-				}, Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW * 1000 + 100);
+				}, Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW * 1000 + 50);
 			} else {
 				// Increase the number of throws.
 				this.increaseThrowNumber();
@@ -318,7 +316,7 @@ public class DiceGame {
 	 * 
 	 * @return Return true if the player's score is saved, otherwise return false.
 	 */
-	public boolean savePlayerScore() {
+	private boolean savePlayerScore() {
 		try {
 			// TODO
 			return true;

@@ -1,9 +1,11 @@
 package fr.sid.miage.dicegameCharlesMassicard.utils.strategy;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Die;
+import javafx.application.Platform;
 
 /**
  * @author Anne-Laure CHARLES
@@ -39,16 +41,22 @@ public class RollDieTwoFirst implements RollStrategy {
 	@Override
 	public boolean rollDices(Die die1, Die die2) {
 		try {
-			// Dice two rollls : set Die Two first value
+			// Die two rollls : set Die Two first value
 			die2.roll();
 			LOG.severe("value of Die 2 : " + die2.getFaceValue());
 			
-			// Pause during some seconds 
-			TimeUnit.SECONDS.sleep(Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW);
-			
-			//set Die One value
-			die1.roll();
-			LOG.severe("value of Die 1 : " + die1.getFaceValue());
+			// Die one rolls : set Die One first value
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> {
+                        die1.roll();
+                        LOG.info("Value of Die 1 : " + die1.getFaceValue());
+                        timer.cancel();
+                    });
+                }
+            }, Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW * 1000);
 			
 			return true;
 		} catch (Exception e) {
