@@ -243,7 +243,11 @@ public class DiceGame {
 	}
 	
 	/**
-	 *TODO
+	 * Method savePlayerScore : to save the player score.
+	 * The player's score is inserted in the high score list.
+	 * If the player's score is one of the 100 first best scores,
+	 * then the player's score is saved in the 100 first best scores (and persist in database),
+	 * and the new 101 best scores is deleted.
 	 * 
 	 * @return Return true if the player's score is saved, otherwise return false.
 	 */
