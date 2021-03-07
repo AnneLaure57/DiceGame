@@ -263,7 +263,8 @@ public class DiceGame {
 	}
 	
 	/**
-	 * Method endGame : to start a game.
+	 * Method endGame : to end a game.
+	 * So saved the player score and start a new game.
 	 * 
 	 * @return Return true if the game ends correctly, otherwise return false.
 	 */
