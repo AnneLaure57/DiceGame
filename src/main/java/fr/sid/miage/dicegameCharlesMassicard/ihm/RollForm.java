@@ -2,10 +2,8 @@ package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
