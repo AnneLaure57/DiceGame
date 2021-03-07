@@ -142,6 +142,8 @@ public class DiceGame {
 	
 	/**
 	 * Method newGame : to start a new game.
+	 * Put the throwNumber at 0.
+	 * Put the player's score at 0.
 	 * 
 	 * @return Return true if the dice's throw is a success, otherwise return false.
 	 */
