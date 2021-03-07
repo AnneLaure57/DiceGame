@@ -128,14 +128,18 @@ public class MainView implements Initializable {
 	
 	/**
 	 * Method startGame : to start the dice game.
-	 * When 
+	 * When user click on the button 'Commencer',
+	 * we check if the player's name is a valid one.
+	 * Then, if it's a valid pseudo, the game start for this player :
+	 * we display the play interface to play the dice game.
 	 * 
-	 * @param event Event click on the button 
+	 * @param event Event click on the button 'Commencer'.
 	 */
 	@FXML
     private void startGame(ActionEvent event) {
 		try {
-			if (!validInput()) {
+//			if (!validInput()) {
+			if (! validInput(addNickName.getText())) {
 	    		errorMessage.setText("Veuillez saisir un pseudo !");
 	    		errorMessage.setTextFill(Color.RED);
 	    	} else {
@@ -154,11 +158,13 @@ public class MainView implements Initializable {
     	}
     }
 	
-	public boolean validInput(){
-		if (addNickName.getText() == null || addNickName.getText().trim().isEmpty()) {
+	public boolean validInput(String nickName){
+//		if (addNickName.getText() == null || addNickName.getText().trim().isEmpty()) {
+		if (nickName == null || nickName.trim().isEmpty()) {
 			return false;
+		} else {
+			return true;
 		}
-        return true;
     }
 	
 	/* ========================================= PropertyChange ============================================== */
@@ -333,7 +339,7 @@ public class MainView implements Initializable {
     		} else if (option.get() == valider) {
     			LOG.info("L'utilisateur modifié son pseudo.");
     			LOG.info("Acien pseudo : " + dicegame.getPlayer().getName());
-    			dicegame.getPlayer().setName( textArea.getText() );
+    			dicegame.changePlayerName( textArea.getText() );
     			LOG.info("Nouveau pseudo : " + dicegame.getPlayer().getName());
     		} else {
     			LOG.info("Aucune action n'a été réalisée lors de la demande de changement de pseudo.");
