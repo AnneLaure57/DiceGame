@@ -56,7 +56,8 @@ public class DiceGame {
 	private static final int POINTS_TO_ADD_WHEN_WIN = 10;
 		
 	/**
-	 * TODO javadoc
+	 * Allow DiceGame to be an Observable :
+	 * We add a PropertyChangeSupport to our DiceGame instance.
 	 */
 	PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
