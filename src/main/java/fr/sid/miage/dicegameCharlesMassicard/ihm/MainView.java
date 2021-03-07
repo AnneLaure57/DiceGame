@@ -112,7 +112,7 @@ public class MainView implements Initializable {
 
 			strategyOne.setSelected(true);
 			
-			//load rules view
+			// Load rules view
 			rules.setSelected(true);
 			rules.setOnAction(e -> displayRules());
 		}
@@ -156,44 +156,41 @@ public class MainView implements Initializable {
 			LOG.severe("Erreur lorsque vous avez voulu quitter le jeu via la barre de menu : " + e.getMessage());
     		e.printStackTrace();
 		}
-    } 
+    }
 	
-	/*
-	 * Change Strategy
+	/**
+	 * Method changeStrategy : to switch and select a new strategy to use to roll dice.
 	 */
-	
 	@FXML 
-	void changeStrategy() {
-		strategyOne.setOnAction(e -> 
-    	{
-	    	if (strategyOne.isSelected())
-	    	{
-	    		strategyTwo.setSelected(false);
-	    		strategyThree.setSelected(false);
-	    		
-	    	}
-    	});
-		strategyTwo.setOnAction(e -> 
-    	{
-	    	if (strategyTwo.isSelected())
-	    	{
-	    		strategyOne.setSelected(false);
-	    		strategyThree.setSelected(false);
-	    	}
-    	});
-		strategyThree.setOnAction(e -> 
-    	{
-	    	if (strategyThree.isSelected())
-	    	{
-	    		strategyTwo.setSelected(false);
-	    		strategyOne.setSelected(false);
-	    	}
-    	});
+	private void changeStrategy() {
+		try {
+			// TODO Appeler la bonne strat dans le back
+			strategyOne.setOnAction(event -> {
+				if (strategyOne.isSelected()) {
+					strategyTwo.setSelected(false);
+					strategyThree.setSelected(false);	
+				}
+			});
+			strategyTwo.setOnAction(event -> {
+				if (strategyTwo.isSelected()) {
+					strategyOne.setSelected(false);
+					strategyThree.setSelected(false);
+				}
+			});
+			strategyThree.setOnAction(event -> {
+				if (strategyThree.isSelected())	{
+					strategyTwo.setSelected(false);
+					strategyOne.setSelected(false);
+				}
+			});
+		} catch (Exception e) {
+			LOG.severe("Erreur lorsque vous avez voulu changer de stratégie : " + e.getMessage());
+    		e.printStackTrace();
+		}
 	} 
 	
-	
-	/*
-	 * View Rules
+	/**
+	 * Method displayRules : to display the view 'Rules' : Rules.fxml.
 	 */
 	@FXML 
 	void displayRules() {
@@ -207,9 +204,9 @@ public class MainView implements Initializable {
             // Hide this current window (if this is what you want)
             //((Node)(event.getSource())).getScene().getWindow().hide();
         }
-        catch (IOException o) {
-        	Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Impossible de charger la fenêtre.", o);
+        catch (IOException ioe) {
+        	LOG.severe("Impossible de charger la fenêtre 'Rules' : " + ioe.getMessage());
+        	ioe.printStackTrace();
         }
 	} 
 	
