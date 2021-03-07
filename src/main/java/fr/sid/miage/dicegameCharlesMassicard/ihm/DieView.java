@@ -34,9 +34,9 @@ public class DieView implements Initializable, PropertyChangeListener {
 
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
-	private Die die;
-	
-	private DiceGame dicegame;
+//	private Die die;
+//	
+//	private DiceGame dicegame;
 
 	/* ========================================= Vues ================================================== */ /*=========================================*/
 	
@@ -53,44 +53,72 @@ public class DieView implements Initializable, PropertyChangeListener {
 	/* ========================================= Initialize ============================================ */
 	
 	public void initialize(URL location, ResourceBundle resources) {
+		System.out.println("DieView Initialization.");
+		System.out.println("********** \n " + location + "\n" + resources + "\n**********");
+		
+		// Get the Dice Game instance
+		Die die1 = DiceGame.getInstance().getDie1();
+//		Die die2 = DiceGame.getInstance().getDie2();
+		
+		die1.addPropertyChangeListener(this);
+//		die2.addPropertyChangeListener(this);
+		
+//		checkFaceValue(0);
 	}
 	
 	// TODO ???
-	public void setDie(Die die) {
-		this.die = die;
-		this.die.addPropertyChangeListener(this);
-	}
+//	public void setDie(Die die) {
+//		this.die = die;
+//		this.die.addPropertyChangeListener(this);
+//	}
 
 	/* ========================================= Property Change ============================================== */
 		
 	public void propertyChange(PropertyChangeEvent evt) {
-		//TODO event with view
-		int faceValue = (int) evt.getNewValue();
-		
-		if(faceValue != 0) {
-			dieFace.setImage(new Image(getClass().getResource("/images/" + checkFaceValue(faceValue) + ".png").toExternalForm()));
-		} else {
-			dieFace.setImage(null);
+		switch(evt.getPropertyName()) {
+		case "Valeur dé 1":
+			int die1Value = (int) evt.getNewValue();
+//			dieFace.setImage(new Image(getClass().getResource("/images/face_.png").toExternalForm()));
+			this.checkFaceValue(die1Value);
+			break;
+			
+		case "Valeur dé 2":
+			int die2Value = (int) evt.getNewValue();
+//			this.checkFaceValue(die2Value);
+			break;
+			
+		default :
+			break;
 		}
+//		//TODO event with view
+//		int faceValue = (int) evt.getNewValue();
+//		
+//		if(faceValue != 0) {
+//			dieFace.setImage(new Image(getClass().getResource("/images/" + checkFaceValue(faceValue) + ".png").toExternalForm()));
+//		} else {
+//			dieFace.setImage(null);
+//		}
     }
 	
 	/* ========================================= Change dice face value image ============================================== */
 	
-	public String checkFaceValue(int faceValue) {
-		String nameImageView = null;
-		if  (faceValue == 1) {
-			nameImageView.equals("face_one.png");
-		} else if (faceValue == 2) {
-			nameImageView.equals("face_two.png");
-		} else if (faceValue == 3) {
-			nameImageView.equals("face_three.png");
-		} else if (faceValue == 4) {
-			nameImageView.equals("face_four.png");
-		} else if (faceValue == 5) {
-			nameImageView.equals("face_five.png");
-		} else if (faceValue == 6) {
-			nameImageView.equals("face_six.png");
-		}
-		return nameImageView;
+	public void checkFaceValue(int faceValue) {
+//		String nameImageView = null;
+//		if  (faceValue == 1) {
+//			nameImageView = ("face_one");
+//		} else if (faceValue == 2) {
+//			nameImageView = ("face_two");
+//		} else if (faceValue == 3) {
+//			nameImageView = ("face_three");
+//		} else if (faceValue == 4) {
+//			nameImageView = ("face_four");
+//		} else if (faceValue == 5) {
+//			nameImageView.equals("face_five");
+//		} else if (faceValue == 6) {
+//			nameImageView.equals("face_six.png");
+//		}
+//		System.out.println("nameImageView : " + nameImageView);
+		dieFace.setImage(new Image(getClass().getResource("/images/face_" + faceValue + ".png").toExternalForm()));
+//		return nameImageView;
 	}
 }

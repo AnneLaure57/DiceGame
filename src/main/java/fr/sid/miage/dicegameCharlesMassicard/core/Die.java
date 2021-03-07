@@ -49,6 +49,7 @@ public class Die {
 	 */
 	public Die(int dieNumber) {
 		LOG.info("An Die has just been created.");
+		this.setDieNumber(dieNumber);
 		this.supportDie = new PropertyChangeSupport(this);
 		this.setFaceValue(Randomizer.getInstance().getValue(5) + 1);
 	}
@@ -62,6 +63,7 @@ public class Die {
 	 */
 	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
+		System.out.println("Die " + this.getDieNumber() + " : add PropertyChangeListener : " + pcl.getClass().toString());
 		supportDie.addPropertyChangeListener("Valeur dé " + this.getDieNumber(), pcl);
     }
 		
@@ -73,7 +75,7 @@ public class Die {
 	public boolean roll() {
 		try {
 			this.setFaceValue(Randomizer.getInstance().getValue(5) + 1);
-			LOG.info("The die rolls, new face value is : " + getFaceValue());
+			LOG.info("The die rolls, new face value is : " + this.getFaceValue());
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'roll' from Die class :");
@@ -95,7 +97,10 @@ public class Die {
 	 * @param faceValue the faceValue to set
 	 */
 	public void setFaceValue(int faceValue) {
+		LOG.severe(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+		// Do nothing if this.faceValue = faceValue before
 		supportDie.firePropertyChange("Valeur dé " + this.getDieNumber(), this.faceValue, faceValue);
+		// Notify change after
 		this.faceValue = faceValue;
 	}
 

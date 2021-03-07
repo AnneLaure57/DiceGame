@@ -10,6 +10,7 @@ import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
@@ -36,9 +37,6 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	 */
 	public String nickNameFound;
 
-	// TODO : a garder ? pourquoi ne pas passer uniquement par getInstance ? 
-//	private DiceGame diceGame;
-
 	/* ========================================= Vues ================================================== */ /*=========================================*/
 
 	@FXML
@@ -63,6 +61,12 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	@FXML private Label scorePreviousTurn;
 	
 	@FXML private Label scorePlayer;
+	
+	/* ========================================= Buttons */
+	
+	@FXML private Button throwButton;
+	
+	@FXML private Button undoButton;
 
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 	
@@ -76,14 +80,10 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		DiceGame diceGame = DiceGame.getInstance();
 		
 		diceGame.addPropertyChangeListener(this);
+		diceGame.getPlayer().addPropertyChangeListener(this);
 		diceGame.getDie1().addPropertyChangeListener(this);
 		diceGame.getDie2().addPropertyChangeListener(this);
-		
-		
-//		this.diceGame = DiceGame.getInstance();
-//		this.diceGame.addPropertyChangeListener(this);
-//		this.diceGame.getDie1().addPropertyChangeListener(this);
-//		this.diceGame.getDie2().addPropertyChangeListener(this);
+
 		actualiseInformationsGame(0);
 		actualiseScore(0);
 	}
@@ -91,17 +91,38 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	/* ========================================= Property Change ============================================== */
 	
 	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println("---------------");
 		System.out.println("change detected");
+		System.out.println(evt);
 		
 		switch(evt.getPropertyName()) {
 		case "Tour partie":
 			int throwNumber = (int) evt.getNewValue();
 			this.turnNumber.setText(String.valueOf(throwNumber));
 			break;
+			
 		case "Valeur dé 1":
-			int throwNumber = (int) evt.getNewValue();
-			this.turnNumber.setText(String.valueOf(throwNumber));
+			int die1Value = (int) evt.getNewValue();
+			System.out.println("COUCOU Dé 1 : " + die1Value);
+
+			System.out.println("COUCOU Dé 1 : " + this.scoreDie1.getText());
+			
+			this.scoreDie1.setText(String.valueOf(die1Value));
+			
+			System.out.println("COUCOU Dé 1 : " + this.scoreDie1.getText());
 			break;
+			
+		case "Valeur dé 2":
+			int die2Value = (int) evt.getNewValue();
+			System.out.println("COUCOU Dé 2 : " + die2Value);
+			this.scoreDie2.setText(String.valueOf(die2Value));
+			break;
+			
+		case "Score Joueur":
+			int scorePlayer = (int) evt.getNewValue();
+			this.scorePlayer.setText(String.valueOf(scorePlayer));
+			break;
+			
 		default :
 			break;
 		}
@@ -113,6 +134,7 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		turnNumber.setText(Integer.toString(score));
 		scoreDie1.setText(Integer.toString(score));
 		scoreDie2.setText(Integer.toString(score));
+		undoButton.setDisable(true);
 	}
 	
 	private void actualiseScore(int score) {
@@ -134,13 +156,17 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		
 		try {
 		  if (diceGame.getPlayer().getName() != null) {
-			  System.out.println("C'est OK \n Throw number : " + diceGame.getThrowNumber());
+//			  System.out.println("C'est OK \n Throw number : " + diceGame.getThrowNumber());
 			  diceGame.throwDice();
+			  undoButton.setDisable(false);
+			  if (diceGame.getThrowNumber() == DiceGame.POINTS_TO_ADD_WHEN_WIN) {
+				throwButton.setDisable(true);
+			}
 		  } else {
-			  System.out.println("C'est pas OK");
+//			  System.out.println("C'est pas OK");
 		  }
     	} catch (Exception e) {
-    		LOG.severe("Erreur de saisie : "+ e.getMessage());
+    		LOG.severe("Erreur lorque l'utilisateur a appuyé sur le bouton 'Lancer' : "+ e.getMessage());
     		e.printStackTrace();
     	}
     }
@@ -152,12 +178,12 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		
 		try {
 		  if (diceGame.getPlayer().getName() != null) {
-			  System.out.println("C'est OK");
+//			  System.out.println("C'est OK");
 		  } else {
-			  System.out.println("C'est pas OK");
+//			  System.out.println("C'est pas OK");
 		  }
     	} catch (Exception e) {
-    		LOG.severe("Erreur de saisie : "+ e.getMessage());
+    		LOG.severe("Erreur lorque l'utilisateur a appuyé sur le bouton 'Annuler' : "+ e.getMessage());
     		e.printStackTrace();
     	}
     }

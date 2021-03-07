@@ -2,6 +2,9 @@ package fr.sid.miage.dicegameCharlesMassicard.core;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.utils.TooMuchDiceThrowException;
@@ -9,6 +12,7 @@ import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.Context;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieOneFirst;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieTwoFirst;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollTwoDiceAtSameTime;
+import javafx.application.Platform;
 
 /**
  * @author Anne-Laure CHARLES
@@ -53,7 +57,7 @@ public class DiceGame {
 	/**
 	 * Number of points to add when the sum of dice's face value allow to win.
 	 */
-	private static final int POINTS_TO_ADD_WHEN_WIN = 10;
+	public static final int POINTS_TO_ADD_WHEN_WIN = 10;
 		
 	/**
 	 * Allow DiceGame to be an Observable :
@@ -96,6 +100,8 @@ public class DiceGame {
 	 */
 	private Context strategyToUseToRollDice;
 	
+	private boolean useScheduleStrategy;
+	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	/**
@@ -106,11 +112,11 @@ public class DiceGame {
 		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
 		this.supportDiceGame = new PropertyChangeSupport(this);
 		this.setPlayer(new Player(""));
-		this.setDie1(new Die());
-		this.setDie2(new Die());
+		this.setDie1(new Die(1));
+		this.setDie2(new Die(2));
 		this.setThrowNumber(0);
 		this.setStrategyToUseToRollDice(new Context(new RollTwoDiceAtSameTime()));
-		
+		this.setUseScheduleStrategy(false);
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -121,7 +127,7 @@ public class DiceGame {
 	 * @param pcl PropertyChangeListener 
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
-		System.out.println("Add PropertyChangeListener : " + pcl.getClass().toString());
+		System.out.println("DiceGame : add PropertyChangeListener : " + pcl.getClass().toString());
 		supportDiceGame.addPropertyChangeListener("Tour partie", pcl);
     }
 	
@@ -155,7 +161,7 @@ public class DiceGame {
 			this.getPlayer().setScore(0);
 			return true;
 		} catch (Exception e) {
-			LOG.severe("An error occurred during the method 'newGame' from DiceGame class :");
+			LOG.severe("An error occurred during the method 'newGame' from DiceGame class.");
 			LOG.severe(e.toString());
 			return false;
 		}
@@ -173,7 +179,7 @@ public class DiceGame {
 			this.getPlayer().setName(playerName);
 			return true;
 		} catch (Exception e) {
-			LOG.severe("An error occurred during the method 'changePlayerName' from DiceGame class :");
+			LOG.severe("An error occurred during the method 'changePlayerName' from DiceGame class.");
 			LOG.severe(e.toString());
 			return false;
 		}
@@ -191,30 +197,67 @@ public class DiceGame {
 	 */
 	public boolean changeStrategy(String newStrategy) {
 		try {
-			// TODO
+			LOG.info("Use the strategy number : " + newStrategy);
 			switch (newStrategy) {
 			case "1":
 				LOG.info("Now, you use this strategy : " + RollTwoDiceAtSameTime.class.getName());
 				this.setStrategyToUseToRollDice(new Context(new RollTwoDiceAtSameTime()));
+				this.setUseScheduleStrategy(false);
 				break;
 			case "2":
 				LOG.info("Now, you use this strategy : " + RollDieOneFirst.class.getName());
 				this.setStrategyToUseToRollDice(new Context(new RollDieOneFirst()));
+				this.setUseScheduleStrategy(true);
 				break;
 			case "3":
 				LOG.info("Now, you use this strategy : " + RollDieTwoFirst.class.getName());
 				this.setStrategyToUseToRollDice(new Context(new RollDieTwoFirst()));
+				this.setUseScheduleStrategy(true);
 				break;
 			default:
 				break;
 			}
 			return true;
 		} catch (Exception e) {
-			LOG.severe("An error occurred during the method 'changeStrategy' from DiceGame class :");
+			LOG.severe("An error occurred during the method 'changeStrategy' from DiceGame class.");
 			LOG.severe(e.toString());
 			return false;
 		}
 	}
+	
+	/**
+	 * Method increaseThrowNumber : increase the throw number by 1.
+	 * 
+	 * @return Return true if the throw number increase is a success, otherwise return false.
+	 */
+	private boolean increaseThrowNumber() {
+		try {
+			this.setThrowNumber(this.getThrowNumber() + 1);
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'changeStrategy' from DiceGame class.");
+			LOG.severe(e.toString());
+			return false;
+		}
+	}
+	
+	/**
+	 * Method checkIfPlayerWins : to check if the player wins.
+	 * 
+	 * @return Return true if the check is a success, otherwise return false.
+	 */
+	private boolean checkIfPlayerWins() {
+		try {
+			if (die1.getFaceValue() + die2.getFaceValue() == DICE_SUM_TO_WIN) {
+				this.getPlayer().increaseScore(POINTS_TO_ADD_WHEN_WIN);
+			}
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'checkIfPlayerWins' from DiceGame class.");
+			LOG.severe(e.toString());
+			return false;
+		}
+	} 
 	
 	/**
 	 * Method throwDice : to throw dice.
@@ -227,19 +270,37 @@ public class DiceGame {
 			if (this.getThrowNumber() >= MAX_NUMBER_OF_THROWS) {
 				throw new TooMuchDiceThrowException("You exceed the maximum throw number for this game. You already throw dice " + this.throwNumber + " times.");
 			}
-			this.setThrowNumber(this.getThrowNumber() + 1);
 			
 			// TODO : Momento
 			
 			// Roll the dice.
 			this.getStrategyToUseToRollDice().executeStrategy(die1, die2);
 			
-			// If the player wins (The sum of the dice's face value for which the player win some points)
-			// then increase the player's score.
-			if (die1.getFaceValue() + die2.getFaceValue() == DICE_SUM_TO_WIN) {
-				this.getPlayer().increaseScore(POINTS_TO_ADD_WHEN_WIN);
+			if (this.isUseScheduleStrategy()) {
+//				long period = Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW;
+//				long millisecondes = TimeUnit.SECONDS.toMillis(period);
+				Timer timer = new Timer();
+				timer.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						Platform.runLater(() -> {
+							// Increase the number of throws.
+							increaseThrowNumber();
+							
+							// If the player wins (The sum of the dice's face value for which the player win some points)
+							// then increase the player's score.
+							checkIfPlayerWins();
+						});
+					}
+				}, Context.NB_SEC_BEFORE_ANOTHER_DIE_THROW * 1000 + 100);
+			} else {
+				// Increase the number of throws.
+				this.increaseThrowNumber();
+				
+				// If the player wins (The sum of the dice's face value for which the player win some points)
+				// then increase the player's score.
+				this.checkIfPlayerWins();
 			}
-			
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'throwDice' from DiceGame class :");
@@ -359,6 +420,20 @@ public class DiceGame {
 	 */
 	public void setStrategyToUseToRollDice(Context strategyToUseToRollDice) {
 		this.strategyToUseToRollDice = strategyToUseToRollDice;
+	}
+
+	/**
+	 * @return the useScheduleStrategy
+	 */
+	public boolean isUseScheduleStrategy() {
+		return useScheduleStrategy;
+	}
+
+	/**
+	 * @param useScheduleStrategy the useScheduleStrategy to set
+	 */
+	public void setUseScheduleStrategy(boolean useScheduleStrategy) {
+		this.useScheduleStrategy = useScheduleStrategy;
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/

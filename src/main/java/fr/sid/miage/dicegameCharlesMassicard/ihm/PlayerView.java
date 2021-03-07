@@ -2,7 +2,6 @@ package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -33,8 +32,6 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 	
 	public String nickNameFound;
 	
-//	private Player player;
-
 	/* ========================================= Vues ================================================== */ /*=========================================*/
 	
 	@FXML private RollForm parent;
@@ -63,11 +60,13 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		LOG.info("PlayerView Initialization.");
+
 		// Get the Dice Game instance
 		Player player = DiceGame.getInstance().getPlayer();
 		
-		player = DiceGame.getInstance().getPlayer();
 		player.addPropertyChangeListener(this);
+		
 		actualiseScore(0);
 	}
 	
@@ -75,23 +74,19 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("event property name : " + evt.getPropertyName());
+//		System.out.println("event property name : " + evt.getPropertyName());
 		
 		switch(evt.getPropertyName()) {
 		case "Nom joueur":
 			String playerName = (String) evt.getNewValue();
 			this.nickNamePlayer.setText(playerName);
 			break;
+			
 		case "Score Joueur":
-			int score = (int) evt.getNewValue();
-			//TODO
-			//if(firstDieScore != 0){
-			//	actualiseScore(firstDieScore + score);
-			//	firstDieScore = 0;
-			//} else {
-			//	firstDieScore = score;
-			//}
+			int scorePlayer = (int) evt.getNewValue();
+			this.scoreCurrentParty.setText(String.valueOf(scorePlayer));
 			break;
+			
 		default :
 			break;
 		}

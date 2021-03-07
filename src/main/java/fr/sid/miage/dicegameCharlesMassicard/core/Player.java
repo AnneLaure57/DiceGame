@@ -75,7 +75,7 @@ public class Player {
 	 */
 	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
-		System.out.println("add PropertyChangeListener : " + pcl.getClass().toString());
+		System.out.println("Player : add PropertyChangeListener : " + pcl.getClass().toString());
 		supportPlayer.addPropertyChangeListener("Nom joueur", pcl);
 		supportPlayer.addPropertyChangeListener("Score Joueur", pcl);
     }
@@ -112,9 +112,9 @@ public class Player {
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		//Do nothing if this.name=name before
+		// Do nothing if this.name = name before
 		supportPlayer.firePropertyChange("Nom joueur", this.name, name);
-		//change after
+		// Notify change after
 		this.name = name;
 	}
 	
@@ -129,9 +129,9 @@ public class Player {
 	 * @param score the score to set
 	 */
 	public void setScore(int score) {
-		//Do nothing if this.score=score before
+		// Do nothing if this.score = score before
 		supportPlayer.firePropertyChange("Score Joueur", this.score, score);
-		//change after
+		// Notify change after
 		this.score = score;
 	}
 	
