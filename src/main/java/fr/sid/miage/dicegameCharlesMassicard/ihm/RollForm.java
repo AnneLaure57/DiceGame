@@ -38,7 +38,7 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	 */
 	public String nickNameFound;
 
-	// TODO : a garder ?
+	// TODO : a garder ? pourquoi ne pas passer uniquement par getInstance ? 
 	private DiceGame diceGame;
 
 	/* ========================================= Vues ================================================== */ /*=========================================*/
