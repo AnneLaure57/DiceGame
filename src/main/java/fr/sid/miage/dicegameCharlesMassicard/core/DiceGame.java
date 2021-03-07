@@ -158,11 +158,11 @@ public class DiceGame {
 	}
 	
 	/**
-	 * TODO
+	 * Method changePlayerName : to set a new player name (or int this name).
 	 * 
-	 * @param playerName
+	 * @param playerName The new player's name to set into player's informations.
 	 * 
-	 * @return
+	 * @return Return true if the player's name is changed, otherwise return false.
 	 */
 	public boolean changePlayerName(String playerName) {
 		try {
@@ -181,9 +181,9 @@ public class DiceGame {
 	 * Example : Die one rolls first, then Die two rolls some seconds after dice one.
 	 * Other example : Two dice roll together at the same time.
 	 * 
-	 * @param newStrategy
+	 * @param newStrategy This strategy to use to roll dice.
 	 * 
-	 * @return
+	 * @return Return true if the strategy is changed, otherwise return false.
 	 */
 	public boolean changeStrategy(String newStrategy) {
 		try {
