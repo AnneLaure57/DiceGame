@@ -59,7 +59,6 @@ public class DiceGame {
 	 * Allow DiceGame to be an Observable :
 	 * We add a PropertyChangeSupport to our DiceGame instance.
 	 */
-	PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
@@ -105,11 +104,13 @@ public class DiceGame {
 	 */
 	private DiceGame() {
 		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
+		this.supportDiceGame = new PropertyChangeSupport(this);
 		this.setPlayer(new Player(""));
 		this.setDie1(new Die());
 		this.setDie2(new Die());
 		this.setThrowNumber(0);
 		this.setStrategyToUseToRollDice(new Context(new RollTwoDiceAtSameTime()));
+		
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -324,7 +325,8 @@ public class DiceGame {
 	 */
 	public void setThrowNumber(int throwNumber) {
 		//Do nothing if this.throwNumber=throwNumber before
-		//supportDiceGame.firePropertyChange("Tour partie", this.throwNumber, throwNumber);
+		System.out.println("set throw number : " + throwNumber);
+		supportDiceGame.firePropertyChange("Tour partie", this.throwNumber, throwNumber);
 		this.throwNumber = throwNumber;
 	}
 

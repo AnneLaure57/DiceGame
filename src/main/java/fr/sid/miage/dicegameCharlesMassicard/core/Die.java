@@ -43,8 +43,8 @@ public class Die {
 	public Die() {
 		LOG.info("An Die has just been created.");
 		this.supportDie = new PropertyChangeSupport(this);
-//		this.setFaceValue(new Random().nextInt(7));
-		this.setFaceValue(1);
+		this.setFaceValue(Randomizer.getInstance().getValue(5) + 1);
+		//this.setFaceValue(1);
 	}
 
 	/* ========================================= Methodes ============================================== */ /*=========================================*/

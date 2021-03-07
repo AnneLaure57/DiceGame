@@ -118,7 +118,7 @@ public class MainView implements Initializable {
     } 
 	
 	/*
-	 * Paramètres > Quitter
+	 * Aides > Règles
 	 */
 	
 	@FXML

@@ -56,6 +56,7 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.diceGame = DiceGame.getInstance();
+		this.diceGame.addPropertyChangeListener(this);
 		this.diceGame.getDie1().addPropertyChangeListener(this);
 		this.diceGame.getDie2().addPropertyChangeListener(this);
 		actualiseInformationsGame(0);
@@ -64,6 +65,15 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	
 	public void propertyChange(PropertyChangeEvent evt) {
 		System.out.println("change detected");
+		
+		switch(evt.getPropertyName()) {
+		case "Tour partie":
+			int throwNumber = (int) evt.getNewValue();
+			this.turnNumber.setText(String.valueOf(throwNumber));
+			break;
+		default :
+			break;
+		}
     }
 	
 	/* ========================================= Initialisation ================================ */
@@ -90,8 +100,8 @@ public class RollForm implements PropertyChangeListener, Initializable {
     private void roll() {
 		try {
 		  if (diceGame.getPlayer().getName() != null) {
-			  System.out.println("C'est OK");
-			  diceGame.setThrowNumber(1);
+			  System.out.println("C'est OK \n Throw number : " + diceGame.getThrowNumber());
+			  diceGame.throwDice();
 		  } else {
 			  System.out.println("C'est pas OK");
 		  }
