@@ -25,6 +25,11 @@ public class Die {
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	/**
+	 * The number of the die.
+	 */
+	private int dieNumber;
+	
+	/**
 	 * The face value of the die.
 	 */
 	private int faceValue = 1;
@@ -37,10 +42,12 @@ public class Die {
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 	
 	/**
-	 * No Args Constructor.
-	 * When Die is created, the face value is initialized at value 1.
+	 * Constructeur with a number : ex : first die, second die...
+	 * When Die is created, the face value is initialized randomly.
+	 * 
+	 * @param dieNumber The number of the die.
 	 */
-	public Die() {
+	public Die(int dieNumber) {
 		LOG.info("An Die has just been created.");
 		this.supportDie = new PropertyChangeSupport(this);
 		this.setFaceValue(Randomizer.getInstance().getValue(5) + 1);
@@ -55,7 +62,7 @@ public class Die {
 	 */
 	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
-		supportDie.addPropertyChangeListener("valeur dé", pcl);
+		supportDie.addPropertyChangeListener("Valeur dé " + this.getDieNumber(), pcl);
     }
 		
 	/**
@@ -88,8 +95,22 @@ public class Die {
 	 * @param faceValue the faceValue to set
 	 */
 	public void setFaceValue(int faceValue) {
-		supportDie.firePropertyChange("valeur dé", this.faceValue, faceValue);
+		supportDie.firePropertyChange("Valeur dé " + this.getDieNumber(), this.faceValue, faceValue);
 		this.faceValue = faceValue;
+	}
+
+	/**
+	 * @return the dieNumber
+	 */
+	public int getDieNumber() {
+		return dieNumber;
+	}
+
+	/**
+	 * @param dieNumber the dieNumber to set
+	 */
+	public void setDieNumber(int dieNumber) {
+		this.dieNumber = dieNumber;
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/

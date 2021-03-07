@@ -21,20 +21,30 @@ import javafx.scene.layout.AnchorPane;
  * @since %G% - %U% (%I%)
  *
  */
-public class PlayerView implements PropertyChangeListener, Initializable{
+public class PlayerView implements PropertyChangeListener, Initializable {
+	/* ========================================= Global ================================================ */ /*=========================================*/
 	
+	/**
+	 * Logger for this class : PlayerView.
+	 */
 	private static final Logger LOG = Logger.getLogger(PlayerView.class.getName());
+	
+	/* ========================================= Attributs ============================================= */ /*=========================================*/
 	
 	public String nickNameFound;
 	
-	private Player player;
+//	private Player player;
 
-	/* ========================================= Components FXML ============================================= */ /*=========================================*/
+	/* ========================================= Vues ================================================== */ /*=========================================*/
 	
 	@FXML private RollForm parent;
 	
 	@FXML private AnchorPane page;
-	
+		
+	/* ========================================= Composants ================================================ */ /*=========================================*/
+
+	/* ========================================= Labels */
+
 	@FXML private Label nickNamePlayer;
 	
 	@FXML private Label scoreCurrentParty;
@@ -45,12 +55,23 @@ public class PlayerView implements PropertyChangeListener, Initializable{
 
 	/* ========================================= Initialize ============================================== */ /*=========================================*/
 	
+	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
+	
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
+
+	/* ========================================= Initialize ============================================ */
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		// Get the Dice Game instance
+		Player player = DiceGame.getInstance().getPlayer();
+		
 		player = DiceGame.getInstance().getPlayer();
 		player.addPropertyChangeListener(this);
 		actualiseScore(0);
 	}
+	
+	/* ========================================= Property Change ============================================== */
 	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -77,14 +98,15 @@ public class PlayerView implements PropertyChangeListener, Initializable{
 		
     }
 	
+	/* ========================================= Init FXML components ============================================== */
+	
 	private void actualiseScore(int score) {
 		scoreCurrentParty.setText(Integer.toString(score));
 		bestScore.setText(Integer.toString(score));
 		worseScore.setText(Integer.toString(score));
-    } 
+    }
 	
-	/* ========================================= Methodes ============================================== */ /*=========================================*/
-	
+	// TODO : à quoi ça sert ?
 	public void setView(RollForm rollForm) {
 		parent = rollForm;
 	}

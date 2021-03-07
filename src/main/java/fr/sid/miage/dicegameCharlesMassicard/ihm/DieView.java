@@ -24,26 +24,45 @@ import javafx.scene.image.ImageView;
  * @since %G% - %U% (%I%)
  *
  */
-public class DieView implements Initializable, PropertyChangeListener{
+public class DieView implements Initializable, PropertyChangeListener {
+	/* ========================================= Global ================================================ */ /*=========================================*/
 	
+	/**
+	 * Logger for this class : DieView.
+	 */
 	private static final Logger LOG = Logger.getLogger(DieView.class.getName());
-	
-	/************************************************* FXML **************************************************/
-	
-	@FXML private ImageView dieFace;
-	
+
+	/* ========================================= Attributs ============================================= */ /*=========================================*/
+
 	private Die die;
 	
 	private DiceGame dicegame;
+
+	/* ========================================= Vues ================================================== */ /*=========================================*/
+	
+	/* ========================================= Composants ================================================ */ /*=========================================*/
+
+	/* ========================================= ImageViews */
+
+	@FXML private ImageView dieFace;
+	
+	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
+	
+	/* ========================================= Methodes ============================================== */ /*=========================================*/
+
+	/* ========================================= Initialize ============================================ */
 	
 	public void initialize(URL location, ResourceBundle resources) {
 	}
 	
+	// TODO ???
 	public void setDie(Die die) {
 		this.die = die;
 		this.die.addPropertyChangeListener(this);
 	}
-	
+
+	/* ========================================= Property Change ============================================== */
+		
 	public void propertyChange(PropertyChangeEvent evt) {
 		//TODO event with view
 		int faceValue = (int) evt.getNewValue();
@@ -54,6 +73,8 @@ public class DieView implements Initializable, PropertyChangeListener{
 			dieFace.setImage(null);
 		}
     }
+	
+	/* ========================================= Change dice face value image ============================================== */
 	
 	public String checkFaceValue(int faceValue) {
 		String nameImageView = null;

@@ -37,7 +37,7 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	public String nickNameFound;
 
 	// TODO : a garder ? pourquoi ne pas passer uniquement par getInstance ? 
-	private DiceGame diceGame;
+//	private DiceGame diceGame;
 
 	/* ========================================= Vues ================================================== */ /*=========================================*/
 
@@ -72,10 +72,18 @@ public class RollForm implements PropertyChangeListener, Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.diceGame = DiceGame.getInstance();
-		this.diceGame.addPropertyChangeListener(this);
-		this.diceGame.getDie1().addPropertyChangeListener(this);
-		this.diceGame.getDie2().addPropertyChangeListener(this);
+		// Get the Dice Game instance
+		DiceGame diceGame = DiceGame.getInstance();
+		
+		diceGame.addPropertyChangeListener(this);
+		diceGame.getDie1().addPropertyChangeListener(this);
+		diceGame.getDie2().addPropertyChangeListener(this);
+		
+		
+//		this.diceGame = DiceGame.getInstance();
+//		this.diceGame.addPropertyChangeListener(this);
+//		this.diceGame.getDie1().addPropertyChangeListener(this);
+//		this.diceGame.getDie2().addPropertyChangeListener(this);
 		actualiseInformationsGame(0);
 		actualiseScore(0);
 	}
@@ -90,12 +98,16 @@ public class RollForm implements PropertyChangeListener, Initializable {
 			int throwNumber = (int) evt.getNewValue();
 			this.turnNumber.setText(String.valueOf(throwNumber));
 			break;
+		case "Valeur dé 1":
+			int throwNumber = (int) evt.getNewValue();
+			this.turnNumber.setText(String.valueOf(throwNumber));
+			break;
 		default :
 			break;
 		}
     }
 	
-	/* ========================================= Initialisation ================================ */
+	/* ========================================= Init FXML components ============================================== */
 	
 	private void actualiseInformationsGame(int score) {
 		turnNumber.setText(Integer.toString(score));
@@ -117,6 +129,9 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	
 	@FXML
     private void roll() {
+		// Get the Dice Game instance
+		DiceGame diceGame = DiceGame.getInstance();
+		
 		try {
 		  if (diceGame.getPlayer().getName() != null) {
 			  System.out.println("C'est OK \n Throw number : " + diceGame.getThrowNumber());
@@ -132,8 +147,10 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	
 	@FXML
     private void cancel() {
+		// Get the Dice Game instance
+		DiceGame diceGame = DiceGame.getInstance();
+		
 		try {
-			DiceGame diceGame = DiceGame.getInstance();
 		  if (diceGame.getPlayer().getName() != null) {
 			  System.out.println("C'est OK");
 		  } else {

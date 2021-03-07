@@ -154,9 +154,9 @@ public class MainView implements Initializable {
 	    		formNickName.setVisible(false);
 	    		rollForm.setVisible(true);
 	  
-	    		DiceGame dicegame = DiceGame.getInstance();
-	    		dicegame.changePlayerName(nickNameFound);
-//	    		dicegame.getPlayer().setScore(0);
+	    		DiceGame diceGame = DiceGame.getInstance();
+	    		diceGame.changePlayerName(nickNameFound);
+//	    		diceGame.getPlayer().setScore(0);
 	    	}
     	} catch (Exception e) {
     		LOG.severe("Erreur de saisie : "+ e.getMessage());
@@ -182,7 +182,7 @@ public class MainView implements Initializable {
 		return ! (nickName == null || nickName.trim().isEmpty());
     }
 	
-	/* ========================================= Main ============================================== */
+	/* ========================================= Menus ============================================== */
 	
 	/**
 	 * Method closeRollForm : Paramètres > Quitter.
@@ -223,13 +223,13 @@ public class MainView implements Initializable {
 	private void changeStrategy() {
 		try {
     		// Get the Dice Game instance
-    		DiceGame dicegame = DiceGame.getInstance();
+    		DiceGame diceGame = DiceGame.getInstance();
     		
     		// Set the clicked strategy
 			strategyOne.setOnAction(event -> { // Strategy 1
 				if (strategyOne.isSelected()) {
 					LOG.info("L'utilisateur a choisi la stratégie 1.");
-					dicegame.changeStrategy("1");
+					diceGame.changeStrategy("1");
 					strategyTwo.setSelected(false);
 					strategyThree.setSelected(false);
 				} else {
@@ -239,7 +239,7 @@ public class MainView implements Initializable {
 			strategyTwo.setOnAction(event -> { // Strategy 2
 				if (strategyTwo.isSelected()) {
 					LOG.info("L'utilisateur a choisi la stratégie 2.");
-					dicegame.changeStrategy("2");
+					diceGame.changeStrategy("2");
 					strategyOne.setSelected(false);
 					strategyThree.setSelected(false);
 				} else {
@@ -249,7 +249,7 @@ public class MainView implements Initializable {
 			strategyThree.setOnAction(event -> { // Strategy 3
 				if (strategyThree.isSelected())	{
 					LOG.info("L'utilisateur a choisi la stratégie 3.");
-					dicegame.changeStrategy("3");
+					diceGame.changeStrategy("3");
 					strategyTwo.setSelected(false);
 					strategyOne.setSelected(false);
 				} else {
@@ -311,7 +311,7 @@ public class MainView implements Initializable {
     public void showChangeEncode() {
     	try {			
     		// Get the Dice Game instance
-    		DiceGame dicegame = DiceGame.getInstance();
+    		DiceGame diceGame = DiceGame.getInstance();
     		
     		// Keep same size after first used
     		this.changeNickName.setWidth(600);
@@ -326,7 +326,7 @@ public class MainView implements Initializable {
     		// Display player's name
     		Label label = new Label("Pseudo actuel (modifiable) :");
     		TextArea textArea = new TextArea();
-    		textArea.setText(dicegame.getPlayer().getName());
+    		textArea.setText(diceGame.getPlayer().getName());
     		
     		// Construct pop-up content
     		VBox dialogPaneContent = new VBox();
@@ -354,9 +354,9 @@ public class MainView implements Initializable {
     		} else if (option.get() == valider) {
     			if (this.validInput(textArea.getText())) {
     				LOG.info("L'utilisateur modifié son pseudo.");
-    				LOG.info("Acien pseudo : " + dicegame.getPlayer().getName());
-    				dicegame.changePlayerName( textArea.getText().trim() );
-    				LOG.info("Nouveau pseudo : " + dicegame.getPlayer().getName());
+    				LOG.info("Acien pseudo : " + diceGame.getPlayer().getName());
+    				diceGame.changePlayerName( textArea.getText().trim() );
+    				LOG.info("Nouveau pseudo : " + diceGame.getPlayer().getName());
 				}
     		} else {
     			LOG.info("Aucune action n'a été réalisée lors de la demande de changement de pseudo.");
