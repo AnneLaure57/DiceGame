@@ -90,7 +90,7 @@ public class DiceGame {
 	private int throwNumber;
 	
 	/**
-	 * The stratregy tu use to roll dice.
+	 * The stratregy to use to roll dice.
 	 * Example : Die one rolls first, then Die two rolls some seconds after dice one.
 	 * Other example : Two dice roll together at the same time.
 	 */
@@ -176,11 +176,10 @@ public class DiceGame {
 	}
 	
 	/**
-	 * TODO
-	 * 
-	 * How call the right strat ? With number ? Boolean ? in params ?
-	 * From front -> RadioButtons ? MenuItem ?
-	 * put switch case ? conditions if/else ?
+	 * Method changeStrategy : to use a new strategy.
+	 * This strategy is used to roll dice.
+	 * Example : Die one rolls first, then Die two rolls some seconds after dice one.
+	 * Other example : Two dice roll together at the same time.
 	 * 
 	 * @param newStrategy
 	 * 
@@ -188,6 +187,7 @@ public class DiceGame {
 	 */
 	public boolean changeStrategy(String newStrategy) {
 		try {
+			// TODO
 			switch (newStrategy) {
 			case "1":
 				this.setStrategyToUseToRollDice(new Context(new RollTwoDiceAtSameTime()));
