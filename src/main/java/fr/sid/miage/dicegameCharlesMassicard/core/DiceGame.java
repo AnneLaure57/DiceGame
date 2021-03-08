@@ -126,7 +126,7 @@ public class DiceGame {
 	 * We add a PropertyChangeSupport to our DiceGame instance.
 	 */
 	private DiceGame() {
-		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
+		LOG.info("A DiceGame has just been created with two dice are initialized.");
 		
 		// Observable
 		this.supportDiceGame = new PropertyChangeSupport(this);
@@ -158,7 +158,7 @@ public class DiceGame {
 	/**
 	 * Method addPropertyChangeListener : allow DiceGame to be an Observable.
 	 * 
-	 * @param pcl PropertyChangeListener 
+	 * @param pcl PropertyChangeListener to observe the DiceGame modifications.
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		System.out.println("DiceGame : add PropertyChangeListener : " + pcl.getClass().toString());

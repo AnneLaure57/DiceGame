@@ -35,7 +35,7 @@ public class Die {
 	private int faceValue = 1;
 	
 	/**
-	 * Observable
+	 * Allow Die to be an Observable.
 	 */
 	PropertyChangeSupport supportDie;
 	
@@ -55,13 +55,12 @@ public class Die {
 	}
 
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
-	
+
 	/**
-	 * Observable
+	 * Method addPropertyChangeListener : allow Die to be an Observable.
 	 * 
-	 * @return The new value of die face value.
+	 * @param pcl PropertyChangeListener to observe the die modifications.
 	 */
-	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		System.out.println("Die " + this.getDieNumber() + " : add PropertyChangeListener : " + pcl.getClass().toString());
 		supportDie.addPropertyChangeListener("Valeur dé " + this.getDieNumber(), pcl);

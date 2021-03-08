@@ -2,7 +2,6 @@ package fr.sid.miage.dicegameCharlesMassicard;
 
 import java.io.IOException;
 
-import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

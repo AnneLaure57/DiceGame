@@ -36,7 +36,7 @@ public class Player {
 	private int score;
 	
 	/**
-	 * Observable
+	 * Allow Player to be an Observable.
 	 */
 	private PropertyChangeSupport supportPlayer ;
 
@@ -70,10 +70,10 @@ public class Player {
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 	
 	/**
-	 * Observable
+	 * Method addPropertyChangeListener : allow Die to be an Observable.
 	 * 
+	 * @param pcl PropertyChangeListener to observe the die modifications.
 	 */
-	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		System.out.println("Player : add PropertyChangeListener : " + pcl.getClass().toString());
 		supportPlayer.addPropertyChangeListener("Nom joueur", pcl);

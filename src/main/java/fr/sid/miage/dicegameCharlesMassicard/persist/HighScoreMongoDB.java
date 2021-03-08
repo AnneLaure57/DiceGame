@@ -1,6 +1,8 @@
 package fr.sid.miage.dicegameCharlesMassicard.persist;
 
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -71,6 +73,11 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	private List<Entry> scores;
 	
+	/**
+	 * Allow HighScoreXML to be an Observable.
+	 */
+	PropertyChangeSupport supportHighScore;
+	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	/**
@@ -79,9 +86,20 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	private HighScoreMongoDB() {
 		this.setScores(new ArrayList<Entry>());
+		this.supportHighScore = new PropertyChangeSupport(this);
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
+	
+	/**
+	 * Method addPropertyChangeListener : allow HighScoreMongoDB to be an Observable.
+	 * 
+	 * @param pcl PropertyChangeListener to observe HighScoreMongoDB die modifications.
+	 */
+	public void addPropertyChangeListener(PropertyChangeListener pcl) {
+		System.out.println("HighScoreMongoDB : add PropertyChangeListener : " + pcl.getClass().toString());
+		supportHighScore.addPropertyChangeListener("Nouveau high score", pcl);
+    }
 	
 	/**
 	 * Method getInstance : return the instance of the current Concrete Product or create it.
@@ -102,12 +120,23 @@ public class HighScoreMongoDB implements HighScore {
 	 */
 	@Override
 	public void add(String playerName, int score) {
-		this.scores.add(new Entry(playerName, score));
+		// Get
+		ArrayList<Entry> scores = (ArrayList<Entry>) this.getScores();
+		
+		// Add
+		scores.add(new Entry(playerName, score));
+		
+		// Sort
 		// Examples : https://dzone.com/articles/java-8-comparator-how-to-sort-a-list
-		this.scores.sort(Comparator.comparing(Entry::getScore).reversed());
-		if (this.scores.size() > NUMBER_OF_SCORES_TO_SAVE) {
-			this.scores.remove(this.scores.size() - 1);
+		scores.sort(Comparator.comparing(Entry::getScore).reversed());
+		
+		// Keep at maximum 100 high scores
+		if (scores.size() > NUMBER_OF_SCORES_TO_SAVE) {
+			scores.remove(scores.size() - 1);
 		}
+
+		// Set
+		this.setScores(scores);
 	}
 	
 	/**
@@ -126,10 +155,10 @@ public class HighScoreMongoDB implements HighScore {
 	@Override
 	public void load() {
 		this.checkDatabaseConnection();
-		this.scores = this.getMany();
+		this.setScores(this.getMany());
 	}
 
-	/* ========================================= PostGreSQL Utils ====================================== */ /*=========================================*/
+	/* ========================================= MongoDB Utils ====================================== */ /*=========================================*/
 	
 	/**
 	 * Method checkDatabaseConnection : to check the connection between the Java application DiceGame to the associated MongoDB database.
@@ -278,6 +307,9 @@ public class HighScoreMongoDB implements HighScore {
 	 * @param scores the scores to set
 	 */
 	public void setScores(List<Entry> scores) {
+		// Do nothing if this.faceValue = faceValue before
+//		supportHighScore.firePropertyChange("Nouveau high score", this.scores, scores);
+		// Notify change after
 		this.scores = scores;
 	}
 	

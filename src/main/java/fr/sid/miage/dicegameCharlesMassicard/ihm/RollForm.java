@@ -1,19 +1,29 @@
 package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
+import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.converter.NumberStringConverter;
 
 /**
  * @author Anne-Laure CHARLES
@@ -36,6 +46,8 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	 * The player's name. 
 	 */
 	public String nickNameFound;
+	
+	private ObservableList<Entry> data = FXCollections.observableArrayList();
 
 	/* ========================================= Vues ================================================== */ /*=========================================*/
 
@@ -67,7 +79,16 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	@FXML private Button throwButton;
 	
 	@FXML private Button undoButton;
+	
+	/* ========================================= TableViews & TableColumn */
 
+	@FXML TableView<Entry> tableViewScore = new TableView<Entry>(data);;
+	
+	@FXML TableColumn<Entry, String> tabNamePlayer = new TableColumn<Entry, String>();
+	
+    @FXML TableColumn<Entry, Number> tabScorePlayer = new TableColumn<Entry, Number>();
+    
+	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -88,15 +109,26 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		diceGame.getPlayer().addPropertyChangeListener(this);
 		diceGame.getDie1().addPropertyChangeListener(this);
 		diceGame.getDie2().addPropertyChangeListener(this);
+		diceGame.getHighScore().addPropertyChangeListener(this);
 
 		actualiseInformationsGame(0);
 		actualiseScore(0);
+
+		if (location.equals(getClass().getClassLoader().getResource("view/RollFrom.fxml"))) {
+
+			tabNamePlayer.setCellValueFactory(new PropertyValueFactory<Entry, String>("Pseudo"));
+			tabScorePlayer.setCellValueFactory(new PropertyValueFactory<Entry, Number>("Score"));
+			
+			tabNamePlayer.setCellFactory(TextFieldTableCell.<Entry>forTableColumn());
+			tabScorePlayer.setCellFactory(TextFieldTableCell.<Entry, Number>forTableColumn(new NumberStringConverter()));
+		
+		}
 	}
 	
 	/* ========================================= Property Change ============================================== */
 	
 	/**
-	 *
+	 * 
 	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 
@@ -124,7 +156,22 @@ public class RollForm implements PropertyChangeListener, Initializable {
 			LOG.info("New player's score : " + scorePlayer);
 			break;
 			
+		case "Nouveau high score":
+			@SuppressWarnings("unchecked") List<Entry> entries = (List<Entry>) evt.getNewValue();
+//			this.scorePlayer.setText(String.valueOf(scorePlayer));
+			
+			this.data.clear();
+			for (Entry entry : entries) {
+				this.data.add(entry);
+			}
+			this.tableViewScore.setItems(data);
+			this.tableViewScore.refresh();
+			
+			LOG.info("Nouveau high score : " + entries);
+			break;
+			
 		default :
+
 			break;
 		}
     }
@@ -153,10 +200,6 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		scorePreviousTurn.setText(Integer.toString(score));
 		scorePlayer.setText(Integer.toString(score));
 	}
-	
-	/* ========================================= Display Best Score ================================ */
-	
-	//TODO
 	
 	/* ========================================= Roll ============================================== */
 	
