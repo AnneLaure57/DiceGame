@@ -6,8 +6,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
 
-import fr.sid.miage.dicegameCharlesMassicard.persist.HighScoreMongoDB;
-import fr.sid.miage.dicegameCharlesMassicard.persist.HighScorePostGreSQL;
 import fr.sid.miage.dicegameCharlesMassicard.persist.HighScoreXML;
 import fr.sid.miage.dicegameCharlesMassicard.persist.MongoDBKit;
 import fr.sid.miage.dicegameCharlesMassicard.persist.PersistKit;
@@ -416,10 +414,12 @@ public class DiceGame {
 			this.getHighScore().load();
 			
 			// Display/log previous games high score to check
+			
 //			HighScoreXML highScore = (HighScoreXML) this.getHighScore();
 //			HighScoreMongoDB highScore = (HighScoreMongoDB) this.getHighScore();
-			HighScorePostGreSQL highScore = (HighScorePostGreSQL) this.getHighScore();
-			highScore.getScores().forEach(System.out::println);
+//			HighScorePostGreSQL highScore = (HighScorePostGreSQL) this.getHighScore();
+			
+//			highScore.getScores().forEach(System.out::println);
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'save' from DiceGame class :");
