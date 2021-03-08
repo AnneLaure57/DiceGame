@@ -74,8 +74,13 @@ public class RollForm implements PropertyChangeListener, Initializable {
 
 	/* ========================================= Initialize ============================================ */
 
+	/**
+	 * Method initialize : to init FXML and observe observable backend components.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		LOG.info("RollForm Initialization.");
+		
 		// Get the Dice Game instance
 		DiceGame diceGame = DiceGame.getInstance();
 		
@@ -90,11 +95,11 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	
 	/* ========================================= Property Change ============================================== */
 	
+	/**
+	 *
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("---------------");
-		System.out.println("change detected");
-		System.out.println(evt);
-		
+
 		switch(evt.getPropertyName()) {
 		case "Tour partie":
 			int throwNumber = (int) evt.getNewValue();
@@ -103,24 +108,20 @@ public class RollForm implements PropertyChangeListener, Initializable {
 			
 		case "Valeur dé 1":
 			int die1Value = (int) evt.getNewValue();
-			System.out.println("COUCOU Dé 1 : " + die1Value);
-
-			System.out.println("COUCOU Dé 1 : " + this.scoreDie1.getText());
-			
 			this.scoreDie1.setText(String.valueOf(die1Value));
-			
-			System.out.println("COUCOU Dé 1 : " + this.scoreDie1.getText());
+			LOG.info("New face value for Die 1 : " + die1Value);
 			break;
 			
 		case "Valeur dé 2":
 			int die2Value = (int) evt.getNewValue();
-			System.out.println("COUCOU Dé 2 : " + die2Value);
 			this.scoreDie2.setText(String.valueOf(die2Value));
+			LOG.info("New face value for Die 2 : " + die2Value);
 			break;
 			
 		case "Score Joueur":
 			int scorePlayer = (int) evt.getNewValue();
 			this.scorePlayer.setText(String.valueOf(scorePlayer));
+			LOG.info("New player's score : " + scorePlayer);
 			break;
 			
 		default :
@@ -130,6 +131,11 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	
 	/* ========================================= Init FXML components ============================================== */
 	
+	/**
+	 * Method actualiseInformationsGame : to init all labels associated to this view.
+	 * 
+	 * @param score The game score to display in all labels associated to this view.
+	 */
 	private void actualiseInformationsGame(int score) {
 		turnNumber.setText(Integer.toString(score));
 		scoreDie1.setText(Integer.toString(score));
@@ -137,6 +143,11 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		undoButton.setDisable(true);
 	}
 	
+	/**
+	 * Method actualiseScore : to init all labels associated to this view.
+	 * 
+	 * @param score The game score to display in all labels associated to this view.
+	 */
 	private void actualiseScore(int score) {
 		scoreTurn.setText(Integer.toString(score));
 		scorePreviousTurn.setText(Integer.toString(score));
@@ -149,6 +160,9 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	
 	/* ========================================= Roll ============================================== */
 	
+	/**
+	 * Method roll : the method that is call when user push the button 'Lancer'.
+	 */
 	@FXML
     private void roll() {
 		// Get the Dice Game instance
@@ -156,14 +170,12 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		
 		try {
 		  if (diceGame.getPlayer().getName() != null) {
-//			  System.out.println("C'est OK \n Throw number : " + diceGame.getThrowNumber());
+			  LOG.info("Throw dice. Throw number : " + diceGame.getThrowNumber());
 			  diceGame.throwDice();
 			  undoButton.setDisable(false);
 			  if (diceGame.getThrowNumber() == DiceGame.POINTS_TO_ADD_WHEN_WIN) {
 				throwButton.setDisable(true);
 			}
-		  } else {
-//			  System.out.println("C'est pas OK");
 		  }
     	} catch (Exception e) {
     		LOG.severe("Erreur lorque l'utilisateur a appuyé sur le bouton 'Lancer' : "+ e.getMessage());
@@ -171,6 +183,9 @@ public class RollForm implements PropertyChangeListener, Initializable {
     	}
     }
 	
+	/**
+	 * Method cancel : the method that is call when user push the button 'Annuler'.
+	 */
 	@FXML
     private void cancel() {
 		// Get the Dice Game instance
@@ -178,9 +193,7 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		
 		try {
 		  if (diceGame.getPlayer().getName() != null) {
-//			  System.out.println("C'est OK");
-		  } else {
-//			  System.out.println("C'est pas OK");
+			   LOG.info("Cancel lest dice throw.");
 		  }
     	} catch (Exception e) {
     		LOG.severe("Erreur lorque l'utilisateur a appuyé sur le bouton 'Annuler' : "+ e.getMessage());

@@ -6,6 +6,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
 
+import fr.sid.miage.dicegameCharlesMassicard.persist.HighScoreMongoDB;
+import fr.sid.miage.dicegameCharlesMassicard.persist.HighScorePostGreSQL;
+import fr.sid.miage.dicegameCharlesMassicard.persist.HighScoreXML;
+import fr.sid.miage.dicegameCharlesMassicard.persist.MongoDBKit;
+import fr.sid.miage.dicegameCharlesMassicard.persist.PersistKit;
+import fr.sid.miage.dicegameCharlesMassicard.persist.PostGreSQLKit;
+import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
 import fr.sid.miage.dicegameCharlesMassicard.utils.TooMuchDiceThrowException;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.Context;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieOneFirst;
@@ -58,15 +65,10 @@ public class DiceGame {
 	 */
 	public static final int POINTS_TO_ADD_WHEN_WIN = 10;
 		
-	/**
-	 * Allow DiceGame to be an Observable :
-	 * We add a PropertyChangeSupport to our DiceGame instance.
-	 */
-	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	/**
-	 * Observable
+	 * Allow DiceGame to be an Observable.
 	 */
 	private PropertyChangeSupport supportDiceGame;
 	
@@ -99,23 +101,58 @@ public class DiceGame {
 	 */
 	private Context strategyToUseToRollDice;
 	
+	/**
+	 * To know if it's a scheldule strategy.
+	 * If it's a scheldule strategy,
+	 * then wait before calculate score and throw number.
+	 */
 	private boolean useScheduleStrategy;
+	
+	/**
+	 * The list of 100 first best scores.
+	 */
+	private HighScore highScore;
+	
+	/**
+	 * The way to persist the high score list of 100 first best scores.
+	 */
+	private PersistKit persistKit;
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
 
 	/**
 	 * No Args Constructor.
 	 * When DiceGame is created, two dice are initialized to play.
+	 * 
+	 * Allow DiceGame to be an Observable :
+	 * We add a PropertyChangeSupport to our DiceGame instance.
 	 */
 	private DiceGame() {
 		LOG.info("A DiceGame has just been created with twoo dice are initialized.");
+		
+		// Observable
 		this.supportDiceGame = new PropertyChangeSupport(this);
+		
+		// Init core iniformations (player, dice and throw number)
 		this.setPlayer(new Player(""));
 		this.setDie1(new Die(1));
 		this.setDie2(new Die(2));
 		this.setThrowNumber(0);
+		
+		// Choose the first strategy, by default
 		this.setStrategyToUseToRollDice(new Context(new RollTwoDiceAtSameTime()));
 		this.setUseScheduleStrategy(false);
+		
+		// Choose the first persist kit, by default
+		this.setPersistKit(persistKit = new XMLKit());
+		this.setHighScore(this.getPersistKit().makeKit());
+		
+		// Load previous games high score 
+		this.getHighScore().load();
+		
+		// Display/log previous games high score to check
+		HighScoreXML highScore = (HighScoreXML) this.getHighScore();
+		highScore.getScores().forEach(System.out::println);
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -197,28 +234,79 @@ public class DiceGame {
 	public boolean changeStrategy(String newStrategy) {
 		try {
 			LOG.info("Use the strategy number : " + newStrategy);
+			
 			switch (newStrategy) {
-			case "1":
+			case RollTwoDiceAtSameTime.STRATEGY_NAME:
 				LOG.info("Now, you use this strategy : " + RollTwoDiceAtSameTime.class.getName());
 				this.setStrategyToUseToRollDice(new Context(new RollTwoDiceAtSameTime()));
 				this.setUseScheduleStrategy(false);
 				break;
-			case "2":
+			
+			case RollDieOneFirst.STRATEGY_NAME:
 				LOG.info("Now, you use this strategy : " + RollDieOneFirst.class.getName());
 				this.setStrategyToUseToRollDice(new Context(new RollDieOneFirst()));
 				this.setUseScheduleStrategy(true);
 				break;
-			case "3":
+			
+			case RollDieTwoFirst.STRATEGY_NAME:
 				LOG.info("Now, you use this strategy : " + RollDieTwoFirst.class.getName());
 				this.setStrategyToUseToRollDice(new Context(new RollDieTwoFirst()));
 				this.setUseScheduleStrategy(true);
 				break;
+			
 			default:
 				break;
 			}
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'changeStrategy' from DiceGame class.");
+			LOG.severe(e.toString());
+			return false;
+		}
+	}
+	
+	/**
+	 * Method changeStrategy : to use a new Persist Kit.
+	 * This Persist Kit is used to save high score (list of 100 first best scores).
+	 * So persist high score via :
+	 *  - XML
+	 *  - PostGreSQL
+	 *  - MongoDB
+	 * 
+	 * @param newPersistKit This Persist Kit to save high score (list of 100 first best scores).
+	 * 
+	 * @return Return true if the Persist Kit is changed, otherwise return false.
+	 */
+	public boolean changePersistKit(String newPersistKit) {
+		try {
+			LOG.info("Use the strategy number : " + newPersistKit);
+			
+			switch (newPersistKit) {
+			case XMLKit.PERSIST_KIT_NAME:
+				LOG.info("Now, you use this Persist Kit : " + XMLKit.class.getName());
+				this.setPersistKit(persistKit = new XMLKit());
+				break;
+			case MongoDBKit.PERSIST_KIT_NAME:
+				LOG.info("Now, you use this Persist Kit : " + MongoDBKit.class.getName());
+				this.setPersistKit(persistKit = new MongoDBKit());
+				break;
+			case PostGreSQLKit.PERSIST_KIT_NAME:
+				LOG.info("Now, you use this Persist Kit : " + PostGreSQLKit.class.getName());
+				this.setPersistKit(persistKit = new PostGreSQLKit());
+				break;
+			default:
+				break;
+			}
+			
+			// Use the persist kit to save high scores
+			this.setHighScore(this.getPersistKit().makeKit());
+			
+			// Load saved high score (list of 100 first best scores).
+			this.getHighScore().load();
+			
+			return true;
+		} catch (Exception e) {
+			LOG.severe("An error occurred during the method 'changePersistKit' from DiceGame class.");
 			LOG.severe(e.toString());
 			return false;
 		}
@@ -232,6 +320,9 @@ public class DiceGame {
 	private boolean increaseThrowNumber() {
 		try {
 			this.setThrowNumber(this.getThrowNumber() + 1);
+			if (this.getThrowNumber() == MAX_NUMBER_OF_THROWS) { // TODO
+				this.savePlayerScore();
+			}
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'changeStrategy' from DiceGame class.");
@@ -318,7 +409,17 @@ public class DiceGame {
 	 */
 	private boolean savePlayerScore() {
 		try {
-			// TODO
+			this.getHighScore().add(this.getPlayer().getName(), this.getPlayer().getScore());
+			this.getHighScore().save();
+			
+			// Load previous games high score 
+			this.getHighScore().load();
+			
+			// Display/log previous games high score to check
+//			HighScoreXML highScore = (HighScoreXML) this.getHighScore();
+//			HighScoreMongoDB highScore = (HighScoreMongoDB) this.getHighScore();
+			HighScorePostGreSQL highScore = (HighScorePostGreSQL) this.getHighScore();
+			highScore.getScores().forEach(System.out::println);
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'save' from DiceGame class :");
@@ -386,9 +487,10 @@ public class DiceGame {
 	 * @param throwNumber the throwNumber to set
 	 */
 	public void setThrowNumber(int throwNumber) {
-		//Do nothing if this.throwNumber=throwNumber before
+		//Do nothing if this.throwNumber = throwNumber before
 		System.out.println("set throw number : " + throwNumber);
 		supportDiceGame.firePropertyChange("Tour partie", this.throwNumber, throwNumber);
+		// Notify change after
 		this.throwNumber = throwNumber;
 	}
 
@@ -432,6 +534,34 @@ public class DiceGame {
 	 */
 	public void setUseScheduleStrategy(boolean useScheduleStrategy) {
 		this.useScheduleStrategy = useScheduleStrategy;
+	}
+
+	/**
+	 * @return the highScore
+	 */
+	public HighScore getHighScore() {
+		return highScore;
+	}
+
+	/**
+	 * @param highScore the highScore to set
+	 */
+	public void setHighScore(HighScore highScore) {
+		this.highScore = highScore;
+	}
+
+	/**
+	 * @return the persistKit
+	 */
+	public PersistKit getPersistKit() {
+		return persistKit;
+	}
+
+	/**
+	 * @param persistKit the persistKit to set
+	 */
+	public void setPersistKit(PersistKit persistKit) {
+		this.persistKit = persistKit;
 	}
 	
 	/* ========================================= Main ================================================== */ /*=========================================*/

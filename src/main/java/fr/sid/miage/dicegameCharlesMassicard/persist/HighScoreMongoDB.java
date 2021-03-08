@@ -91,7 +91,7 @@ public class HighScoreMongoDB implements HighScore {
 	public static synchronized HighScoreMongoDB getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new HighScoreMongoDB();
-			LOG.info("A HighScorePostGreSQL's Instance is created.");
+			LOG.info("A HighScoreMongoDB's Instance is created.");
 		}
 		return INSTANCE;
 	}

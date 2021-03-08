@@ -97,7 +97,6 @@ public class Die {
 	 * @param faceValue the faceValue to set
 	 */
 	public void setFaceValue(int faceValue) {
-		LOG.severe(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
 		// Do nothing if this.faceValue = faceValue before
 		supportDie.firePropertyChange("Valeur dé " + this.getDieNumber(), this.faceValue, faceValue);
 		// Notify change after

@@ -23,6 +23,12 @@ public class RollDieTwoFirst implements RollStrategy {
 	 */
 	private static final Logger LOG = Logger.getLogger(RollDieTwoFirst.class.getName());
 
+	/**
+	 * The strategy name to call, refer and use this strategy in a switch case.
+	 * Specialy usefull for switch case because you can't use RollDieTwoFirst.class.getName().
+	 */
+	public static final String STRATEGY_NAME = "RollDieTwoFirst";
+	
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/

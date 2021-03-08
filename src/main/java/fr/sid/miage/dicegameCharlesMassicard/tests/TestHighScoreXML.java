@@ -67,5 +67,11 @@ public class TestHighScoreXML {
 		
 		// Display scores after loaded
 		highScore.getScores().forEach(System.out::println);
+		
+		// Test load
+		highScore.load();
+		
+		// Display scores after loaded
+		highScore.getScores().forEach(System.out::println);
 	}
 }

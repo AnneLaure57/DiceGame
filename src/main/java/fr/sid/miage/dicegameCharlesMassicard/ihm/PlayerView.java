@@ -58,6 +58,9 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 
 	/* ========================================= Initialize ============================================ */
 	
+	/**
+	 * Method initialize : to init FXML and observe observable backend components.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		LOG.info("PlayerView Initialization.");
@@ -72,19 +75,23 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 	
 	/* ========================================= Property Change ============================================== */
 	
+	/**
+	 *
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-//		System.out.println("event property name : " + evt.getPropertyName());
-		
+
 		switch(evt.getPropertyName()) {
 		case "Nom joueur":
 			String playerName = (String) evt.getNewValue();
 			this.nickNamePlayer.setText(playerName);
+			LOG.info("New player's name : " + playerName);
 			break;
 			
 		case "Score Joueur":
 			int scorePlayer = (int) evt.getNewValue();
 			this.scoreCurrentParty.setText(String.valueOf(scorePlayer));
+			LOG.info("New player's score : " + scorePlayer);
 			break;
 			
 		default :
@@ -95,26 +102,14 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 	
 	/* ========================================= Init FXML components ============================================== */
 	
+	/**
+	 * Method actualiseScore : to init all labels associated to this view.
+	 * 
+	 * @param score The game score to display in all labels associated to this view.
+	 */
 	private void actualiseScore(int score) {
 		scoreCurrentParty.setText(Integer.toString(score));
 		bestScore.setText(Integer.toString(score));
 		worseScore.setText(Integer.toString(score));
     }
-	
-	// TODO : à quoi ça sert ?
-	public void setView(RollForm rollForm) {
-		parent = rollForm;
-	}
-	
-	/*@FXML
-	public void setLabelNickName(String nickname) throws IOException {
-		/*FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/PlayerView.fxml"));
-		loader.setController(this);
-		page = loader.load();
-		Scene scene = new Scene(page);
-    	LOG.info(nickname);
-    	nickNamePlayer.setText(nickname);
-    	System.out.println(nickNamePlayer.getText());
-    } */
-	
 }

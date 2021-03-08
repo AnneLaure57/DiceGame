@@ -24,9 +24,9 @@
                   <CheckMenuItem fx:id="strategyThree" mnemonicParsing="false" text="Stratégie 3 : Lancer dé 2 avant dé 1" />
                </items>
             </Menu>
-          <Menu fx:id="parameters" mnemonicParsing="false" text="Choisir sauvegarde">
+          <Menu fx:id="mainPersistKits" mnemonicParsing="false" onAction="#changePersistKit" text="Choisir sauvegarde">
                <items>
-                  <CheckMenuItem mnemonicParsing="false" text="XML" fx:id="xmlCheckItem" />
+                  <CheckMenuItem fx:id="xmlCheckItem" mnemonicParsing="false" text="XML" />
                   <CheckMenuItem fx:id="mongoCheckItem" mnemonicParsing="false" text="Mongo" />
                   <CheckMenuItem fx:id="posgresCheckItem" mnemonicParsing="false" text="PostgreSQL" />
                </items>

@@ -3,17 +3,13 @@ package fr.sid.miage.dicegameCharlesMassicard.ihm;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import antlr.debug.Event;
 import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
 import fr.sid.miage.dicegameCharlesMassicard.core.Die;
-import fr.sid.miage.dicegameCharlesMassicard.core.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -34,17 +30,11 @@ public class DieView implements Initializable, PropertyChangeListener {
 
 	/* ========================================= Attributs ============================================= */ /*=========================================*/
 
-//	private Die die;
-//	
-//	private DiceGame dicegame;
-
 	/* ========================================= Vues ================================================== */ /*=========================================*/
 	
 	/* ========================================= Composants ================================================ */ /*=========================================*/
 
 	/* ========================================= ImageViews */
-
-//	@FXML private ImageView dieFace;
 	
 	@FXML private ImageView die1Face;
 	
@@ -56,9 +46,11 @@ public class DieView implements Initializable, PropertyChangeListener {
 
 	/* ========================================= Initialize ============================================ */
 	
+	/**
+	 * Method initialize : to init FXML and observe observable backend components.
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
-//		System.out.println("DieView Initialization.");
-//		System.out.println("********** \n " + location + "\n" + resources + "\n**********");
+		LOG.info("DieView Initialization.");
 		
 		// Get the Dice Game instance
 		Die die1 = DiceGame.getInstance().getDie1();
@@ -66,30 +58,26 @@ public class DieView implements Initializable, PropertyChangeListener {
 		
 		die1.addPropertyChangeListener(this);
 		die2.addPropertyChangeListener(this);
-		
-//		checkFaceValue(0);
 	}
-	
-	// TODO ???
-//	public void setDie(Die die) {
-//		this.die = die;
-//		this.die.addPropertyChangeListener(this);
-//	}
 
 	/* ========================================= Property Change ============================================== */
 		
+	/**
+	 *
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
+		
 		switch(evt.getPropertyName()) {
 		case "Valeur dé 1":
 			int die1Value = (int) evt.getNewValue();
-//			dieFace.setImage(new Image(getClass().getResource("/images/face_.png").toExternalForm()));
-//			this.checkFaceValue(die1Value);
 			die1Face.setImage(new Image(getClass().getResource(this.checkFaceValue(die1Value)).toExternalForm()));
+			LOG.info("The image for Die 1 : " + this.checkFaceValue(die1Value));
 			break;
 			
 		case "Valeur dé 2":
 			int die2Value = (int) evt.getNewValue();
 			die2Face.setImage(new Image(getClass().getResource(this.checkFaceValue(die2Value)).toExternalForm()));
+			LOG.info("The image for Die 2 : " + this.checkFaceValue(die2Value));
 			break;
 			
 		default :
@@ -99,24 +87,14 @@ public class DieView implements Initializable, PropertyChangeListener {
 	
 	/* ========================================= Change dice face value image ============================================== */
 	
+	/**
+	 * Method : use to change dice face value image.
+	 * 
+	 * @param faceValue The face value corresponding to the image file path to display.
+	 * 
+	 * @return Return the image file path to display.
+	 */
 	public String checkFaceValue(int faceValue) {
-//		String nameImageView = null;
-//		if  (faceValue == 1) {
-//			nameImageView = ("face_one");
-//		} else if (faceValue == 2) {
-//			nameImageView = ("face_two");
-//		} else if (faceValue == 3) {
-//			nameImageView = ("face_three");
-//		} else if (faceValue == 4) {
-//			nameImageView = ("face_four");
-//		} else if (faceValue == 5) {
-//			nameImageView.equals("face_five");
-//		} else if (faceValue == 6) {
-//			nameImageView.equals("face_six.png");
-//		}
-//		System.out.println("nameImageView : " + nameImageView);
-//		die1Face.setImage(new Image(getClass().getResource("/images/face_" + faceValue + ".png").toExternalForm()));
-//		return nameImageView;
 		return "/images/face_" + faceValue + ".png";
 	}
 }

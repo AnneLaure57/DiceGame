@@ -8,6 +8,12 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.DiceGame;
+import fr.sid.miage.dicegameCharlesMassicard.persist.MongoDBKit;
+import fr.sid.miage.dicegameCharlesMassicard.persist.PostGreSQLKit;
+import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
+import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieOneFirst;
+import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieTwoFirst;
+import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollTwoDiceAtSameTime;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,6 +75,14 @@ public class MainView implements Initializable {
 	
 	@FXML private MenuBar mainItems;
 	
+	// New Game
+	
+	@FXML private MenuItem newPseudo;
+	
+	@FXML private MenuItem keepPseudo;
+	
+	// Strategies
+	
 	@FXML private Menu mainStrategies;
 	
 	@FXML private CheckMenuItem strategyOne;
@@ -76,10 +90,24 @@ public class MainView implements Initializable {
 	@FXML private CheckMenuItem strategyTwo;
 	
 	@FXML private CheckMenuItem strategyThree;
+	
+	// Persist Kits
+	
+	@FXML private Menu mainPersistKits;
+	
+	@FXML private CheckMenuItem xmlCheckItem;
+	
+	@FXML private CheckMenuItem mongoCheckItem;
+	
+	@FXML private CheckMenuItem posgresCheckItem;
+	
+	// Help
 		
 	@FXML private Menu help;
 	
 	@FXML private CheckMenuItem rules; // TODO check ?
+	
+	// Quit
 	
 	@FXML private MenuItem quit; // TODO Change the place
 	
@@ -105,18 +133,20 @@ public class MainView implements Initializable {
 
 	/* ========================================= Initialize ============================================ */
 	
+	/**
+	 * Method initialize : to init FXML and observe observable backend components.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/MainView.fxml"))) {
 			formNickName.setVisible(true);
 			rollForm.setVisible(false);
-			//formNickName.setManaged(true);
-			//formNickName.setViewOrder(0);
 		}
 		if (location.equals(getClass().getClassLoader().getResource("view/MainBar.fxml"))) {
 
 			strategyOne.setSelected(true);
+			xmlCheckItem.setSelected(true);
 			
 			// Load rules view
 			rules.setSelected(true);
@@ -144,7 +174,6 @@ public class MainView implements Initializable {
 	@FXML
     private void startGame(ActionEvent event) {
 		try {
-//			if (!validInput()) {
 			if (! validInput(addNickName.getText())) {
 	    		errorMessage.setText("Veuillez saisir un pseudo !");
 	    		errorMessage.setTextFill(Color.RED);
@@ -156,7 +185,6 @@ public class MainView implements Initializable {
 	  
 	    		DiceGame diceGame = DiceGame.getInstance();
 	    		diceGame.changePlayerName(nickNameFound);
-//	    		diceGame.getPlayer().setScore(0);
 	    	}
     	} catch (Exception e) {
     		LOG.severe("Erreur de saisie : "+ e.getMessage());
@@ -174,11 +202,6 @@ public class MainView implements Initializable {
 	 * @return Return true if the player's name is OK, otherwise return false.
 	 */
 	public boolean validInput(String nickName){
-//		if (addNickName.getText() == null || addNickName.getText().trim().isEmpty()) {
-//			return false;
-//		} else {
-//			return true;
-//		}
 		return ! (nickName == null || nickName.trim().isEmpty());
     }
 	
@@ -192,7 +215,6 @@ public class MainView implements Initializable {
 	@FXML
     private void closeRollForm(ActionEvent event) {
 		try {
-			//TODO check if a party is in progress
     		System.exit(0);
     	} catch (Exception e) {
     		LOG.severe("Erreur lorsque vous avez voulu quitter le jeu via la barre de menu : " + e.getMessage());
@@ -208,6 +230,7 @@ public class MainView implements Initializable {
 		try {
 			// Get a handle to the stage
 			Stage stage = (Stage) quitRules.getScene().getWindow();
+			
 			// Do what you have to do
 			stage.close();
 		} catch (Exception e) {
@@ -229,31 +252,81 @@ public class MainView implements Initializable {
 			strategyOne.setOnAction(event -> { // Strategy 1
 				if (strategyOne.isSelected()) {
 					LOG.info("L'utilisateur a choisi la stratégie 1.");
-					diceGame.changeStrategy("1");
+					diceGame.changeStrategy(RollTwoDiceAtSameTime.STRATEGY_NAME);
 					strategyTwo.setSelected(false);
 					strategyThree.setSelected(false);
 				} else {
 					strategyOne.setSelected(true);
 				}
 			});
+			
 			strategyTwo.setOnAction(event -> { // Strategy 2
 				if (strategyTwo.isSelected()) {
 					LOG.info("L'utilisateur a choisi la stratégie 2.");
-					diceGame.changeStrategy("2");
+					diceGame.changeStrategy(RollDieOneFirst.STRATEGY_NAME);
 					strategyOne.setSelected(false);
 					strategyThree.setSelected(false);
 				} else {
 					strategyTwo.setSelected(true);
 				}
 			});
+			
 			strategyThree.setOnAction(event -> { // Strategy 3
 				if (strategyThree.isSelected())	{
 					LOG.info("L'utilisateur a choisi la stratégie 3.");
-					diceGame.changeStrategy("3");
+					diceGame.changeStrategy(RollDieTwoFirst.STRATEGY_NAME);
 					strategyTwo.setSelected(false);
 					strategyOne.setSelected(false);
 				} else {
 					strategyThree.setSelected(true);
+				}
+			});
+		} catch (Exception e) {
+			LOG.severe("Erreur lorsque vous avez voulu changer de stratégie : " + e.getMessage());
+    		e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Method changePersistKit : to switch and select a new persist kit to save high score (list of 100 first best scores).
+	 */
+	@FXML 
+	private void changePersistKit() {
+		try {
+    		// Get the Dice Game instance
+    		DiceGame diceGame = DiceGame.getInstance();
+    		
+    		// Set the clicked Persist Kit
+    		xmlCheckItem.setOnAction(event -> { // Persist Kit XML
+				if (xmlCheckItem.isSelected()) {
+					LOG.info("L'utilisateur a choisi le persist kit : " + XMLKit.PERSIST_KIT_NAME);
+					diceGame.changePersistKit(XMLKit.PERSIST_KIT_NAME);
+					mongoCheckItem.setSelected(false);
+					posgresCheckItem.setSelected(false);
+				} else {
+					xmlCheckItem.setSelected(true);
+				}
+			});
+    		
+    		mongoCheckItem.setOnAction(event -> { // Persist Kit MongoDB
+				if (mongoCheckItem.isSelected()) {
+					LOG.info("L'utilisateur a choisi le persist kit : " + MongoDBKit.PERSIST_KIT_NAME);
+					diceGame.changePersistKit(MongoDBKit.PERSIST_KIT_NAME);
+					xmlCheckItem.setSelected(false);
+					posgresCheckItem.setSelected(false);
+				} else {
+					mongoCheckItem.setSelected(true);
+				}
+			});
+    		
+    		posgresCheckItem.setOnAction(event -> { // Persist Kit PostGreSQl
+				if (posgresCheckItem.isSelected())	{
+					LOG.info("L'utilisateur a choisi le persist kit : " + PostGreSQLKit.PERSIST_KIT_NAME);
+					diceGame.changePersistKit(PostGreSQLKit.PERSIST_KIT_NAME);
+					xmlCheckItem.setSelected(false);
+					mongoCheckItem.setSelected(false);
+				} else {
+					posgresCheckItem.setSelected(true);
 				}
 			});
 		} catch (Exception e) {
@@ -281,7 +354,7 @@ public class MainView implements Initializable {
         	LOG.severe("Impossible de charger la fenêtre 'Rules' : " + ioe.getMessage());
         	ioe.printStackTrace();
         }
-	} 
+	}
 	
 //	/*
 //	 * New Game
