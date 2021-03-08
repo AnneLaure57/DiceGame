@@ -2,7 +2,7 @@
 
 Ce projet correspond au projet réalisé tout au long du cours de Patrons en Master 2 MIAGE.
 
-## Dans le bibliothequeCharlesYacia.zip qui contient :
+## Dans le dicegameCharlesMassicard.zip qui contient :
 
 * dicegameRapportCharlesMassicard.pdf,
 * dicegameRapportCharlesMassicard.doc,
@@ -39,14 +39,47 @@ Sous la licence MIT.
 
 ### HTTPS
 
+```
 git clone https://github.com/AnneLaure57/DiceGame.git
+```
 
 ### SSH
 
+```
 git clone git@github.com:AnneLaure57/DiceGame.git
+```
 
 ## Démarrer le projet
 
 ```
 java -jar dicegameCharlesMassicard.jar
 ```
+
+## Documentation technique  
+
+Dans toutes les commandes que nous donnons, le symbole `.` correspond à la racine de ce projet.
+
+### Rapport
+
+Un rapport est disponible dans le répertoire suivant :  
+`./doc/rapport"`  
+
+### Diagrammes  
+
+Des diagrmmes ont été réaliser pour dochumenter l'architecture du projet, ainsi que toutes les fonctionnalités offertent par ce projet.  
+Ces diagrammes ont été réalisé avec Visual Paradigm.  
+Ils sont disponibles dans le répertoire suivant :  
+`./doc/VPP"`  
+Parmis ces diagrammes, vous pourrez trouver : 
+
+* diagramme de cas d'utilisation
+* diagrammes d'activités
+* diagramme de classe 
+* diagramme de package
+* diagrammes de séquences
+* diagrammes d'états trasnitions
+
+### Javadoc
+
+### mkdoc
+

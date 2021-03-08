@@ -101,7 +101,6 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 		worseScore.setText(Integer.toString(score));
     }
 	
-	// TODO : à quoi ça sert ?
 	public void setView(RollForm rollForm) {
 		parent = rollForm;
 	}

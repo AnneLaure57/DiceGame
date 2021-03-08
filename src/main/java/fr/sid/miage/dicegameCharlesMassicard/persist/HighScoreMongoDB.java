@@ -173,13 +173,7 @@ public class HighScoreMongoDB implements HighScore {
 	}
 	
 	/**
-	 * Method truncateTable : to run the command TRUNCATE.
-	 * 
-	 * If you have a running PostGreSQL server, then run this command : sudo pkill -u postgres
-	 * 
-	 * Use PostGreSQL Docker : 
-	 *  * first use : docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=riovas -p 5432:5432 -d postgres
-	 *  * otherwise : docker start postgres
+	 * Method removeAllDocuments : remove all documents in MongoDB.
 	 */
 	private void removeAllDocuments () {
 		LOG.info("Remove all documents in collection : " + COLLECTION_NAME);

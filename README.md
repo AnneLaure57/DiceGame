@@ -2,20 +2,14 @@
 
 Ce projet correspond au projet réalisé tout au long du cours de Patrons en Master 2 MIAGE.
 
-## Dans le bibliothequeCharlesYacia.zip qui contient :
+## Dans le dicegameCharlesMassicard.zip qui contient :
 
-## **TODO LIST**
-
-* Patrons : Strategy, Memento
-* Interface : Obeservable + reste
-* association imageView et valeur (Dé 1 alors valeur 1 etc) -> OK
-
-* dicegameRapportCharlesMassicard.pdf, -> TODO
-* dicegameRapportCharlesMassicard.doc, -> TODO
-* dicegameDesignCharlesMassicard.vpp, -> TODO
-* dicegameDemoCharlesMassicard.mp4, -> TODO
-* dicegameReadMeCharlesMassicard.txt, -> Check
-* dicegameLogicielCharlesMassicard.jar. -> TODO
+* dicegameRapportCharlesMassicard.pdf,
+* dicegameRapportCharlesMassicard.doc,
+* dicegameDesignCharlesMassicard.vpp,
+* dicegameDemoCharlesMassicard.mp4,
+* dicegameReadMeCharlesMassicard.txt,
+* dicegameLogicielCharlesMassicard.jar.
 
 Tout est dans le zip.
 
