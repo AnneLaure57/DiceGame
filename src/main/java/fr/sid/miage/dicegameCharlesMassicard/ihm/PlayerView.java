@@ -45,10 +45,6 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 	@FXML private Label nickNamePlayer;
 	
 	@FXML private Label scoreCurrentParty;
-	
-	@FXML private Label bestScore;
-	
-	@FXML private Label worseScore;
 
 	/* ========================================= Initialize ============================================== */ /*=========================================*/
 	
@@ -108,8 +104,6 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 	 * @param score The game score to display in all labels associated to this view.
 	 */
 	private void actualiseScore(int score) {
-		scoreCurrentParty.setText(Integer.toString(score));
-		bestScore.setText(Integer.toString(score));
-		worseScore.setText(Integer.toString(score));
+		this.scoreCurrentParty.setText(Integer.toString(score));
     }
 }

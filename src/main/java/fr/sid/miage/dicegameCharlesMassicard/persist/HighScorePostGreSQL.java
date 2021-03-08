@@ -92,8 +92,8 @@ public class HighScorePostGreSQL implements HighScore {
 	 * Initiate the list of best scores. 
 	 */
 	private HighScorePostGreSQL() {
-		this.setScores(new ArrayList<Entry>());
 		this.supportHighScore = new PropertyChangeSupport(this);
+		this.setScores(new ArrayList<Entry>());
 	}
 	
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
@@ -423,7 +423,7 @@ public class HighScorePostGreSQL implements HighScore {
 	 */
 	public void setScores(List<Entry> scores) {
 		// Do nothing if this.faceValue = faceValue before
-//		supportHighScore.firePropertyChange("Nouveau high score", this.scores, scores);
+		supportHighScore.firePropertyChange("Nouveau high score", this.scores, scores);
 		// Notify change after
 		this.scores = scores;
 	}

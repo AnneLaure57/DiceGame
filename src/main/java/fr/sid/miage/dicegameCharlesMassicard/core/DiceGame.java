@@ -12,6 +12,7 @@ import fr.sid.miage.dicegameCharlesMassicard.persist.PersistKit;
 import fr.sid.miage.dicegameCharlesMassicard.persist.PostGreSQLKit;
 import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
 import fr.sid.miage.dicegameCharlesMassicard.utils.TooMuchDiceThrowException;
+import fr.sid.miage.dicegameCharlesMassicard.utils.memento.DiceGameState;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.Context;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieOneFirst;
 import fr.sid.miage.dicegameCharlesMassicard.utils.strategy.RollDieTwoFirst;
@@ -34,6 +35,8 @@ import javafx.application.Platform;
  * 
  * If you have a good final score,
  * then you can reach the top ladder!
+ * 
+ * Originator in Memento pattern.
  */
 public class DiceGame {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -156,6 +159,30 @@ public class DiceGame {
 	/* ========================================= Methodes ============================================== */ /*=========================================*/
 
 	/**
+	 * Method save : to implement the Memento pattern.
+	 * 
+	 * @return Return a snapshot of dice game via Memento pattern.
+	 */
+	public DiceGameState save() {
+		return new DiceGameState(this.getPlayer().getScore(), this.getDie1().getFaceValue(), this.getDie2().getFaceValue(), this.getThrowNumber());
+	}
+	
+	/**
+	 * Method restore : to implement the Memento pattern.
+	 * 
+	 * @param save The snapshot of dice game via Memento pattern to restore.
+	 */
+	public void restore(DiceGameState save) {
+		this.getPlayer().setScore(save.getPlayer());
+
+		this.getDie1().setFaceValue(save.getDie1());
+		
+		this.getDie2().setFaceValue(save.getDie2());
+		
+		this.setThrowNumber(save.getThrowNumber());
+	}
+	
+	/**
 	 * Method addPropertyChangeListener : allow DiceGame to be an Observable.
 	 * 
 	 * @param pcl PropertyChangeListener to observe the DiceGame modifications.
@@ -163,6 +190,7 @@ public class DiceGame {
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		System.out.println("DiceGame : add PropertyChangeListener : " + pcl.getClass().toString());
 		supportDiceGame.addPropertyChangeListener("Tour partie", pcl);
+		supportDiceGame.addPropertyChangeListener("Change Persist Kit", pcl);
     }
 	
 	/**
@@ -193,6 +221,8 @@ public class DiceGame {
 		try {
 			this.setThrowNumber(0);
 			this.getPlayer().setScore(0);
+			this.getDie1().setFaceValue(1);
+			this.getDie2().setFaceValue(2);
 			return true;
 		} catch (Exception e) {
 			LOG.severe("An error occurred during the method 'newGame' from DiceGame class.");
@@ -283,14 +313,22 @@ public class DiceGame {
 			case XMLKit.PERSIST_KIT_NAME:
 				LOG.info("Now, you use this Persist Kit : " + XMLKit.class.getName());
 				this.setPersistKit(persistKit = new XMLKit());
+				this.setHighScore(this.getPersistKit().makeKit());
+				this.getHighScore().load();
 				break;
+				
 			case MongoDBKit.PERSIST_KIT_NAME:
 				LOG.info("Now, you use this Persist Kit : " + MongoDBKit.class.getName());
 				this.setPersistKit(persistKit = new MongoDBKit());
+				this.setHighScore(this.getPersistKit().makeKit());				
+				this.getHighScore().load();
 				break;
+				
 			case PostGreSQLKit.PERSIST_KIT_NAME:
 				LOG.info("Now, you use this Persist Kit : " + PostGreSQLKit.class.getName());
 				this.setPersistKit(persistKit = new PostGreSQLKit());
+				this.setHighScore(this.getPersistKit().makeKit());
+				this.getHighScore().load();
 				break;
 			default:
 				break;
@@ -318,7 +356,7 @@ public class DiceGame {
 	private boolean increaseThrowNumber() {
 		try {
 			this.setThrowNumber(this.getThrowNumber() + 1);
-			if (this.getThrowNumber() == MAX_NUMBER_OF_THROWS) { // TODO
+			if (this.getThrowNumber() == MAX_NUMBER_OF_THROWS) {
 				this.savePlayerScore();
 			}
 			return true;
@@ -358,8 +396,6 @@ public class DiceGame {
 			if (this.getThrowNumber() >= MAX_NUMBER_OF_THROWS) {
 				throw new TooMuchDiceThrowException("You exceed the maximum throw number for this game. You already throw dice " + this.throwNumber + " times.");
 			}
-			
-			// TODO : Momento
 			
 			// Roll all dice.
 			this.getStrategyToUseToRollDice().executeStrategy(die1, die2);
@@ -488,7 +524,6 @@ public class DiceGame {
 	 */
 	public void setThrowNumber(int throwNumber) {
 		//Do nothing if this.throwNumber = throwNumber before
-		System.out.println("set throw number : " + throwNumber);
 		supportDiceGame.firePropertyChange("Tour partie", this.throwNumber, throwNumber);
 		// Notify change after
 		this.throwNumber = throwNumber;
@@ -547,6 +582,9 @@ public class DiceGame {
 	 * @param highScore the highScore to set
 	 */
 	public void setHighScore(HighScore highScore) {
+		// Do nothing if this.highScore = highScore before
+		supportDiceGame.firePropertyChange("Change Persist Kit", this.highScore, highScore);
+		// Notify change after
 		this.highScore = highScore;
 	}
 

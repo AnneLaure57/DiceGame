@@ -41,7 +41,8 @@ import javafx.stage.Stage;
  * @author Louis MASSICARD (user name : louis)
  * @version 
  * @since %G% - %U% (%I%)
- *
+ * 
+ * The main view controller of the Dice Game.
  */
 public class MainView implements Initializable {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -70,6 +71,11 @@ public class MainView implements Initializable {
      * Pop-Up to change the player's name.
      */
     private Alert changeNickName = new Alert(Alert.AlertType.CONFIRMATION);
+    
+	/**
+     * Pop-Up to change the player's name & new game.
+     */
+    private Alert changeNickNameNewGame = new Alert(Alert.AlertType.CONFIRMATION);
     
 	/* ========================================= Menus & Check Menu Items */
 	
@@ -105,11 +111,11 @@ public class MainView implements Initializable {
 		
 	@FXML private Menu help;
 	
-	@FXML private CheckMenuItem rules; // TODO check ?
+	@FXML private CheckMenuItem rules;
 	
 	// Quit
 	
-	@FXML private MenuItem quit; // TODO Change the place
+	@FXML private MenuItem quit;
 	
 	/* ========================================= Buttons */
 	
@@ -147,7 +153,7 @@ public class MainView implements Initializable {
 
 			strategyOne.setSelected(true);
 			xmlCheckItem.setSelected(true);
-			
+
 			// Load rules view
 			rules.setSelected(true);
 			rules.setOnAction(e -> displayRules());
@@ -300,7 +306,10 @@ public class MainView implements Initializable {
     		xmlCheckItem.setOnAction(event -> { // Persist Kit XML
 				if (xmlCheckItem.isSelected()) {
 					LOG.info("L'utilisateur a choisi le persist kit : " + XMLKit.PERSIST_KIT_NAME);
+					
 					diceGame.changePersistKit(XMLKit.PERSIST_KIT_NAME);
+					
+					
 					mongoCheckItem.setSelected(false);
 					posgresCheckItem.setSelected(false);
 				} else {
@@ -311,7 +320,10 @@ public class MainView implements Initializable {
     		mongoCheckItem.setOnAction(event -> { // Persist Kit MongoDB
 				if (mongoCheckItem.isSelected()) {
 					LOG.info("L'utilisateur a choisi le persist kit : " + MongoDBKit.PERSIST_KIT_NAME);
+					
 					diceGame.changePersistKit(MongoDBKit.PERSIST_KIT_NAME);
+					
+					
 					xmlCheckItem.setSelected(false);
 					posgresCheckItem.setSelected(false);
 				} else {
@@ -322,7 +334,9 @@ public class MainView implements Initializable {
     		posgresCheckItem.setOnAction(event -> { // Persist Kit PostGreSQl
 				if (posgresCheckItem.isSelected())	{
 					LOG.info("L'utilisateur a choisi le persist kit : " + PostGreSQLKit.PERSIST_KIT_NAME);
+					
 					diceGame.changePersistKit(PostGreSQLKit.PERSIST_KIT_NAME);
+					
 					xmlCheckItem.setSelected(false);
 					mongoCheckItem.setSelected(false);
 				} else {
@@ -379,9 +393,9 @@ public class MainView implements Initializable {
 //    }
 	
     /**
-     * Method showChangeEncode : to display Pop-up to change player name.
+     * Method showChangeName : to display Pop-up to change player name.
      */
-    public void showChangeEncode() {
+    public void showChangeName() {
     	try {			
     		// Get the Dice Game instance
     		DiceGame diceGame = DiceGame.getInstance();
@@ -429,6 +443,73 @@ public class MainView implements Initializable {
     				LOG.info("L'utilisateur modifié son pseudo.");
     				LOG.info("Acien pseudo : " + diceGame.getPlayer().getName());
     				diceGame.changePlayerName( textArea.getText().trim() );
+    				LOG.info("Nouveau pseudo : " + diceGame.getPlayer().getName());
+				}
+    		} else {
+    			LOG.info("Aucune action n'a été réalisée lors de la demande de changement de pseudo.");
+    		}
+		} catch (Exception e) {
+			LOG.severe("Erreur lorsque l'utilisateur a voulu changer de pseudo : " + e.getMessage());
+    		e.printStackTrace();
+		}
+    }
+    
+    public void newGame() {
+    	DiceGame.getInstance().newGame();
+    }
+    
+    /**
+     * Method showNewGame : to display Pop-up to change player name & new hame.
+     */
+    public void showNewGame() {
+    	try {			
+    		// Get the Dice Game instance
+    		DiceGame diceGame = DiceGame.getInstance();
+    		
+    		// Keep same size after first used
+    		this.changeNickNameNewGame.setWidth(600);
+    		this.changeNickNameNewGame.setHeight(430);
+    		
+    		// Init Pop up title and description
+    		this.changeNickNameNewGame.setTitle("Ajouter un nouveau pseudo");
+    		this.changeNickNameNewGame.setHeaderText("\n\n"
+    				+ "Modifier le pseudo pour sauvregarder votre score à la fin de la partie :\n"
+    				+ "\n");
+    		
+    		// Display player's name
+    		Label label = new Label("Pseudo actuel (modifiable) :");
+    		TextArea textArea = new TextArea();
+    		textArea.setText(diceGame.getPlayer().getName());
+    		
+    		// Construct pop-up content
+    		VBox dialogPaneContent = new VBox();
+    		dialogPaneContent.getChildren().addAll(label, textArea);
+    		
+    		// Set content for Dialog Pane
+    		this.changeNickNameNewGame.getDialogPane().setContent(dialogPaneContent);
+    		
+    		
+    		// Remove default ButtonTypes
+    		this.changeNickNameNewGame.getButtonTypes().clear();
+    		
+    		// Add new ButtonTypes  
+    		ButtonType annuler = new ButtonType("Annuler");
+    		ButtonType valider = new ButtonType("Valider changement");
+    		this.changeNickNameNewGame.getButtonTypes().addAll(annuler, valider);
+    		
+    		// option != null.
+    		Optional<ButtonType> option = this.changeNickName.showAndWait();
+    		
+    		if (option.get() == null) {
+    			LOG.info("Aucune action n'a été réalisée lors de la demande de changement de pseudo.");
+    		} else if (option.get() == annuler) {
+    			LOG.info("L'utilisateur a annulé lors de la demande de changement de pseudo.");
+    		} else if (option.get() == valider) {
+    			if (this.validInput(textArea.getText())) {
+    				LOG.info("L'utilisateur modifié son pseudo.");
+    				LOG.info("Acien pseudo : " + diceGame.getPlayer().getName());
+    				diceGame.changePlayerName( textArea.getText().trim() );
+    				DiceGame.getInstance().newGame();
     				LOG.info("Nouveau pseudo : " + diceGame.getPlayer().getName());
 				}
     		} else {

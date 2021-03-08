@@ -1,6 +1,10 @@
 package fr.sid.miage.dicegameCharlesMassicard.ihm;
 
 import fr.sid.miage.dicegameCharlesMassicard.core.Entry;
+import fr.sid.miage.dicegameCharlesMassicard.persist.MongoDBKit;
+import fr.sid.miage.dicegameCharlesMassicard.persist.PostGreSQLKit;
+import fr.sid.miage.dicegameCharlesMassicard.persist.XMLKit;
+import fr.sid.miage.dicegameCharlesMassicard.utils.memento.DiceGameState;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -21,16 +25,16 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.converter.NumberStringConverter;
+
 
 /**
  * @author Anne-Laure CHARLES
  * @author Louis MASSICARD (user name : louis)
  * @version 
  * @since %G% - %U% (%I%)
- *
+ * 
+ * Caretaker
  */
 public class RollForm implements PropertyChangeListener, Initializable {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -47,7 +51,15 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	 */
 	public String nickNameFound;
 	
+	/**
+	 * The data to display in our TableView FXML component.
+	 */
 	private ObservableList<Entry> data = FXCollections.observableArrayList();
+	
+	/**
+	 * The saved dice game to implement Memento Pattern.
+	 */
+	private DiceGameState savedDiceGame;
 
 	/* ========================================= Vues ================================================== */ /*=========================================*/
 
@@ -68,10 +80,6 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	
 	@FXML private Label scoreDie2;
 	
-	@FXML private Label scoreTurn;
-	
-	@FXML private Label scorePreviousTurn;
-	
 	@FXML private Label scorePlayer;
 	
 	/* ========================================= Buttons */
@@ -86,7 +94,7 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	
 	@FXML TableColumn<Entry, String> tabNamePlayer = new TableColumn<Entry, String>();
 	
-    @FXML TableColumn<Entry, Number> tabScorePlayer = new TableColumn<Entry, Number>();
+    @FXML TableColumn<Entry, Integer> tabScorePlayer = new TableColumn<Entry, Integer>();
     
 	
 	/* ========================================= Constructeurs ========================================= */ /*=========================================*/
@@ -113,16 +121,22 @@ public class RollForm implements PropertyChangeListener, Initializable {
 
 		actualiseInformationsGame(0);
 		actualiseScore(0);
-
-		if (location.equals(getClass().getClassLoader().getResource("view/RollFrom.fxml"))) {
-
-			tabNamePlayer.setCellValueFactory(new PropertyValueFactory<Entry, String>("Pseudo"));
-			tabScorePlayer.setCellValueFactory(new PropertyValueFactory<Entry, Number>("Score"));
-			
-			tabNamePlayer.setCellFactory(TextFieldTableCell.<Entry>forTableColumn());
-			tabScorePlayer.setCellFactory(TextFieldTableCell.<Entry, Number>forTableColumn(new NumberStringConverter()));
 		
-		}
+		this.tabNamePlayer.setCellValueFactory(new PropertyValueFactory<Entry, String>("Name"));
+		this.tabScorePlayer.setCellValueFactory(new PropertyValueFactory<Entry, Integer>("Score"));
+		
+		// Add Property Change Listenerfor each DB persist type
+		diceGame.changePersistKit(MongoDBKit.PERSIST_KIT_NAME);
+		diceGame.getHighScore().addPropertyChangeListener(this);
+		diceGame.getHighScore().load();
+		diceGame.changePersistKit(PostGreSQLKit.PERSIST_KIT_NAME);
+		diceGame.getHighScore().addPropertyChangeListener(this);
+		diceGame.getHighScore().load();
+		diceGame.changePersistKit(XMLKit.PERSIST_KIT_NAME);
+		diceGame.getHighScore().addPropertyChangeListener(this);
+		diceGame.getHighScore().load();
+		
+		this.hitSave();
 	}
 	
 	/* ========================================= Property Change ============================================== */
@@ -131,11 +145,15 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	 * 
 	 */
 	public void propertyChange(PropertyChangeEvent evt) {
+		// Get the Dice Game instance
+		DiceGame diceGame = DiceGame.getInstance();
 
 		switch(evt.getPropertyName()) {
 		case "Tour partie":
 			int throwNumber = (int) evt.getNewValue();
 			this.turnNumber.setText(String.valueOf(throwNumber));
+			
+			this.scorePlayer.setText(String.valueOf(diceGame.getDie1().getFaceValue() + diceGame.getDie2().getFaceValue()));
 			break;
 			
 		case "Valeur dé 1":
@@ -150,24 +168,31 @@ public class RollForm implements PropertyChangeListener, Initializable {
 			LOG.info("New face value for Die 2 : " + die2Value);
 			break;
 			
-		case "Score Joueur":
-			int scorePlayer = (int) evt.getNewValue();
-			this.scorePlayer.setText(String.valueOf(scorePlayer));
-			LOG.info("New player's score : " + scorePlayer);
-			break;
-			
 		case "Nouveau high score":
-			@SuppressWarnings("unchecked") List<Entry> entries = (List<Entry>) evt.getNewValue();
-//			this.scorePlayer.setText(String.valueOf(scorePlayer));
+			this.tabNamePlayer.setCellValueFactory(new PropertyValueFactory<Entry, String>("Name"));
+			this.tabScorePlayer.setCellValueFactory(new PropertyValueFactory<Entry, Integer>("Score"));
 			
+			@SuppressWarnings("unchecked") List<Entry> entries = (List<Entry>) evt.getNewValue();
+			
+			// Reset
 			this.data.clear();
+			
+			// Add to data to display
 			for (Entry entry : entries) {
 				this.data.add(entry);
 			}
+			
+			// Set in FXML component & refresh view
 			this.tableViewScore.setItems(data);
 			this.tableViewScore.refresh();
 			
 			LOG.info("Nouveau high score : " + entries);
+			break;
+			
+		case "Change Persist Kit":
+			String newPersistKit = (String) evt.getNewValue().toString();
+			
+			LOG.info("New Persist Kit : " + newPersistKit);
 			break;
 			
 		default :
@@ -184,10 +209,11 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	 * @param score The game score to display in all labels associated to this view.
 	 */
 	private void actualiseInformationsGame(int score) {
-		turnNumber.setText(Integer.toString(score));
-		scoreDie1.setText(Integer.toString(score));
-		scoreDie2.setText(Integer.toString(score));
-		undoButton.setDisable(true);
+		this.turnNumber.setText(Integer.toString(score));
+		this.scoreDie1.setText(Integer.toString(score));
+		this.scoreDie2.setText(Integer.toString(score));
+		
+		this.undoButton.setDisable(true);
 	}
 	
 	/**
@@ -196,9 +222,7 @@ public class RollForm implements PropertyChangeListener, Initializable {
 	 * @param score The game score to display in all labels associated to this view.
 	 */
 	private void actualiseScore(int score) {
-		scoreTurn.setText(Integer.toString(score));
-		scorePreviousTurn.setText(Integer.toString(score));
-		scorePlayer.setText(Integer.toString(score));
+		this.scorePlayer.setText(Integer.toString(score));
 	}
 	
 	/* ========================================= Roll ============================================== */
@@ -213,11 +237,13 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		
 		try {
 		  if (diceGame.getPlayer().getName() != null) {
+			  this.hitSave();
 			  LOG.info("Throw dice. Throw number : " + diceGame.getThrowNumber());
 			  diceGame.throwDice();
 			  undoButton.setDisable(false);
 			  if (diceGame.getThrowNumber() == DiceGame.POINTS_TO_ADD_WHEN_WIN) {
-				throwButton.setDisable(true);
+				  throwButton.setDisable(true);
+				  undoButton.setDisable(true);
 			}
 		  }
     	} catch (Exception e) {
@@ -236,13 +262,30 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		
 		try {
 		  if (diceGame.getPlayer().getName() != null) {
-			   LOG.info("Cancel lest dice throw.");
+			  undoButton.setDisable(true);
+			  this.hitUndo();
+			  LOG.info("Cancel lest dice throw.");
 		  }
     	} catch (Exception e) {
     		LOG.severe("Erreur lorque l'utilisateur a appuyé sur le bouton 'Annuler' : "+ e.getMessage());
     		e.printStackTrace();
     	}
     }
+	
+	/**
+	 * Method hitSave : to implement the Memento pattern.
+	 */
+	public void hitSave() {
+	    this.savedDiceGame = DiceGame.getInstance().save();
+	}
+
+	/**
+	 * Method hitSave : to implement the Memento pattern.
+	 */
+	public void hitUndo() {
+		DiceGame.getInstance().restore(this.savedDiceGame);
+	}
+
 	
 	/* ========================================= Cancel Roll ============================================== */
 

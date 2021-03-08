@@ -13,8 +13,13 @@
           <Menu mnemonicParsing="false" text="Nouvelle Partie">
                <items>
                   <!-- <MenuItem fx:id="newPseudo" mnemonicParsing="false" onAction="#openViewNewNickName" text="Nouveau Pseudo" /> -->
-                  <MenuItem fx:id="newPseudo" mnemonicParsing="false" onAction="#showChangeEncode" text="Nouveau Pseudo" />
-                  <MenuItem fx:id="keepPseudo" mnemonicParsing="false" text="Garder Pseudo" />
+                  <MenuItem fx:id="newPseudonNewGame" mnemonicParsing="false" onAction="#showNewGame" text="Nouveau Pseudo" />
+                  <MenuItem fx:id="keepPseudoNewGame" mnemonicParsing="false" onAction="#newGame" text="Garder Pseudo" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Choisir pseudo">
+               <items>
+                  <MenuItem fx:id="newPseudo" mnemonicParsing="false" onAction="#showChangeName" text="Changer Pseudo" />
                </items>
             </Menu>
             <Menu fx:id="mainStrategies" mnemonicParsing="false" onAction="#changeStrategy" text="Choisir stratégie">

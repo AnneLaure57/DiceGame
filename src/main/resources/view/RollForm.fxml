@@ -38,16 +38,16 @@
                               
                               <Label layoutX="23.0" layoutY="46.0" text="N° du tour :" />
       						  <Label fx:id="turnNumber" layoutX="134.0" layoutY="46.0" text="Label" />
+      						  
                               <Label layoutX="22.0" layoutY="96.0" text="Score Dé 1 :" />
 						      <Label fx:id="scoreDie1" layoutX="134.0" layoutY="96.0" text="Label" />
+						      
 						      <Label layoutX="22.0" layoutY="148.0" text="Score Dé 2 :" />
 						      <Label fx:id="scoreDie2" layoutX="134.0" layoutY="148.0" text="Label" />
-						      <Label layoutX="22.0" layoutY="203.0" text="Total score tour  :" />
-						      <Label fx:id="scoreTurn" layoutX="134.0" layoutY="203.0" text="Label" />
-						      <Label layoutX="22.0" layoutY="256.0" text="Score tour -1  :" />
-						      <Label fx:id="scorePreviousTurn" layoutX="134.0" layoutY="256.0" text="Label" />
-						      <Label layoutX="22.0" layoutY="309.0" text="Score cumulé :" />
-						      <Label fx:id="scorePlayer" layoutX="134.0" layoutY="309.0" text="Label" />
+						      
+						      <Label layoutX="22.0" layoutY="203.0" text="Score cumulé :" />
+						      <Label fx:id="scorePlayer" layoutX="134.0" layoutY="203.0" text="Label" />
+						      
                            </children>
                         </AnchorPane>
                     </items>
