@@ -75,7 +75,7 @@ public class Player {
 	 * @param pcl PropertyChangeListener to observe the die modifications.
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
-		System.out.println("Player : add PropertyChangeListener : " + pcl.getClass().toString());
+		LOG.info("Player : add PropertyChangeListener : " + pcl.getClass().toString());
 		supportPlayer.addPropertyChangeListener("Nom joueur", pcl);
 		supportPlayer.addPropertyChangeListener("Score Joueur", pcl);
     }
@@ -109,6 +109,9 @@ public class Player {
 	}
 
 	/**
+	 * Setter for player's name.
+	 * Also fire a message to notify changes to listeners.
+	 * 
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -126,6 +129,9 @@ public class Player {
 	}
 
 	/**
+	 * Setter for player's score.
+	 * Also fire a message to notify changes to listeners.
+	 * 
 	 * @param score the score to set
 	 */
 	public void setScore(int score) {

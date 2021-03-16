@@ -8,7 +8,10 @@ import java.beans.PropertyChangeListener;
  * @version 
  * @since %G% - %U% (%I%)
  * 
- * Abstract product.
+ * Desgign Patterns :
+ * 
+ *   - Abstract product
+ *   - Observable/Observer
  */
 public interface HighScore {
 	public abstract void add(String playerName, int score);

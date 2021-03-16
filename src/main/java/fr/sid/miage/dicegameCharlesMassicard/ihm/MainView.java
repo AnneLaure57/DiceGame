@@ -471,19 +471,19 @@ public class MainView implements Initializable {
     		this.changeNickNameNewGame.setHeight(430);
     		
     		// Init Pop up title and description
-    		this.changeNickNameNewGame.setTitle("Ajouter un nouveau pseudo");
+    		this.changeNickNameNewGame.setTitle("Recommencer une partie avec un nouveau pseudo");
     		this.changeNickNameNewGame.setHeaderText("\n\n"
     				+ "Modifier le pseudo pour sauvregarder votre score à la fin de la partie :\n"
     				+ "\n");
     		
     		// Display player's name
-    		Label label = new Label("Pseudo actuel (modifiable) :");
-    		TextArea textArea = new TextArea();
-    		textArea.setText(diceGame.getPlayer().getName());
+    		Label labelNewGame = new Label("Pseudo actuel (modifiable) :");
+    		TextArea textAreaNewGame = new TextArea();
+    		textAreaNewGame.setText(diceGame.getPlayer().getName());
     		
     		// Construct pop-up content
     		VBox dialogPaneContent = new VBox();
-    		dialogPaneContent.getChildren().addAll(label, textArea);
+    		dialogPaneContent.getChildren().addAll(labelNewGame, textAreaNewGame);
     		
     		// Set content for Dialog Pane
     		this.changeNickNameNewGame.getDialogPane().setContent(dialogPaneContent);
@@ -493,25 +493,23 @@ public class MainView implements Initializable {
     		this.changeNickNameNewGame.getButtonTypes().clear();
     		
     		// Add new ButtonTypes  
-    		ButtonType annuler = new ButtonType("Annuler");
-    		ButtonType valider = new ButtonType("Valider changement");
-    		this.changeNickNameNewGame.getButtonTypes().addAll(annuler, valider);
+    		ButtonType annulerNewGame = new ButtonType("Annuler");
+    		ButtonType validerNewGame = new ButtonType("Valider changement");
+    		this.changeNickNameNewGame.getButtonTypes().addAll(annulerNewGame, validerNewGame);
     		
     		// option != null.
-    		Optional<ButtonType> option = this.changeNickName.showAndWait();
+    		Optional<ButtonType> option = this.changeNickNameNewGame.showAndWait();
     		
     		if (option.get() == null) {
     			LOG.info("Aucune action n'a été réalisée lors de la demande de changement de pseudo.");
-    		} else if (option.get() == annuler) {
+    		} else if (option.get() == annulerNewGame) {
     			LOG.info("L'utilisateur a annulé lors de la demande de changement de pseudo.");
-    		} else if (option.get() == valider) {
-    			if (this.validInput(textArea.getText())) {
+    		} else if (option.get() == validerNewGame) {
     				LOG.info("L'utilisateur modifié son pseudo.");
     				LOG.info("Acien pseudo : " + diceGame.getPlayer().getName());
-    				diceGame.changePlayerName( textArea.getText().trim() );
+    				diceGame.changePlayerName( textAreaNewGame.getText().trim() );
     				DiceGame.getInstance().newGame();
     				LOG.info("Nouveau pseudo : " + diceGame.getPlayer().getName());
-				}
     		} else {
     			LOG.info("Aucune action n'a été réalisée lors de la demande de changement de pseudo.");
     		}

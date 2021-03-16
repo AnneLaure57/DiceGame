@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>fr.miage.sid</groupId>
+  <groupId>fr.sid.miage</groupId>
   <artifactId>dicegameCharlesMassicard</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 <description>DiceGame Charles - Massicard </description>
@@ -126,18 +126,6 @@
   <build>
 	<plugins>
 		<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <executions>
-                <execution>
-                    <id>attach-javadocs</id>
-                    <goals>
-                        <goal>jar</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-assembly-plugin</artifactId>
 			<version>3.1.0</version>
@@ -162,7 +150,7 @@
 			<configuration>
 				<archive>
 					<manifest>
-						<mainClass>fr.miage.sid.dicegameCharlesMassicard.App</mainClass>
+						<mainClass>fr.sid.miage.dicegameCharlesMassicard.App</mainClass>
 					</manifest>
 				</archive>
 			</configuration>
@@ -175,7 +163,7 @@
 				<assembleDirectory>${project.basedir}/scripts</assembleDirectory>
 				<programs>
 					<program>
-						<mainClass>fr.miage.sid.dicegameCharlesMassicard.App</mainClass>
+						<mainClass>fr.sid.miage.dicegameCharlesMassicard.App</mainClass>
 						<id>app</id>
 					</program>
 				</programs>
@@ -201,7 +189,7 @@
                   </execution>
               </executions>
               <configuration>
-                  <mainClass>fr.miage.sid.bibliothequeCharlesYacia.App</mainClass>
+                  <mainClass>fr.sid.miage.dicegameCharlesMassicard.App</mainClass>
               </configuration>
         </plugin>
 		<plugin>
@@ -217,7 +205,7 @@
                     <configuration>
                         <transformers>
                             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>fr.miage.sid.dicegameCharlesMassicard.Launcher</mainClass>
+                                <mainClass>fr.sid.miage.dicegameCharlesMassicard.Launcher</mainClass>
                             </transformer>
                         </transformers>
                     </configuration>

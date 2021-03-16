@@ -36,20 +36,24 @@ import javafx.application.Platform;
  * If you have a good final score,
  * then you can reach the top ladder!
  * 
- * Originator in Memento pattern.
+ * Desgign Patterns :
+ * 
+ *   - Singleton
+ *   - Observable/Observer
+ *   - Originator in Memento pattern.
  */
 public class DiceGame {
 	/* ========================================= Global ================================================ */ /*=========================================*/
-
-	/**
-	 * Logger for this class : DiceGame.
-	 */
-	private static final Logger LOG = Logger.getLogger(DiceGame.class.getName());
 	
 	/**
 	 * The unique instance of this Singleton class.
 	 */
 	private static DiceGame INSTANCE = null;
+
+	/**
+	 * Logger for this class : DiceGame.
+	 */
+	private static final Logger LOG = Logger.getLogger(DiceGame.class.getName());
 	
 	/**
 	 * The maximum number of throw in a game.
@@ -123,7 +127,7 @@ public class DiceGame {
 
 	/**
 	 * No Args Constructor.
-	 * When DiceGame is created, two dice are initialized to play.
+	 * When DiceGame is created, two dice are initialized.
 	 * 
 	 * Allow DiceGame to be an Observable :
 	 * We add a PropertyChangeSupport to our DiceGame instance.
@@ -194,7 +198,7 @@ public class DiceGame {
     }
 	
 	/**
-	 * Method getInstance : return the instance of the current Concrete Product or create it.
+	 * Method getInstance : return the unique instance of the current Concrete Product or create it.
 	 * 
 	 * @return the current Concrete Product or create it.
 	 */
@@ -219,6 +223,7 @@ public class DiceGame {
 	 */
 	public boolean newGame() {
 		try {
+			System.out.println("Start a new Game !");
 			this.setThrowNumber(0);
 			this.getPlayer().setScore(0);
 			this.getDie1().setFaceValue(1);

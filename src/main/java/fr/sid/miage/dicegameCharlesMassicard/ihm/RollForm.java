@@ -34,7 +34,7 @@ import javafx.scene.layout.AnchorPane;
  * @version 
  * @since %G% - %U% (%I%)
  * 
- * Caretaker
+ * Caretaker in Memento pattern
  */
 public class RollForm implements PropertyChangeListener, Initializable {
 	/* ========================================= Global ================================================ */ /*=========================================*/
@@ -152,7 +152,10 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		case "Tour partie":
 			int throwNumber = (int) evt.getNewValue();
 			this.turnNumber.setText(String.valueOf(throwNumber));
-			
+			if (throwNumber == 0) {				
+				throwButton.setDisable(false);
+				undoButton.setDisable(true);
+			}
 			this.scorePlayer.setText(String.valueOf(diceGame.getDie1().getFaceValue() + diceGame.getDie2().getFaceValue()));
 			break;
 			
@@ -262,8 +265,8 @@ public class RollForm implements PropertyChangeListener, Initializable {
 		
 		try {
 		  if (diceGame.getPlayer().getName() != null) {
-			  undoButton.setDisable(true);
 			  this.hitUndo();
+			  undoButton.setDisable(true);
 			  LOG.info("Cancel lest dice throw.");
 		  }
     	} catch (Exception e) {

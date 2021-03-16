@@ -71,8 +71,12 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 	
 	/* ========================================= Property Change ============================================== */
 	
+	
 	/**
-	 *
+	 * Method propertyChange : receive Events fired when information changes
+	 * Those informations are transferred by listeners.
+	 * 
+	 * @param evt Events fired when informations changed.
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -93,7 +97,6 @@ public class PlayerView implements PropertyChangeListener, Initializable {
 		default :
 			break;
 		}
-		
     }
 	
 	/* ========================================= Init FXML components ============================================== */
